@@ -1,0 +1,13 @@
+"homegrad"
+{
+	"base"		"base"
+	"title"		"Homegrad"
+	"category"	"pvp"
+	"maps"		"^hs_|^hg_|^ttt_"
+	"menusystem"	"1"
+
+	"settings"
+	{
+
+	}
+}
