@@ -9,4 +9,4 @@ function homegrad.client(path)
     include(path)
 end
 
-homegrad.client("cl_init.lua")
+homegrad.client("shared.lua")
