@@ -1,0 +1,15 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models\nypd_v2\feet_01"
+	$bumpMap "models\nypd_v2\feet_noraml"
+	"$blendTintByBaseAlpha"	"1"
+	$normalmapalphaenvmapmask 1
+						
+	"$envmaptint" "[ .01 .01 .01 ]"					
+ 	"$envmapFresnel" "5 7 8"	
+
+
+	"$phong" "1"						
+	"$phongboost"	"0.05"
+
+}

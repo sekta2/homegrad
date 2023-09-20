@@ -1,0 +1,15 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models\nypd_v2\body_02"
+	$bumpMap "models\nypd_v2\body_02_normal"
+	$alphatest                   1
+
+	
+						
+
+ 
+}
+
+
+
+

@@ -1,0 +1,22 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "models\nypd_v2\access_02"
+	"$bumpmap" "models\nypd_v2\acces_02_normal"
+	
+
+     $nocull 1 
+     $normalmapalphaenvmapmask 1 
+     "$envmaptint" "[ 0.005 0.005 0.005]" 
+     "$envmapFresnel"  "[5 7 8] " 
+     "$envmaptint" "[3.77 0.8 1]" 
+     "$phong" "1" 
+     "$phongboost"    "0.01" 
+     "$phongexponent" 8
+
+
+ 
+}
+
+
+
+
