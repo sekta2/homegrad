@@ -31,3 +31,15 @@ function homegrad.GetPhrase(name)
     --]]
     return phrases and (phrases[name] and phrases[name] or "idk") or homegrad.langs["en"][name] and homegrad.langs["en"][name] or "idk"
 end
+
+function homegrad.LanguageSync()
+    local gmodlang = GetConVar("gmod_language"):GetString()
+
+    if homegrad.langs[gmodlang] then
+        homegrad.lang = gmodlang
+    else
+        homegrad.lang = "en"
+    end
+end
+
+homegrad.LanguageSync()
