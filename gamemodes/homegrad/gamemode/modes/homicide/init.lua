@@ -20,6 +20,22 @@ local function randomModel()
     end
 end
 
+function MODE:SelectTraitor()
+    local innocents = team.GetPlayers(1)
+
+    local traitor = table.Random(innocents)
+    traitor:SetTeam(2)
+end
+
+function MODE:SelectPolice()
+    local innocents = team.GetPlayers(1)
+
+    if table.Count(innocents) > 1 then
+        local policeman = table.Random(innocents)
+        policeman:SetTeam(3)
+    end
+end
+
 function MODE:SetUp()
     local plys = player.GetAll()
 
@@ -37,8 +53,14 @@ function MODE:SetUp()
     end
 
     // Selecting a random player as a traitor
-    local traitor = table.Random(plys)
-    traitor:SetTeam(2)
+    self:SelectTraitor()
+
+    // Selecting a random player as a police
+    if math.random(0,100) >= 50 then
+        for i = 1, math.Rand(1,2) do // 1 or 2 policeman's
+            self:SelectPolice()
+        end
+    end
 end
 
 return MODE
