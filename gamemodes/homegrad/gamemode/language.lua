@@ -9,14 +9,14 @@ if SERVER then
         local LANG = include("lang/" .. path)
         homegrad.langs[LANG.name] = LANG
 
-        homegrad.print("Added languane: " .. LANG.name)
+        homegrad.print("Added language: " .. LANG.name)
     end
 else
     for _,path in pairs(langsfiles) do
         local LANG = include("lang/" .. path)
         homegrad.langs[LANG.name] = LANG
 
-        homegrad.print("Added languane: " .. LANG.name)
+        homegrad.print("Added language: " .. LANG.name)
     end
 end
 
