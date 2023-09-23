@@ -3,11 +3,11 @@ local MODE = {}
 MODE.name = "Homicide"
 
 function MODE:GetLocalizedName()
-    return ""
+    return homegrad.GetPhrase("gmname_homicide")
 end
 
 function MODE:GetLocalizedDesc()
-    return ""
+    return homegrad.GetPhrase("gmdesc_homicide")
 end
 
 local function randomModel()

@@ -1,7 +1,6 @@
 local lerped_ang
 
 hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
-
     local head = ply:LookupBone(homegrad.limbs["head"][1])
     local eye = ply:GetAttachment(ply:LookupAttachment("eyes"))
     --local hand = ply:GetAttachment(ply:LookupAttachment("anim_attachment_rh"))

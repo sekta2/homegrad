@@ -10,5 +10,6 @@ function homegrad.client(path)
 end
 
 homegrad.client("language.lua")
+homegrad.client("modes.lua")
 
 homegrad.client("shared.lua")
