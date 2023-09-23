@@ -11,6 +11,7 @@ LANG.phrases = {
     ["gmname_wick"] = "John Wick",
     ["hc_traitorwas"] = "The traitor was:",
     ["hc_innocent"] = "Innocent",
+    ["hc_innocents"] = "Innocent",
     ["hc_traitor"] = "Traitor",
     ["hg_won"] = "Won:",
     ["hg_yourguilt"] = "Your guilt:",
