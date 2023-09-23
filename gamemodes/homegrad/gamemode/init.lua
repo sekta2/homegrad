@@ -19,5 +19,7 @@ function homegrad.shared(path)
     include(path)
 end
 
+homegrad.shared("languane.lua")
+
 homegrad.shared("shared.lua")
 homegrad.client("cl_init.lua")

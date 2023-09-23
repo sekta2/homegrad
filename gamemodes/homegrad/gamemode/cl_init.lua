@@ -9,4 +9,6 @@ function homegrad.client(path)
     include(path)
 end
 
+homegrad.client("languane.lua")
+
 homegrad.client("shared.lua")
