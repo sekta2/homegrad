@@ -1,0 +1,10 @@
+"VertexLitGeneric"
+{
+	"$basetexture" 			"pwb\models\weapons\v_m200\cantedironsight_d"
+	"$bumpmap"			"pwb\models\weapons\v_m200\cantedironsight_n"
+	"$halflambert" "1"
+	"$phong" 		"1"
+	"$phongexponent" 	"20"
+	"$phongboost" "0.75"
+	"$phongfresnelranges" "[0.1 0.3 0.6]"
+}

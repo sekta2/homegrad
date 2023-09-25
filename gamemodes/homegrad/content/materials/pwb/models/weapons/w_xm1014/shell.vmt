@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "pwb\models\weapons\v_xm1014\Shell"
+	"$bumpmap" "pwb\models\weapons\v_xm1014\N"
+}

@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "pwb\models\weapons\v_uzi\gripetc_map"
+      	"$bumpmap" "pwb\models\weapons\v_uzi\gripetc_map_normal"
+}

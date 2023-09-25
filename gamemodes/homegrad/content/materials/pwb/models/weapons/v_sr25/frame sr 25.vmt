@@ -1,0 +1,10 @@
+"VertexlitGeneric"
+{
+"$basetexture" "pwb/models/weapons/v_sr25/Frame SR 25 D"
+"$bumpmap" "pwb/models/weapons/v_sr25/Frame SR 25 N"
+"$halflambert" "1"
+"$phong" "1"
+"$phongexponent" 30
+"$phongboost" ".3"
+"$phongfresnelranges"	"[0 1 0]"
+}

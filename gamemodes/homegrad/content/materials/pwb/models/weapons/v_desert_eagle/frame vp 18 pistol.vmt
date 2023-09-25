@@ -1,0 +1,12 @@
+"VertexlitGeneric"
+{
+"$basetexture" "pwb/models/weapons/v_desert_eagle/Frame VP 18 Pistol D"
+"$bumpmap" "pwb/models/weapons/v_desert_eagle/Frame VP 18 Pistol N"
+"$phong" "1"
+"$phongboost" "1"
+"$nocull" "1"
+"$phongfresnelranges" "[0.3 0.3 0.3]"
+"$phongalbedotint" "1"
+"$halflambert" "1"
+"$phongexponent" "155"
+}

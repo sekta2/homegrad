@@ -1,0 +1,5 @@
+VertexLitGeneric
+{
+	"$basetexture"	"pwb\models\weapons\v_rpk\drumT"
+	"$bumpmap" "pwb\models\weapons\v_rpk\drumT_normal"
+}

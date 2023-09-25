@@ -1,0 +1,7 @@
+"UnlitGeneric"
+{
+	"$basetexture" "pwb/models/weapons/v_hk416/glass"
+	"$model" "1"
+	"$selfillum" "1"
+	"$additive" 1
+}

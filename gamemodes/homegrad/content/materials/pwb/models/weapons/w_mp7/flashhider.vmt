@@ -1,0 +1,5 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "pwb\models\weapons\v_mp7\flashhider"
+	"$bumpmap" "pwb\models\weapons\v_mp7\flashhider_normal"
+}

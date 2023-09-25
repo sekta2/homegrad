@@ -1,0 +1,5 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "pwb\models\weapons\v_p99\gun_silver"
+	"$bumpmap" "pwb\models\weapons\v_p99\gun_silver_norm"
+}

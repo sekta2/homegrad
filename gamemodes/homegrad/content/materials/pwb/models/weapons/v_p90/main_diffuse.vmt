@@ -1,0 +1,12 @@
+"VertexLitGeneric"
+{	
+"$baseTexture" "pwb\models\weapons\v_p90\main_diffuse"	
+"$bumpmap" 	"pwb\models\weapons\v_p90\main_norm"	
+"$halflambert" 	"1" 	
+"$phong" "1"	
+"$phongexponenttexture" "pwb\models\weapons\v_p90\main_spec"
+// "$phongexponent" "20"
+"$phongboost" "1.1"	
+"$phongfresnelranges"	"[1 6 12]"	
+"$phongalbedotint" "1"
+}

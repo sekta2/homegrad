@@ -1,0 +1,11 @@
+VertexLitGeneric
+{
+	"$basetexture" "pwb\models\weapons\v_hk416\silencer"
+	"$nocull" "1"
+                "$phong" "1"
+                "$phongboost" ".5"
+                "$phongfresnelranges" "[1 8 6]"
+	"$phongexponent" "50"
+                "$phongalbedotint" "1"
+                "$halflambert" "1"
+}

@@ -1,0 +1,13 @@
+"vertexlitgeneric"
+{
+	"$basetexture" "pwb\models\weapons\v_aks74u\bullet_diffuse"
+	"$bumpmap" "pwb\models\weapons\v_aks74u\bullet_normal"
+	"$phongexponenttexture" "pwb\models\weapons\v_aks74u\bullet_gloss"
+	"$halflambert" 				"1"
+	"$phong" 					"1"
+	"$phongboost" 				"0.4"
+	"$normalmapalphaphongmask"	"1"
+	"$phongfresnelranges" 		"[1 3 6]"
+	"$phongalbedotint"			"1"
+	"$phongtint" 				"[0.75 0.8 1]"
+}

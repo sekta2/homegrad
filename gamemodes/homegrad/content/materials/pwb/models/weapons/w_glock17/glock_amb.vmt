@@ -1,0 +1,5 @@
+"VertexlitGeneric"
+{
+"$basetexture" "pwb\models\weapons\v_glock17\Glock_diffuse"
+"$bumpmap" "pwb\models\weapons\v_glock17\Glock_normal"
+}

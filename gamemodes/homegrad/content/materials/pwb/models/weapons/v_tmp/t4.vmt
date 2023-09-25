@@ -1,0 +1,11 @@
+"VertexLitGeneric"
+{
+	"$basetexture" 	"pwb/models/weapons/v_tmp/T4"
+	"$bumpmap" 	"pwb/models/weapons/v_tmp/v_mp9_stock_normal"
+	"$phong" 		"1"
+	"$phongtint"		"[0.7 0.9 1]"
+	"$phongexponent" 		"20"
+	"$phongboost"		"1"
+	"$phongfresnelranges"	"[1 4 5]"
+	"$halflambert" 		"1"
+}

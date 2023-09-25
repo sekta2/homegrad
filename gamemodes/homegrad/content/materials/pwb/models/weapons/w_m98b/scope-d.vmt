@@ -1,0 +1,5 @@
+VertexLitGeneric
+{
+	$basetexture					"pwb/models/weapons/v_m98b/scope-d"
+	$bumpmap						"pwb/models/weapons/v_m98b/scope-ns"
+}

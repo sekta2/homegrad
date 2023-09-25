@@ -1,0 +1,14 @@
+"VertexLitGeneric"
+{
+	"$basetexture" 				"pwb\models\weapons\v_rgd5\rgd_5"
+	"$bumpmap" 					"pwb\models\weapons\v_rgd5\rgd_5n"
+	"$normalmapalphaphongmask"    "1"
+
+	"$phong"     "1"
+	"$phongboost"   "1"
+	"$phongfresnelranges"      "[.7 .7 1]"
+	"$phongexponenttexture" 	"pwb\models\weapons\v_rgd5\rgd_5s"
+	"$phongalbedotint"		"1"
+	"$phongalbedoboost" 	"40"
+	"$halflambert" 		"1"
+}

@@ -1,0 +1,11 @@
+VertexLitGeneric
+{
+	"$basetexture"	"pwb\models\weapons\v_aks74u\gucci"
+	"$bumpmap" "pwb\models\weapons\v_aks74u\gucci_bump"
+	"$phong" "1"
+	"$phongboost" "1"
+	"$phongfresnelranges" "[1 1 1]"
+	"$phongexponent" "5"
+	"$phongalbedotint" "1"
+	"$halflambert" "1"
+}

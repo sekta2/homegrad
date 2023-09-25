@@ -1,0 +1,14 @@
+"Vertexlitgeneric"
+{
+	"$basetexture"  "pwb\models\weapons\v_knife\diffuse"
+	"$bumpmap"     "pwb\models\weapons\v_knife\normal"
+ 	"$normalmapalphaphongmask"    "1"
+   	"$phong"     "1"
+   	"$phongexponent"  "24"
+   	"$phongboost"   "1.35"
+   	"$phongfresnelranges"       "[.83 .83 1]"
+	"$phongexponenttexture" 	"pwb\models\weapons\v_knife\exp"
+	"$phongalbedotint"      "1"
+ 	"$phongalbedoboost"     "25"
+  	"$halflambert"      "1"
+}

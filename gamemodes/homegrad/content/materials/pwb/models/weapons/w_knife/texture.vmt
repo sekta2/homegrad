@@ -1,0 +1,5 @@
+"Vertexlitgeneric"
+{
+	"$basetexture"  "pwb\models\weapons\v_knife\diffuse"
+	"$bumpmap"     "pwb\models\weapons\v_knife\normal"
+}

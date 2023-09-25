@@ -1,0 +1,5 @@
+VertexLitGeneric
+{
+	"$basetexture"	"pwb\models\weapons\v_sg552\SG55_Rail"
+	"$bumpmap" 	"pwb\models\weapons\v_sg552\SG55_Rail_Normal"
+}

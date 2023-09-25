@@ -1,0 +1,11 @@
+"VertexLitGeneric"
+{
+	"$basetexture" 				"pwb\models\weapons\v_spas_12\spas"
+	"$bumpmap" 				"pwb\models\weapons\v_spas_12\spas_n"
+	
+	"$phong" 				"1"
+	"$phongboost" 				"1.85"
+	"$normalmapalphaenvmask"			"1"
+	"$phongfresnelranges" 			"[1 3 6]"
+
+}

@@ -1,0 +1,7 @@
+Vertexlitgeneric
+{
+
+    // MAIN SETTINGS
+    $basetexture                "pwb\models\weapons\v_saiga_12\black"
+    $bumpmap                    "pwb\models\weapons\v_saiga_12\black_n"
+}

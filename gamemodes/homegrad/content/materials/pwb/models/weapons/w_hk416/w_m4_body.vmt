@@ -1,0 +1,6 @@
+VertexLitGeneric
+{
+	"$basetexture" "pwb\models\weapons\w_hk416\w_m4_body"
+	"$bumpmap" "pwb\models\weapons\v_hk416\m4_b_n"
+	"$nocull" "1"
+}

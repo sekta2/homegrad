@@ -1,0 +1,19 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "pwb\models\weapons\v_xm1014\Shell"
+	"$bumpmap" "pwb\models\weapons\v_xm1014\N"
+
+        	"$phong"     "1"
+        	"$phongalbedoboost" "80"
+	"$phongexponent"  "25"
+        	"$phongboost"   "1.25"
+       	"$phongfresnelranges" "[.8 .9 1]"
+        	"$phongtint"                   "[0.7 0.9 1]"
+        	"$phongwarptexture"  	"pwb\models\weapons\v_xm1014\phongwarp"
+	"$phongalbedotint" "1"
+	"$halflambert" "1"
+
+	"$rimlight" "1"
+	"$rimlightexponent" "33"	
+	"$rimlightboost" "0.2"
+}

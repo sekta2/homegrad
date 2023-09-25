@@ -1,0 +1,11 @@
+"VertexLitGeneric"
+{
+	"$baseTexture" "pwb\models\weapons\v_uzi\main_map"
+      	"$bumpmap" "pwb\models\weapons\v_uzi\main_map_normal"
+	"$phong" "1"
+	"$phongexponent" "30"
+	"$phongboost" "1.6"
+	"$phongfresnelranges" "[1 9 3]"
+	"$phongtint" "[0.7 0.9 1]"
+	"$phongalbedotint" "1"
+}

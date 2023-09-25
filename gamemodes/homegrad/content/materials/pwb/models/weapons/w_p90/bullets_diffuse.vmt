@@ -1,0 +1,5 @@
+"vertexlitgeneric"
+{
+	"$basetexture"			"pwb\models\weapons\v_p90\bullets_diffuse"
+	"$bumpmap"			"pwb\models\weapons\v_p90\bullets_norm"
+}

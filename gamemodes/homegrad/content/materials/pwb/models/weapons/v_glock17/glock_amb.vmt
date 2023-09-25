@@ -1,0 +1,14 @@
+"VertexlitGeneric"
+{
+"$basetexture" "pwb\models\weapons\v_glock17\Glock_diffuse"
+"$bumpmap" "pwb\models\weapons\v_glock17\Glock_normal"
+"$phong" "1"
+"$phongexponent" "30"
+"$phongboost" "0.25"
+"$phongfresnelranges" "[1 9 3]"
+"$phongtint" "[0.7 0.9 1]"
+"$phongalbedotint" "1"
+"$halflambert" "1"
+"$selfillum" "1"
+"$nocull" "1"
+}

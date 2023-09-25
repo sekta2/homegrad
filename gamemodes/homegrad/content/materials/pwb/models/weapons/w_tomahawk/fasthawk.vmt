@@ -1,0 +1,6 @@
+VertexLitGeneric
+{
+	"$basetexture"   "pwb\models\weapons\v_tomahawk\fasthawk"
+	"$bumpmap"   "pwb\models\weapons\v_tomahawk\fasthawk_n"
+	"$nocull" "1"
+}

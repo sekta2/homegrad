@@ -1,0 +1,17 @@
+"VertexlitGeneric"
+{
+"$basetexture" "pwb/models/weapons/v_sr25/Attachment Lens D"
+"$bumpmap" "pwb/models/weapons/v_sr25/Attachment Lens N"
+"$translucent" "1"
+"$envmap" "env_cubemap"
+"$normalmapalphaenvmapmask"  "1" 
+"$phongalbedotint" "1"
+"$halflambert" "1"
+"$phong" "1"
+"$nocull" "1"
+"$phongboost" "0.85"
+"$phongfresnelranges" "[1 7 4]"
+"$envmaptint" "[0.65 0.65 0.65]"
+"$envmapcontrast" 0.9
+"$envmapsaturation" 0.7
+}

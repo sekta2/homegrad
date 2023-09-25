@@ -1,0 +1,9 @@
+"VertexLitGeneric"
+{
+$basetexture "pwb\models\weapons\v_m134\jb_chaingun"
+$bumpmap "pwb\models\weapons\v_m134\jb_chaingun_normal"
+$phong "1"
+$phongexponent "48"
+$phongboost "0.05"
+$phongfresnelranges "[2 1 2]"
+}

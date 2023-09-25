@@ -1,0 +1,10 @@
+VertexLitGeneric
+{
+	"$basetexture"	"pwb\models\weapons\v_sg552\SG55_Grip"
+	"$bumpmap" 	"pwb\models\weapons\v_sg552\SG55_Grip_Normal"
+	"$phongalbedotint" "1"
+	"$phong" "1"
+	"$phongexponent" "40"
+	"$phongboost"	"6"
+	"$phongfresnelranges"	"[0.05 0.5 1]"
+}

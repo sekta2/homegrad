@@ -1,0 +1,11 @@
+VertexLitGeneric
+{
+	"$basetexture" "pwb\models\weapons\v_hk416\m4_body"
+	"$bumpmap" "pwb\models\weapons\v_hk416\m4_b_n"
+	"$nocull" "1"
+	"$phong" 		"1"
+	"$phongexponent" 	"30"
+	"$phongboost" "0.6"
+	"$phongfresnelranges" "[1 2 1]"
+	"$phongalbedotint" "1"
+}

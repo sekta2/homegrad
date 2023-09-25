@@ -1,0 +1,19 @@
+"VertexLitGeneric"
+{
+	"$basetexture" 				"pwb/models/weapons/v_akm/AKM_diffuse"
+	"$bumpmap" 					"pwb/models/weapons/v_akm/AKM_normal"
+	"$phongexponenttexture"		"pwb/models/weapons/v_akm/AKM_gloss"
+	
+	"$phong"					"1"
+	"$phongboost"				"0.5"
+	"$phongfresnelranges"		"[6 1 8]"
+	"$phongalbedotint"			"1"
+	"$phongtint"				"[.1 .12 .12]"
+	
+	"$rimlight" 				"1"
+	"$rimlightexponent"			"25"
+	"$rimlightboost"			"0.1"
+	"$rimmask" 					"1"
+	
+	"$nocull"					"1"
+}

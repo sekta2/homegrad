@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$basetexture" 				"pwb\models\weapons\w_spas_12\spas"
+	"$bumpmap" 				"pwb\models\weapons\v_spas_12\spas_n"
+}

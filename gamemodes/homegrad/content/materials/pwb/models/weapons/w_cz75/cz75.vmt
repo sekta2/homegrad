@@ -1,0 +1,5 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "pwb/models/weapons/v_Cz75/Cz75"
+	"$bumpmap" "pwb/models/weapons/v_Cz75/Cz75_normal"
+}

@@ -1,0 +1,11 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "pwb\models\weapons\v_mp5/mp5_CM"
+	"$bumpmap" "pwb\models\weapons\v_mp5/mp5_NM"
+	"$phong" "1"
+	"$phongexponent" "10"
+	"$phongboost" "0.05"
+	"$phongfresnelranges" "[2 5 2]"
+	"$phongtint" "[0.8 0.9 1]"
+	"$phongalbedotint" "1"
+}

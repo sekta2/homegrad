@@ -1,0 +1,13 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "pwb/models/weapons/v_sv98/Bullets"
+	"$bumpmap" "pwb/models/weapons/v_sv98/Bullets_N"
+	"$halflambert" "1"
+	"$phong" "1"
+	"$phongexponent" 15
+	"$phongboost" ".2"
+	"$phongfresnelranges"	"[ .6 3 9]"
+	"$rimlight" "1"						
+	"$rimlightexponent" "50"				
+	"$rimlightboost" "0.02"
+}

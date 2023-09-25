@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$basetexture" 	"pwb/models/weapons/v_tmp/frame"
+	"$bumpmap" 	"pwb/models/weapons/v_tmp/frame_normal"
+}

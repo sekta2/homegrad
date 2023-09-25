@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "pwb\models\weapons\v_l96a1\lens"
+	"$translucent" "1"
+	"$bumpmap"	"pwb\models\weapons\v_l96a1\lens_normal"
+ 	"$envmap" "env_cubemap"
+	"$normalmapalphaenvmapmask" 1
+}

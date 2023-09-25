@@ -1,0 +1,9 @@
+VertexLitGeneric
+{
+	$baseTexture "pwb\models\weapons\v_protecta\map2"
+	$bumpmap "pwb\models\weapons\v_protecta\map2_normal"
+	$phong 1
+	$phongboost 3
+	$phongexponent 30
+	$phongfresnelranges "[.5 1 0]"
+}

@@ -6,8 +6,34 @@ SWEP.Spawnable = false
 SWEP.AdminOnly = false
 SWEP.PrintName = "hg_weaponbase"
 SWEP.IsHomegrad = true
+SWEP.NextShoot = 0
+SWEP.ShootWait = 0.1
+SWEP.Reloading = false
+
+SWEP.Primary.Automatic = false
+
+SWEP.Primary.ClipSize = 50
+SWEP.Primary.DefaultClip = 50
+SWEP.Primary.Automatic = true
+SWEP.Primary.Ammo = "none"
+SWEP.Primary.Cone = 0
+SWEP.Primary.Damage = 100
+SWEP.Primary.Spread = 0
+SWEP.Primary.Sound = "ak74/ak74_fp.wav"
+SWEP.Primary.SoundFar = "ak74/ak74_dist.wav"
+SWEP.Primary.Force = 0
+
+SWEP.Secondary.ClipSize    = -1
+SWEP.Secondary.DefaultClip = -1
+SWEP.Secondary.Automatic = false
+SWEP.Secondary.Ammo = "none"
+
 SWEP.ScopePos = Vector(0,0,0)
 SWEP.ScopeAng = Angle(0,0,0)
+
+function SWEP:Initialize()
+    self:SetHoldType(self.HoldType)
+end
 
 function SWEP:GetAmmoText()
     local ammo,ammobag = self:GetMaxClip1(), self:Clip1()
@@ -29,14 +55,14 @@ function SWEP:DrawHUD()
     local ply = LocalPlayer()
 
     local hand = ply:GetAttachment(ply:LookupAttachment("anim_attachment_rh"))
-    local pos = (hand.Pos+hand.Ang:Forward()*7+hand.Ang:Up()*5+hand.Ang:Right()*-1):ToScreen()
+    local pos = (hand.Pos + hand.Ang:Forward() * 7 + hand.Ang:Up() * 5 + hand.Ang:Right() * -1):ToScreen()
 
     local text = self:GetAmmoText()
-    local ammo,ammobag = self:GetMaxClip1(), self:Clip1()
+    local ammo = self:GetMaxClip1()
     local ammomags = ply:GetAmmoCount( self:GetPrimaryAmmoType() )
 
-    draw.DrawText( "Магазин | "..text, "hg.big", pos.x, pos.y, color_gray1, TEXT_ALIGN_RIGHT )
-    draw.DrawText( "Магазинов | "..math.Round(ammomags / ammo), "hg.big", pos.x+5, pos.y+25, color_gray, TEXT_ALIGN_RIGHT )
+    draw.DrawText("Магазин | " .. text, "hg.big", pos.x, pos.y, color_gray1, TEXT_ALIGN_RIGHT )
+    draw.DrawText("Магазинов | " .. math.Round(ammomags / ammo), "hg.big", pos.x + 5, pos.y + 25, color_gray, TEXT_ALIGN_RIGHT )
 end
 
 function SWEP:IsScope()
@@ -50,9 +76,11 @@ function SWEP:GetScopePos()
     return self.ScopePos, self.ScopeAng
 end
 
-function SWEP:FireBullet(dmg,numbul,spread)
-    if self:Clip1() <= 0 then return end
+function SWEP:CanPrimaryAttack()
+    return self:Clip1() > 0 and self.NextShoot < CurTime()
+end
 
+function SWEP:FireBullet(dmg,numbul,spread)
     local ply = self:GetOwner()
 
     ply:LagCompensation(true)
@@ -125,10 +153,10 @@ function SWEP:FireBullet(dmg,numbul,spread)
 end
 
 function SWEP:PrimaryAttack()
-    if self.Cooldown > CurTime() then return end
+    if not self:CanPrimaryAttack() then return end
 
     self:FireBullet(5,1,1)
-    self.Cooldown = CurTime() + 0.1
+    self.NextShoot = CurTime() + self.ShootWait
     self:EmitSound(Sound( self.Primary.Sound ))
 end
 
@@ -137,4 +165,9 @@ end
 
 
 function SWEP:Reload()
+    local ply = self:GetOwner()
+
+    self:SendWeaponAnim( ACT_VM_RELOAD )
+    ply:SetAnimation( PLAYER_RELOAD )
+    self.NextShoot = CurTime() + ply:GetViewModel():SequenceDuration()
 end

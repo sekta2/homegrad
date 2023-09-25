@@ -80,8 +80,6 @@ if SERVER then
             self:FinishRound(2,traitor)
         elseif self:GetAlivePlayers() <= 0 then
             self:FinishRound(1,traitor)
-        else
-            self:FinishRound(3)
         end
     end
 

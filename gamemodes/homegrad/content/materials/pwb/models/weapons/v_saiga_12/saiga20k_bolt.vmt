@@ -1,0 +1,11 @@
+Vertexlitgeneric
+{
+
+    // MAIN SETTINGS
+    $basetexture                "pwb\models\weapons\v_saiga_12\saiga20k_body"
+    $bumpmap                    "pwb\models\weapons\v_saiga_12\saiga20k_n"
+        "$normalmapalphaenvmask"   "1"	
+        "$phong"                   "1" 
+         $phongtint                  "[.8 .8 1]"                      
+	 $phongboost                 0.48  
+}

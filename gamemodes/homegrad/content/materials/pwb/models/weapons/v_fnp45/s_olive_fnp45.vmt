@@ -1,0 +1,12 @@
+"Vertexlitgeneric"
+{
+"$basetexture""pwb\models\weapons\v_fnp45\d_fnp45"
+"$bumpmap""pwb\models\weapons\v_fnp45\n_fnp45"
+"$phong"     "1"
+"$phongexponent"  "30"
+"$phongboost"   "1.6"
+"$phongfresnelranges"   "[1 9 3]"
+"$phongtint"                   "[0.7 0.9 1]" 
+"$phongalbedotint" "1"
+"$halflambert" "1"
+}

@@ -1,0 +1,6 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "pwb\models\weapons\v_vz61\diffuse"
+	"$bumpmap" "pwb\models\weapons\v_vz61\normal"
+	"$nocull" "1"
+}

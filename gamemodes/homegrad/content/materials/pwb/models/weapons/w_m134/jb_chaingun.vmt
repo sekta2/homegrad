@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+$basetexture "pwb\models\weapons\v_m134\jb_chaingun"
+$bumpmap "pwb\models\weapons\v_m134\jb_chaingun_normal"
+}

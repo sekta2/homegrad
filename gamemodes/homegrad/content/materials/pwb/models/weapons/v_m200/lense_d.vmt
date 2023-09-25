@@ -1,0 +1,8 @@
+"VertexLitGeneric"
+{
+	"$basetexture" 			"pwb\models\weapons\v_m200\lense_d"
+	"$bumpmap"			"pwb\models\weapons\v_m200\lense_n"
+	"$envmapmask"                   "pwb\models\weapons\v_m200\lense_d1"
+	"$envmap" "env_cubemap"
+	"$normalmapalphaenvmapmask" "1"
+}

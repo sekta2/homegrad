@@ -1,0 +1,22 @@
+VertexLitGeneric
+{
+	$basetexture					"pwb/models/weapons/v_m98b/m98b-d"
+	$bumpmap						"pwb/models/weapons/v_m98b/m98b-ns"
+	$phongexponenttexture			"pwb/models/weapons/v_m98b/m98b-exp"
+	
+	$normalmapalphaphongmask		1
+	$nocull							1
+	$surfaceprop					metalvehicle
+	
+	$phong							1
+	$phongboost						0.3
+	$phongfresnelranges				"[ 1 4 6 ]"
+	$phongtint						"[ 0.9 0.9 1.1 ]"
+	$phongalbedotint				1
+	$phongalbedoboost				30
+	
+	$rimlight						1
+	$rimlightexponent				60
+	$rimlightboost					0.3
+	$rimlightmask					1
+}

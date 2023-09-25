@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$basetexture" 				"pwb/models/weapons/v_akm/AKM_diffuse"
+	"$bumpmap" 					"pwb/models/weapons/v_akm/AKM_normal"
+}

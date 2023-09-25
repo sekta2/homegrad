@@ -1,0 +1,15 @@
+"vertexlitgeneric"
+{
+	"$baseTexture" "pwb\models\weapons\v_remington_870\870_DIFF"
+	"$bumpmap" "pwb\models\weapons\v_remington_870\870_NORMAL"
+	"$phongexponenttexture" 	"pwb\models\weapons\v_remington_870\870_SPEC"
+
+	"$phong" "1"
+	"$phongexponent" "0"
+	"$phongboost" "0"
+	"$phongfresnelranges"	"[ .6 3 9]"
+
+	"$rimlight" "1"						
+	"$rimlightexponent" "50"				
+	"$rimlightboost" "0.02"
+}

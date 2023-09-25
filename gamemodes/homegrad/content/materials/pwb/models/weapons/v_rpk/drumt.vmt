@@ -1,0 +1,13 @@
+VertexLitGeneric
+{
+	"$basetexture"	"pwb\models\weapons\v_rpk\drumT"
+	"$bumpmap" "pwb\models\weapons\v_rpk\drumT_normal"
+	"$halflambert" 1
+	"$nodecal" "1"
+	"$model" "1"
+
+	"$phong" "1"
+	"$phongexponent" 40
+	"$phongboost"	"6"
+	"$phongfresnelranges"	"[0.05 0.5 1]"
+}

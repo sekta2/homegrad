@@ -1,0 +1,5 @@
+VertexLitGeneric
+{
+	$baseTexture "pwb\models\weapons\v_protecta\map2"
+	$bumpmap "pwb\models\weapons\v_protecta\map2_normal"
+}

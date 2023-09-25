@@ -1,0 +1,6 @@
+"vertexlitgeneric"
+{
+	"$translucent" 			"1"
+	"$basetexture"			"pwb\models\weapons\v_p90\main_diffuse"
+"$bumpmap" 	"pwb\models\weapons\v_p90\main_norm"	
+}

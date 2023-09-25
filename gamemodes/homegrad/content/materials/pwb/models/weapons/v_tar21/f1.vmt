@@ -1,0 +1,11 @@
+vertexLitGeneric
+{
+	"$basetexture" "pwb\models\weapons\v_tar21\f1"
+	"$bumpmap" "pwb\models\weapons\v_tar21\f1_nm"
+	"$phong" "1"
+	"$phongexponent" "20"
+	"$phongboost" "0.1"
+	"$phongfresnelranges" "[1 9 3]"
+	"$phongtint" "[0.7 0.9 1]"
+	"$phongalbedotint" "1"
+}

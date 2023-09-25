@@ -1,0 +1,19 @@
+"VertexLitGeneric"
+{
+	"$basetexture" 				"pwb/models/weapons/v_akm/Wood_diffuse"
+	"$bumpmap" 					"pwb/models/weapons/v_akm/Wood_normal"
+	"$phongexponenttexture"		"pwb/models/weapons/v_akm/Wood_gloss"
+	
+	"$phong"					"1"
+	"$phongboost"				"1.2"
+	"$phongfresnelranges"		"[6 6 8]"
+	"$phongalbedotint"			"1"
+	"$phongtint"				"[.13 .1 .1]"
+
+	"$rimlight" 				"1"
+	"$rimlightexponent"			"75"
+	"$rimlightboost"			"0.5"
+	"$rimmask" 					"1"
+	
+	"$nocull"					"1"
+}

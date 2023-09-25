@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$basetexture" 	"pwb/models/weapons/v_tmp/bullet"
+	"$bumpmap" 	"pwb/models/weapons/v_tmp/bullet_normal"
+}

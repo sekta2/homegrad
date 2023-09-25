@@ -1,0 +1,5 @@
+VertexLitGeneric
+{
+	"$baseTexture" "pwb\models\weapons\v_m9\sherped"
+	"$bumpmap" "pwb\models\weapons\v_m9\sherped_normal"
+}

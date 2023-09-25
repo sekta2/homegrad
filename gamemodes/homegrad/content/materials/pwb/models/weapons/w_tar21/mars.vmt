@@ -1,0 +1,5 @@
+vertexLitGeneric
+{
+	"$basetexture" "pwb\models\weapons\v_tar21\mars"
+	"$bumpmap" "pwb\models\weapons\v_tar21\mars_nm"
+}

@@ -1,0 +1,12 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "pwb\models\weapons\v_vz61\diffuse"
+	"$bumpmap" "pwb\models\weapons\v_vz61\normal"
+	"$nocull" "1"
+	"$halflambert" "1"
+	"$phong" 		"1"
+	"$phongexponent" 	"32"
+	"$phongboost" "2"
+	"$phongfresnelranges" "[1 3 6]"
+	"$phongalbedotint" "1"
+}

@@ -1,0 +1,11 @@
+"VertexlitGeneric"
+{
+	"$basetexture" "pwb\models\weapons\v_m320\tex_0010_1"
+	"$bumpmap" "pwb\models\weapons\v_m320\tex_0010_2"
+	"$phong"     "1"
+	"$phongboost"   "1"
+	"$phongfresnelranges"      "[.7 .7 1]"
+	"$phongalbedotint"		"1"
+	"$phongalbedoboost" 	"40"
+	"$halflambert" 		"1"
+}

@@ -1,0 +1,11 @@
+"VertexLitGeneric"
+{
+	"$basetexture" 	"pwb/models/weapons/v_tmp/Rotex_Silencer_Textured_1024.vmt"
+	"$bumpmap" 	"pwb/models/weapons/v_tmp/Rotex_Silencer_Textured_1024_normal.vmt"
+	"$phong" 		"1"
+	"$phongtint"		"[0.7 0.9 1]"
+	"$phongexponent" 		"20"
+	"$phongboost"		".5"
+	"$phongfresnelranges"	"[1 4 5]"
+	"$halflambert" 		"1"
+}

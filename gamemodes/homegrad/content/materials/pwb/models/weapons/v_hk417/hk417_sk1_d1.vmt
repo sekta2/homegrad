@@ -1,0 +1,10 @@
+Vertexlitgeneric
+{
+	"$basetexture" "pwb\models\weapons\v_hk417\hk417_sk1_d1"
+	"$bumpmap" "pwb\models\weapons\v_hk417\hk417_sk1_d1_nm"
+	"$halflambert" "1"
+	"$phong" "1"
+	"$phongexponent" "20"
+	"$phongboost" "0.05"
+	"$phongfresnelranges" "[1 4 6]"
+}

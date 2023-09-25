@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+	"$basetexture" 	"pwb/models/weapons/v_tmp/Rotex_Silencer_Textured_1024.vmt"
+	"$bumpmap" 	"pwb/models/weapons/v_tmp/Rotex_Silencer_Textured_1024_normal.vmt"
+}
