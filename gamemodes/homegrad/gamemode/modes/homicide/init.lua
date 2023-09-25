@@ -6,8 +6,19 @@ function MODE:GetLocalizedName()
     return homegrad.GetPhrase("gmname_homicide")
 end
 
-function MODE:GetLocalizedDesc()
-    return homegrad.GetPhrase("gmdesc_homicide")
+function MODE:GetLocalizedDesc(teamid)
+    return teamid == 1 and homegrad.GetPhrase("hc_innocent_lore") or
+    teamid == 2 and homegrad.GetPhrase("hc_traitor_lore") or
+    teamid == 3 and homegrad.GetPhrase("hc_police_lore") or
+    "???"
+end
+
+function MODE:GetLocalizedRole(teamid)
+    local you = homegrad.GetPhrase("hg_you")
+    return teamid == 1 and you .. " " .. homegrad.GetPhrase("hc_innocent") or
+    teamid == 2 and you .. " " .. homegrad.GetPhrase("hc_traitor") or
+    teamid == 3 and you .. " " .. homegrad.GetPhrase("hc_police") or
+    "???"
 end
 
 local function randomModel()

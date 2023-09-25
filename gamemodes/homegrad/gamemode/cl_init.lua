@@ -9,7 +9,9 @@ function homegrad.client(path)
     include(path)
 end
 
+homegrad.client("fonts.lua")
 homegrad.client("language.lua")
 homegrad.client("modes.lua")
+homegrad.client("rounds.lua")
 
 homegrad.client("shared.lua")

@@ -25,8 +25,27 @@ else
     end
 end
 
+function homegrad.GetModeName()
+    local curmode = homegrad.modes[homegrad.currentmode]
+    return curmode:GetLocalizedName()
+end
+
+function homegrad.GetNextModeName()
+    local curmode = homegrad.modes[homegrad.nextmode]
+    return curmode:GetLocalizedName()
+end
+
+function homegrad.GetMRoleName(teamid)
+    local curmode = homegrad.modes[homegrad.currentmode]
+    return curmode:GetLocalizedRole(teamid)
+end
+
+function homegrad.GetMRoleDesc(teamid)
+    local curmode = homegrad.modes[homegrad.currentmode]
+    return curmode:GetLocalizedDesc(teamid)
+end
+
 function homegrad.SetUpMode()
     local curmode = homegrad.modes[homegrad.currentmode]
-
     curmode:SetUp()
 end
