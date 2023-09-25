@@ -45,6 +45,11 @@ function homegrad.GetMRoleDesc(teamid)
     return curmode:GetLocalizedDesc(teamid)
 end
 
+function homegrad.GetModeStartSounds()
+    local curmode = homegrad.modes[homegrad.currentmode]
+    return curmode.startsounds
+end
+
 function homegrad.SetUpMode()
     local curmode = homegrad.modes[homegrad.currentmode]
     curmode:SetUp()
