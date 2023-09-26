@@ -102,7 +102,7 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
     end
 end)
 
-hook.Add("AdjustMouseSensitivity","hg.sensa",function(default)
+hook.Add("AdjustMouseSensitivity","hg.sensitivity",function(default)
     local ply = LocalPlayer()
     return ply:IsSprinting() and 0.5
 end)
