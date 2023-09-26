@@ -10,8 +10,8 @@ SWEP.ScopeAng = Angle(-10,0,0)
 SWEP.HoldType = "revolver"
 SWEP.ReloadingTime = 2.5
 
-SWEP.Primary.ClipSize = 8
-SWEP.Primary.DefaultClip = 8
+SWEP.Primary.ClipSize = 9
+SWEP.Primary.DefaultClip = 9
 SWEP.Primary.Automatic = false
 SWEP.Primary.Ammo = "9mm Parabellum"
 SWEP.Primary.Cone = 0

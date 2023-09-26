@@ -10,8 +10,8 @@ SWEP.ScopeAng = Angle(-8,0,0)
 SWEP.HoldType = "ar2"
 SWEP.ReloadingTime = 2
 
-SWEP.Primary.ClipSize = 20
-SWEP.Primary.DefaultClip = 20
+SWEP.Primary.ClipSize = 30
+SWEP.Primary.DefaultClip = 30
 SWEP.Primary.Automatic = true
 SWEP.Primary.Ammo = "5,45x39mm"
 SWEP.Primary.Cone = 0

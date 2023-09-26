@@ -104,5 +104,5 @@ end)
 
 hook.Add("AdjustMouseSensitivity","hg.sensa",function(default)
     local ply = LocalPlayer()
-    return ply:IsSprinting() and 0.2
+    return ply:IsSprinting() and 0.5
 end)

@@ -75,7 +75,7 @@ if SERVER then
             local policeman = table.Random(innocents)
             policeman:HSetTeam(3)
             policeman:Give("weapon_glock17")
-            policeman:GiveAmmo(8 * 8,"9mm Parabellum")
+            policeman:GiveAmmo(9 * 6,"9mm Parabellum")
         end
     end
 
