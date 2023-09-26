@@ -13,11 +13,12 @@ SWEP.ReloadingTime = 2
 SWEP.Primary.ClipSize = 20
 SWEP.Primary.DefaultClip = 20
 SWEP.Primary.Automatic = true
-SWEP.Primary.Ammo = "ar2"
+SWEP.Primary.Ammo = "5,45x39mm"
 SWEP.Primary.Cone = 0
 SWEP.Primary.Damage = 20
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "pwb/weapons/aks74u/shoot.wav"
+SWEP.Primary.SoundDraw = "pwb/weapons/aks74u/draw.wav"
 SWEP.Primary.Force = 0
 
 SWEP.Secondary.ClipSize    = -1

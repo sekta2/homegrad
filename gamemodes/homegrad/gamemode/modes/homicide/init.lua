@@ -1,7 +1,7 @@
 local MODE = {}
 
 MODE.name = "Homicide"
-MODE.startsounds = {"snd_jack_hmcd_disaster.mp3","snd_jack_hmcd_shining.mp3","snd_jack_hmcd_panic.mp3"}
+MODE.startsounds = {"snd_jack_hmcd_disaster.mp3","snd_jack_hmcd_shining.mp3","snd_jack_hmcd_panic.mp3","snd_jack_hmcd_deathmatch.mp3"}
 MODE.teams = {
     [1] = {
         name = "Innocent",
@@ -55,9 +55,9 @@ if SERVER then
         local rand = math.random(0,100)
 
         if rand >= 50 then
-            return "models/player/group01/male_0" .. math.random(1,9) .. ".mdl"
+            return "models/player/group01/male_0" .. math.random(1,9) .. ".mdl", "male"
         else
-            return "models/player/group01/female_0" .. math.random(1,6) .. ".mdl"
+            return "models/player/group01/female_0" .. math.random(1,6) .. ".mdl", "female"
         end
     end
 
@@ -75,7 +75,7 @@ if SERVER then
             local policeman = table.Random(innocents)
             policeman:HSetTeam(3)
             policeman:Give("weapon_glock17")
-            policeman:GiveAmmo(8 * 8,"pistol")
+            policeman:GiveAmmo(8 * 8,"9mm Parabellum")
         end
     end
 
@@ -107,7 +107,12 @@ if SERVER then
         // Making everyone innocent
         for _,ply in pairs(plys) do
             ply:HSetTeam(1)
-            ply:SetModel(randomModel())
+            local model,gender = randomModel()
+            local tblname = table.Random(homegrad.names[gender])
+            local name,localname = tblname[1],tblname[2]
+            ply:SetModel(model)
+            ply:SetGender(gender)
+            ply:SetHName(name,localname)
             local color = HSVToColor(math.random(0,360),1,0.5)
             ply:SetPlayerColor(Color(color.r,color.g,color.b):ToVector())
         end

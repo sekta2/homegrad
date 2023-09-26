@@ -14,6 +14,10 @@ hook.Add("HUDDrawTargetID","hg.hideplayername",function()
     return false
 end)
 
+hook.Add("HUDDrawPickupHistory","hg.hidehistory",function()
+    return false
+end)
+
 hook.Add("HUDPaint","hg.hudpaint",function()
     local ply = LocalPlayer()
 
@@ -23,6 +27,8 @@ hook.Add("HUDPaint","hg.hudpaint",function()
     local currentmode = homegrad.GetModeName()
     local nextmode = homegrad.GetNextModeName()
     local yourole = homegrad.GetMRoleName(teamid)
+    local yourname = homegrad.GetPhrase("hg_your_name")
+    local namelocalized = homegrad.GetPhrase(ply:GetHNameLocalized())
     local youroledesc = homegrad.GetMRoleDesc(teamid)
     local scrw,scrh = ScrW(),ScrH()
 
@@ -38,7 +44,8 @@ hook.Add("HUDPaint","hg.hudpaint",function()
 
         draw.SimpleText(currentmode, "hg.big", scrw / 2, scrh / 8, maincolor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
-        draw.SimpleText(yourole, "hg.big", scrw / 2, scrh / 2, teamcolor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        draw.SimpleText(yourname .. " " .. namelocalized, "hg.big", scrw / 2, (scrh / 2) - 10, teamcolor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        draw.SimpleText(yourole, "hg.big", scrw / 2, (scrh / 2) + 10, teamcolor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         draw.SimpleText(youroledesc, "hg.big", scrw / 2, scrh / 1.2, teamcolor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end
 end)

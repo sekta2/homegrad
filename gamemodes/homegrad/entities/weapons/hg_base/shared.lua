@@ -25,7 +25,7 @@ SWEP.Primary.Cone = 0
 SWEP.Primary.Damage = 100
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "ak74/ak74_fp.wav"
-SWEP.Primary.SoundFar = "ak74/ak74_dist.wav"
+SWEP.Primary.SoundDraw = "ak74/ak74_draw.wav"
 SWEP.Primary.Force = 0
 
 SWEP.Secondary.ClipSize    = -1
@@ -44,15 +44,15 @@ function SWEP:GetAmmoText()
     local ammo,ammobag = self:GetMaxClip1(), self:Clip1()
 
     if ammobag > ammo - 1 then
-        return "Полон"
+        return homegrad.GetPhrase("hg_full")
     elseif ammobag > ammo - ammo / 3 then
-        return "~Почти полон"
+        return homegrad.GetPhrase("hg_almost_full")
     elseif ammobag > ammo / 3 then
-        return "~Половина"
+        return homegrad.GetPhrase("hg_half")
     elseif ammobag >= 1 then
-        return "~Почти пуст"
+        return homegrad.GetPhrase("hg_almost_empty")
     elseif ammobag < 1 then
-        return "Пуст"
+        return homegrad.GetPhrase("hg_empty")
     end
 end
 
@@ -76,8 +76,8 @@ function SWEP:DrawHUD()
     local ammo = self:GetMaxClip1()
     local ammomags = ply:GetAmmoCount( self:GetPrimaryAmmoType() )
 
-    draw.DrawText("Магазин | " .. text, "hg.big", pos.x, pos.y, color_gray1, TEXT_ALIGN_RIGHT )
-    draw.DrawText("Магазинов | " .. math.Round(ammomags / ammo), "hg.big", pos.x + 5, pos.y + 25, color_gray, TEXT_ALIGN_RIGHT )
+    draw.DrawText(homegrad.GetPhrase("hg_store") .. " | " .. text, "hg.big", pos.x, pos.y, color_gray1, TEXT_ALIGN_RIGHT )
+    draw.DrawText(homegrad.GetPhrase("hg_stores") .. " | " .. math.Round(ammomags / ammo), "hg.big", pos.x + 5, pos.y + 25, color_gray, TEXT_ALIGN_RIGHT )
 end
 
 function SWEP:IsScope()
@@ -93,6 +93,10 @@ end
 
 function SWEP:CanPrimaryAttack()
     return self:Clip1() > 0 and self.NextShoot < CurTime() and not self:IsReloading()
+end
+
+function SWEP:Deploy()
+    self:EmitSound(Sound(self.Primary.SoundDraw))
 end
 
 function SWEP:FireBullet(dmg,numbul,spread)
