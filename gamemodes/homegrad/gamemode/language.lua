@@ -43,3 +43,9 @@ function homegrad.LanguageSync()
 end
 
 homegrad.LanguageSync()
+
+function LanguageChanged(lang)
+    if homegrad.langs[lang] then
+        homegrad.lang = lang
+    end
+end

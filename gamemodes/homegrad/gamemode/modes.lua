@@ -50,6 +50,21 @@ function homegrad.GetModeStartSounds()
     return curmode.startsounds
 end
 
+function homegrad.GetModeTeams()
+    local curmode = homegrad.modes[homegrad.currentmode]
+    return curmode.teams
+end
+
+function homegrad.GetModeTeamName(id)
+    local teams = homegrad.GetModeTeams()
+    return teams[id] and teams[id].name or "???"
+end
+
+function homegrad.GetModeTeamColor(id)
+    local teams = homegrad.GetModeTeams()
+    return teams[id] and teams[id].color or "???"
+end
+
 function homegrad.SetUpMode()
     local curmode = homegrad.modes[homegrad.currentmode]
     curmode:SetUp()

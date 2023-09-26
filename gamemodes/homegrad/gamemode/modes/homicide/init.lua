@@ -2,6 +2,20 @@ local MODE = {}
 
 MODE.name = "Homicide"
 MODE.startsounds = {"snd_jack_hmcd_disaster.mp3","snd_jack_hmcd_shining.mp3","snd_jack_hmcd_panic.mp3"}
+MODE.teams = {
+    [1] = {
+        name = "Innocent",
+        color = Color(155,155,155)
+    },
+    [2] = {
+        name = "Traitor",
+        color = Color(155,55,55)
+    },
+    [3] = {
+        name = "Police",
+        color = Color(0,55,155)
+    }
+}
 
 function MODE:GetLocalizedName()
     return homegrad.GetPhrase("gmname_homicide")
@@ -23,8 +37,8 @@ function MODE:GetLocalizedRole(teamid)
 end
 
 function MODE:GetAlivePlayers()
-    local innocents = team.GetPlayers(1)
-    local police = team.GetPlayers(3)
+    local innocents = homegrad.HGetTeamPlayers(1)
+    local police = homegrad.HGetTeamPlayers(3)
 
     local alive = 0
 
@@ -48,18 +62,20 @@ if SERVER then
     end
 
     function MODE:SelectTraitor()
-        local innocents = team.GetPlayers(1)
+        local innocents = homegrad.HGetTeamPlayers(1)
 
         local traitor = table.Random(innocents)
-        traitor:SetTeam(2)
+        traitor:HSetTeam(2)
     end
 
     function MODE:SelectPolice()
-        local innocents = team.GetPlayers(1)
+        local innocents = homegrad.HGetTeamPlayers(1)
 
         if table.Count(innocents) > 1 then
             local policeman = table.Random(innocents)
-            policeman:SetTeam(3)
+            policeman:HSetTeam(3)
+            policeman:Give("weapon_glock17")
+            policeman:GiveAmmo(8 * 8,"pistol")
         end
     end
 
@@ -73,8 +89,10 @@ if SERVER then
     end
 
     function MODE:OnPlayerDeath(victim,inflictor,attacker)
-        local victeam = victim:Team()
-        local traitor = team.GetPlayers(2)[1]
+        if not homegrad.IsRoundStarted() then return end
+
+        local victeam = victim:HGetTeam()
+        local traitor = homegrad.HGetTeamPlayers(2)[1]
 
         if victeam == 2 then
             self:FinishRound(2,traitor)
@@ -86,14 +104,9 @@ if SERVER then
     function MODE:SetUp()
         local plys = player.GetAll()
 
-        // Creating primary teams
-        team.SetUp(1, "Innocent", Color(155,155,155), false)
-        team.SetUp(2, "Traitor", Color(155,0,0), false)
-        team.SetUp(3, "Police", Color(0,55,155), false)
-
         // Making everyone innocent
         for _,ply in pairs(plys) do
-            ply:SetTeam(1)
+            ply:HSetTeam(1)
             ply:SetModel(randomModel())
             local color = HSVToColor(math.random(0,360),1,0.5)
             ply:SetPlayerColor(Color(color.r,color.g,color.b):ToVector())

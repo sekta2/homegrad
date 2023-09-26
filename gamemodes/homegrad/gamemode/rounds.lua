@@ -21,6 +21,7 @@ if SERVER then
 
     function homegrad.CleanAllPlayers()
         for _,ply in pairs(player.GetAll()) do
+            ply:StripAmmo()
             ply:StripWeapons()
             ply:Spawn()
         end

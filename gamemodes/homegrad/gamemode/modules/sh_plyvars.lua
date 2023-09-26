@@ -19,8 +19,4 @@ function meta:GetLimbCondition(name)
     end
 end
 
-if SERVER then
-    
-else
-    
-end
+

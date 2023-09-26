@@ -6,11 +6,16 @@ SWEP.Spawnable = false
 SWEP.AdminOnly = false
 SWEP.PrintName = "hg_weaponbase"
 SWEP.IsHomegrad = true
+SWEP.Reloading = false
+SWEP.HudShow = 0
+
+SWEP.HoldType = "ar2"
+
+SWEP.ReloadingTime = 2.5
+SWEP.ReloadingTimer = 0
+
 SWEP.NextShoot = 0
 SWEP.ShootWait = 0.1
-SWEP.Reloading = false
-
-SWEP.Primary.Automatic = false
 
 SWEP.Primary.ClipSize = 50
 SWEP.Primary.DefaultClip = 50
@@ -51,7 +56,17 @@ function SWEP:GetAmmoText()
     end
 end
 
+function SWEP:IsReloading()
+    return self:GetNWBool("hg.isreloading",false)
+end
+
 function SWEP:DrawHUD()
+    show = math.Clamp(self.HudShow or 0,0,1)
+    self.HudShow = Lerp(2 * FrameTime(),self.HudShow or 0,0)
+
+    color_gray = Color(225,215,125,190 * show)
+    color_gray1 = Color(225,215,125,255 * show)
+
     local ply = LocalPlayer()
 
     local hand = ply:GetAttachment(ply:LookupAttachment("anim_attachment_rh"))
@@ -77,7 +92,7 @@ function SWEP:GetScopePos()
 end
 
 function SWEP:CanPrimaryAttack()
-    return self:Clip1() > 0 and self.NextShoot < CurTime()
+    return self:Clip1() > 0 and self.NextShoot < CurTime() and not self:IsReloading()
 end
 
 function SWEP:FireBullet(dmg,numbul,spread)
@@ -158,16 +173,35 @@ function SWEP:PrimaryAttack()
     self:FireBullet(5,1,1)
     self.NextShoot = CurTime() + self.ShootWait
     self:EmitSound(Sound( self.Primary.Sound ))
+
+    self.HudShow = 3
 end
 
 function SWEP:SecondaryAttack()
 end
 
-
 function SWEP:Reload()
     local ply = self:GetOwner()
 
+    self.HudShow = 5
+
+    if self:Clip1() >= self:GetMaxClip1() or self:IsReloading() or ply:GetAmmoCount(self:GetPrimaryAmmoType()) <= 0 then return end
+
     self:SendWeaponAnim( ACT_VM_RELOAD )
     ply:SetAnimation( PLAYER_RELOAD )
-    self.NextShoot = CurTime() + ply:GetViewModel():SequenceDuration()
+    self:SetNWBool("hg.isreloading",true)
+    self.ReloadingTimer = CurTime() + self.ReloadingTime
+end
+
+function SWEP:Think()
+    local ply = self:GetOwner()
+
+    if self:IsReloading() and self.ReloadingTimer <= CurTime() then
+        self:SetNWBool("hg.isreloading",false)
+
+        local need = self:GetMaxClip1() - self:Clip1()
+        need = math.min(need,ply:GetAmmoCount(self:GetPrimaryAmmoType()))
+        ply:RemoveAmmo(need,self:GetPrimaryAmmoType())
+        self:SetClip1(self:Clip1() + need)
+    end
 end

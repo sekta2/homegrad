@@ -1,12 +1,17 @@
 local lerped_ang
+local recoil,startRecoil = 0,0
 
 hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
+    if ply:IsSpectator() then return end
+
     local head = ply:LookupBone(homegrad.limbs["head"][1])
     local eye = ply:GetAttachment(ply:LookupAttachment("eyes"))
     local hand = ply:GetAttachment(ply:LookupAttachment("anim_attachment_rh"))
     local ragdoll = ply:GetRagdollEntity()
 
     local ft = FrameTime() * 15
+    local weapon = ply:GetActiveWeapon()
+    local scope = IsValid(weapon) and (weapon.IsHomegrad and weapon:IsScope() and not weapon:IsReloading())
 
     if not ply:Alive() and IsValid(ragdoll) then
         local raghead = ragdoll:LookupBone(homegrad.limbs["head"][1])
@@ -32,17 +37,39 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
         local vang = ply:GetAimVector():Angle()
 
         // Scope
-        local weapon = ply:GetActiveWeapon()
         local weppos, wepang
-        if IsValid(weapon) and (weapon.IsHomegrad and weapon:IsScope()) then
+        if scope then
             local pos, ang = weapon:GetScopePos()
             weppos = hand.Pos + hand.Ang:Up() * pos.x - hand.Ang:Forward() * pos.y + hand.Ang:Right() * pos.z
             wepang = hand.Ang + ang
+
+            vpos = weppos
         end
 
         lerped_ang = LerpAngle(ft,lerped_ang or vang,wepang or vang)
 
         ply:ManipulateBoneScale(head,Vector(0,0,0))
+
+        if weapon.IsHomegrad then
+            local lastShootTime = weapon:LastShootTime()
+            if not oldShootTime then oldShootTime = lastShootTime else
+                if oldShootTime ~= lastShootTime then
+                    oldShootTime = lastShootTime
+                    startRecoil = CurTime() + 0.05
+                    recoil = math.Rand(0.9,1.1) * (scope and 0.5 or 0.5)
+                end
+            end
+        end
+
+        if weapon and hand then
+            local posrecoil = Vector(recoil * 8,0,recoil * 1.5)
+            posrecoil:Rotate(hand.Ang)
+            vpos = vpos + posrecoil
+
+            recoil = LerpFT(scope and 0.25 or 0.1,recoil,0)
+        else
+            recoil = 0
+        end
 
         local size = Vector(6,6,0)
         local tr = {}
@@ -66,11 +93,16 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
 
         local view = {}
 
-        view.origin = weppos or vpos
+        view.origin = vpos
         view.angles = lerped_ang
         view.fov = fov
         view.drawviewer = true
 
         return view
     end
+end)
+
+hook.Add("AdjustMouseSensitivity","hg.sensa",function(default)
+    local ply = LocalPlayer()
+    return ply:IsSprinting() and 0.2
 end)
