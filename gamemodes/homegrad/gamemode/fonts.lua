@@ -6,3 +6,12 @@ surface.CreateFont("hg.big",{
     shadow = true,
     extended = true
 })
+
+surface.CreateFont("hg.bigname",{
+    font = "Montserrat Regular",
+    size = 45,
+    weight = 100,
+    outline = false,
+    shadow = false,
+    extended = true
+})

@@ -40,16 +40,21 @@ if SERVER then
         SetGlobalBool("hg.roundstarted",true)
     end
 
+    function homegrad.StartNextRound()
+        homegrad.ProcessNextMode()
+        homegrad.StartRound()
+    end
+
     function homegrad.EndRound()
         SetGlobalBool("hg.roundstarted",false)
 
         timer.Simple(5,function()
-            homegrad.StartRound()
+            homegrad.StartNextRound()
         end)
     end
 
     hook.Add("PlayerDeath","hg.rounddeath",function(victim,inflictor,attacker)
-        local curmode = homegrad.modes[homegrad.currentmode]
+        local curmode = homegrad.modes[homegrad.GetCurrentMode()]
         curmode:OnPlayerDeath(victim,inflictor,attacker)
     end)
 else

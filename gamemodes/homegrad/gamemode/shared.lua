@@ -27,23 +27,3 @@ else
         homegrad.client("modules/" .. path)
     end
 end
-
-// Funcs
-
-local mul = 1
-
-hook.Add("Think","hg.mullerp",function()
-    mul = FrameTime() / engine.TickInterval()
-end)
-
-function LerpFT(lerp,source,set)
-    return Lerp(math.min(lerp * mul,1),source,set)
-end
-
-function LerpVectorFT(lerp,source,set)
-    return LerpVector(math.min(lerp * mul,1),source,set)
-end
-
-function LerpAngleFT(lerp,source,set)
-    return LerpAngle(math.min(lerp * mul,1),source,set)
-end
