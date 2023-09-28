@@ -34,25 +34,27 @@ function homegrad.ExplodeCommand(str)
     return args
 end
 
-function draw.Circle(x, y, radius, seg)
-    local cir = {}
-
-    cir[#cir + 1] = { x = x, y = y, u = 0.5, v = 0.5 }
-    for i = 0, seg do
-        local a = math.rad( ( i / seg ) * -360 )
-        cir[#cir + 1] = { x = x + math.sin( a ) * radius, y = y + math.cos( a ) * radius, u = math.sin( a ) / 2 + 0.5, v = math.cos( a ) / 2 + 0.5 }
-    end
-
-    local a = math.rad( 0 ) -- This is needed for non absolute segment counts
-    -- perfomance moment
-    cir[#cir + 1] = { x = x + math.sin( a ) * radius, y = y + math.cos( a ) * radius, u = math.sin( a ) / 2 + 0.5, v = math.cos( a ) / 2 + 0.5 }
-
-    surface.DrawPoly( cir )
-end
-
 function plymeta:HGEyeTrace()
     tr.start = ply:GetAttachment(ply:LookupAttachment("eyes")).Pos
     tr.endpos = tr.start + ply:GetAngles():Forward() * 80
     tr.filter = ply
     return util.TraceLine(tr)
+end
+
+if CLIENT then
+    function draw.Circle(x, y, radius, seg)
+        local cir = {}
+
+        cir[#cir + 1] = { x = x, y = y, u = 0.5, v = 0.5 }
+        for i = 0, seg do
+            local a = math.rad( ( i / seg ) * -360 )
+            cir[#cir + 1] = { x = x + math.sin( a ) * radius, y = y + math.cos( a ) * radius, u = math.sin( a ) / 2 + 0.5, v = math.cos( a ) / 2 + 0.5 }
+        end
+
+        local a = math.rad( 0 ) -- This is needed for non absolute segment counts
+        -- perfomance moment
+        cir[#cir + 1] = { x = x + math.sin( a ) * radius, y = y + math.cos( a ) * radius, u = math.sin( a ) / 2 + 0.5, v = math.cos( a ) / 2 + 0.5 }
+
+        surface.DrawPoly( cir )
+    end
 end
