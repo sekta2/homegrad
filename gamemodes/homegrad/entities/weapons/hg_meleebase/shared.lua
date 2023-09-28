@@ -67,7 +67,13 @@ function SWEP:PrimaryAttack()
             end
             tr.Entity:TakeDamage(self.Primary.Damage,owner,self)
         else
-            
+            if tr.Hit then
+                local snd = self.Primary.SoundHitWall[math.random(1,#self.Primary.SoundHitWall)]
+                owner:EmitSound(snd)
+            else
+                local snd = self.Primary.Sound[math.random(1,#self.Primary.Sound)]
+                owner:EmitSound(snd)
+            end
         end
     end
 end

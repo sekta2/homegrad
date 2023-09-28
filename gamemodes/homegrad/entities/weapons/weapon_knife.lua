@@ -69,10 +69,10 @@ SWEP.Spawnable = false
 SWEP.AdminOnly = false
 SWEP.PrintName = "Knife"
 
-SWEP.ShootWait = 0.5
+SWEP.ShootWait = 0.7
 
 SWEP.Primary.Automatic = true
-SWEP.Primary.Damage = 50
+SWEP.Primary.Damage = 10
 SWEP.Primary.Sound = {
     "hg_knife_slash1",
     "hg_knife_slash2"
