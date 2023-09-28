@@ -23,7 +23,7 @@ if SERVER then
         local exploded = homegrad.ExplodeCommand(text)
         local command = string.Replace(exploded[1],"!","")
         if string.len(command) > 1 and homegrad.commands[command] then
-            homegrad.commands[command].callback(ply,exploded)
+            timer.Simple(0,function() homegrad.commands[command].callback(ply,exploded) end)
         end
     end)
 end

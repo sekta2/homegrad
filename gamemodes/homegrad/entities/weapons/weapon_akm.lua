@@ -17,8 +17,8 @@ SWEP.Primary.Ammo = "7,62x39mm"
 SWEP.Primary.Cone = 100
 SWEP.Primary.Damage = 25
 SWEP.Primary.Spread = 0
-SWEP.Primary.Sound = "pwb/weapons/akm/shoot.wav"
-SWEP.Primary.SoundDraw = "pwb/weapons/akm/draw.wav"
+SWEP.Primary.Sound = Sound("pwb/weapons/akm/shoot.wav")
+SWEP.Primary.SoundDraw = Sound("pwb/weapons/akm/draw.wav")
 SWEP.Primary.Force = 0
 
 SWEP.Secondary.ClipSize    = -1

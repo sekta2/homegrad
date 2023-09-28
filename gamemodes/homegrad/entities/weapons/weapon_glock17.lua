@@ -17,8 +17,8 @@ SWEP.Primary.Ammo = "9mm Parabellum"
 SWEP.Primary.Cone = 0
 SWEP.Primary.Damage = 10
 SWEP.Primary.Spread = 0
-SWEP.Primary.Sound = "pwb/weapons/glock17/shoot.wav"
-SWEP.Primary.SoundDraw = "pwb/weapons/glock17/draw.wav"
+SWEP.Primary.Sound = Sound("pwb/weapons/glock17/shoot.wav")
+SWEP.Primary.SoundDraw = Sound("pwb/weapons/glock17/draw.wav")
 SWEP.Primary.Force = 0
 
 SWEP.Secondary.ClipSize    = -1

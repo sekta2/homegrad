@@ -1,3 +1,21 @@
+sound.Add({
+    name = "hg_ak74u_shoot",
+    channel = CHAN_WEAPON,
+    volume = 1.0,
+    level = 80,
+    pitch = {95, 110},
+    sound = "pwb/weapons/aks74u/shoot.wav"
+})
+
+sound.Add({
+    name = "hg_ak74u_draw",
+    channel = CHAN_WEAPON,
+    volume = 1.0,
+    level = 80,
+    pitch = {95, 110},
+    sound = "pwb/weapons/aks74u/shoot.wav"
+})
+
 SWEP.Base = "hg_base"
 
 SWEP.Author = "Homegrad"
@@ -17,8 +35,8 @@ SWEP.Primary.Ammo = "5,45x39mm"
 SWEP.Primary.Cone = 0
 SWEP.Primary.Damage = 20
 SWEP.Primary.Spread = 0
-SWEP.Primary.Sound = "pwb/weapons/aks74u/shoot.wav"
-SWEP.Primary.SoundDraw = "pwb/weapons/aks74u/draw.wav"
+SWEP.Primary.Sound = "hg_ak74u_shoot"
+SWEP.Primary.SoundDraw = "hg_ak74u_draw"
 SWEP.Primary.Force = 0
 
 SWEP.Secondary.ClipSize    = -1

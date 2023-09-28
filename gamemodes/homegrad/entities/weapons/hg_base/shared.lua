@@ -24,8 +24,8 @@ SWEP.Primary.Ammo = "none"
 SWEP.Primary.Cone = 0
 SWEP.Primary.Damage = 100
 SWEP.Primary.Spread = 0
-SWEP.Primary.Sound = "ak74/ak74_fp.wav"
-SWEP.Primary.SoundDraw = "ak74/ak74_draw.wav"
+SWEP.Primary.Sound = Sound("ak74/ak74_fp.wav")
+SWEP.Primary.SoundDraw = Sound("ak74/ak74_draw.wav")
 SWEP.Primary.Force = 0
 
 SWEP.Secondary.ClipSize    = -1
@@ -96,7 +96,7 @@ function SWEP:CanPrimaryAttack()
 end
 
 function SWEP:Deploy()
-    self:EmitSound(Sound(self.Primary.SoundDraw))
+    self:EmitSound(self.Primary.SoundDraw)
 end
 
 function SWEP:FireBullet(dmg,numbul,spread)
@@ -176,7 +176,7 @@ function SWEP:PrimaryAttack()
 
     self:FireBullet(5,1,1)
     self.NextShoot = CurTime() + self.ShootWait
-    self:EmitSound(Sound( self.Primary.Sound ))
+    self:EmitSound(self.Primary.Sound)
 
     self.HudShow = 3
 end
