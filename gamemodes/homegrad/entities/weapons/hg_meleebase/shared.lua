@@ -42,14 +42,19 @@ function SWEP:PrimaryAttack()
 
     local owner = self:GetOwner()
 
+    owner:LagCompensation(true)
+
     self.NextShoot = CurTime() + self.ShootWait
 
     self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
     owner:SetAnimation( PLAYER_ATTACK1 )
 
+    local startPos = owner:GetAttachment(owner:LookupAttachment("eyes")).Pos
+    local endPos = startPos + owner:GetAngles():Forward() * 80
+
     local tr = util.TraceHull({
-        start = owner:GetShootPos(),
-        endpos = owner:GetShootPos() + owner:GetAimVector() * 64,
+        start = startPos,
+        endpos = endPos,
         filter = owner,
         mins = Vector( -16, -16, 0 ),
         maxs = Vector( 16, 16, 0 ),
@@ -63,10 +68,17 @@ function SWEP:PrimaryAttack()
                 owner:EmitSound(snd)
                 tr.Entity:TakeDamage(self.Primary.Damage,owner,self)
                 tr.Entity:SetLastHitGroup(tr.HitGroup)
-                print(tr.HitGroup)
+                util.Decal("Impact.Flesh", startPos, endPos, owner)
             else
                 local snd = self.Primary.SoundHitWall[math.random(1,#self.Primary.SoundHitWall)]
                 owner:EmitSound(snd)
+                local negr = ents.Create("prop_ragdoll")
+                negr:SetModel("models/player/group01/male_03.mdl")
+                negr:SetPos(tr.Entity:GetPos())
+                negr:Spawn()
+                negr:SetColor(Color(1,0,0))
+                tr.Entity:Remove()
+                util.Decal("Scorch", startPos, endPos, owner)
             end
         else
             if tr.Hit then

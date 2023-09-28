@@ -1,5 +1,5 @@
 local lerped_ang
-local recoil,startRecoil = 0,0
+local recoil = 0
 
 hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
     if ply:IsSpectator() then return end
@@ -55,7 +55,7 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
             if not oldShootTime then oldShootTime = lastShootTime else
                 if oldShootTime ~= lastShootTime then
                     oldShootTime = lastShootTime
-                    startRecoil = CurTime() + 0.05
+                    // startRecoil = CurTime() + 0.05
                     recoil = math.Rand(0.9,1.1) * (scope and 0.5 or 0.5)
                 end
             end

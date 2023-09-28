@@ -66,6 +66,7 @@ if SERVER then
 
         local traitor = table.Random(innocents)
         traitor:HSetTeam(2)
+        traitor:Give("weapon_knife")
     end
 
     function MODE:SelectPolice()
