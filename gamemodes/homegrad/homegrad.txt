@@ -3,7 +3,7 @@
 	"base"		"base"
 	"title"		"Homegrad"
 	"category"	"pvp"
-	"maps"		"^hs_|^hg_|^ttt_|^mu_"
+	"maps"		"^hs_|^hg_|^ttt_|^mu_|^hmcd_"
 	"menusystem"	"1"
 
 	"settings"
