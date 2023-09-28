@@ -61,11 +61,13 @@ function SWEP:PrimaryAttack()
             if tr.Entity:IsPlayer() then
                 local snd = self.Primary.SoundHit[math.random(1,#self.Primary.SoundHit)]
                 owner:EmitSound(snd)
+                tr.Entity:TakeDamage(self.Primary.Damage,owner,self)
+                tr.Entity:SetLastHitGroup(tr.HitGroup)
+                print(tr.HitGroup)
             else
                 local snd = self.Primary.SoundHitWall[math.random(1,#self.Primary.SoundHitWall)]
                 owner:EmitSound(snd)
             end
-            tr.Entity:TakeDamage(self.Primary.Damage,owner,self)
         else
             if tr.Hit then
                 local snd = self.Primary.SoundHitWall[math.random(1,#self.Primary.SoundHitWall)]
