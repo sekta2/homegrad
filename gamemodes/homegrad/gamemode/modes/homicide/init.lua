@@ -79,25 +79,32 @@ if SERVER then
         end
     end
 
-    function MODE:FinishRound(winner,traitor)
+    function MODE:GetWinner()
+        local allalive = self:GetAlivePlayers()
+        local traitor = homegrad.HGetTeamPlayers(2)[1]
+        local traitoralive = traitor:Alive()
+
+        return (traitoralive and allalive <= 0) and 1 or (not traitoralive and allalive > 0) and 2 or 3
+    end
+
+    function MODE:OnEndRound()
+        local winner = self:GetWinner()
+        local traitor = homegrad.HGetTeamPlayers(2)[1]
         net.Start("hc.wintext")
             net.WriteUInt(winner,4)
             net.WriteEntity(traitor)
         net.Broadcast()
-
-        homegrad.EndRound()
     end
 
     function MODE:OnPlayerDeath(victim,inflictor,attacker)
         if not homegrad.IsRoundStarted() then return end
 
         local victeam = victim:HGetTeam()
-        local traitor = homegrad.HGetTeamPlayers(2)[1]
 
         if victeam == 2 then
-            self:FinishRound(2,traitor)
+            homegrad.EndRound()
         elseif self:GetAlivePlayers() <= 0 then
-            self:FinishRound(1,traitor)
+            homegrad.EndRound()
         end
     end
 

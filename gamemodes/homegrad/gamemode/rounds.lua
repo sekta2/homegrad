@@ -47,16 +47,14 @@ if SERVER then
 
     function homegrad.EndRound()
         SetGlobalBool("hg.roundstarted",false)
+        homegrad.ModeOnEnd()
 
         timer.Simple(5,function()
             homegrad.StartNextRound()
         end)
     end
 
-    hook.Add("PlayerDeath","hg.rounddeath",function(victim,inflictor,attacker)
-        local curmode = homegrad.modes[homegrad.GetCurrentMode()]
-        curmode:OnPlayerDeath(victim,inflictor,attacker)
-    end)
+    hook.Add("PlayerDeath","hg.rounddeath",homegrad.ModeOnDeath)
 else
     net.Receive("hg.roundstarted",function()
         local snd = net.ReadString()

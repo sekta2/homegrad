@@ -11,7 +11,7 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
 
     local ft = FrameTime() * 15
     local weapon = ply:GetActiveWeapon()
-    local scope = IsValid(weapon) and (weapon.IsHomegrad and weapon:IsScope() and not weapon:IsReloading())
+    local scope = IsValid(weapon) and (weapon.IsHomegrad and not weapon.IsMelee and weapon:IsScope() and not weapon:IsReloading())
 
     if not ply:Alive() and IsValid(ragdoll) then
         local raghead = ragdoll:LookupBone(homegrad.limbs["head"][1])

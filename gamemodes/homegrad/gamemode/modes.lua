@@ -79,6 +79,16 @@ function homegrad.SetUpMode()
 end
 
 if SERVER then
+    function homegrad.ModeOnDeath(victim,inflictor,attacker)
+        local curmode = homegrad.modes[homegrad.GetCurrentMode()]
+        curmode:OnPlayerDeath(victim,inflictor,attacker)
+    end
+
+    function homegrad.ModeOnEnd()
+        local curmode = homegrad.modes[homegrad.GetCurrentMode()]
+        curmode:OnEndRound()
+    end
+
     function homegrad.SetCurrentMode(curmode)
         SetGlobalString("hg.currentmode",homegrad.modes[curmode] and curmode or "homicide")
     end
