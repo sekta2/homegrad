@@ -18,6 +18,12 @@ homegrad.CreateCommand("endround","Ending the round",function(ply,args)
     end
 end)
 
+homegrad.CreateCommand("fendround","Ending the round",function(ply,args)
+    if ply:IsSuperAdmin() then
+        homegrad.ForceEndRound()
+    end
+end)
+
 if SERVER then
     hook.Add("PlayerSay","hg.commandsexec",function(ply,text,teamb)
         local exploded = homegrad.ExplodeCommand(text)

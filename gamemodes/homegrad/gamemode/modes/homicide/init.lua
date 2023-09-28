@@ -76,7 +76,7 @@ if SERVER then
             local policeman = table.Random(innocents)
             policeman:HSetTeam(3)
             policeman:Give("weapon_glock17")
-            policeman:GiveAmmo(9 * 6,"9mm Parabellum")
+            policeman:GiveAmmo(17 * 6,"9x19mm Parabellum")
         end
     end
 
@@ -98,8 +98,6 @@ if SERVER then
     end
 
     function MODE:OnPlayerDeath(victim,inflictor,attacker)
-        if not homegrad.IsRoundStarted() then return end
-
         local victeam = victim:HGetTeam()
 
         if victeam == 2 then
@@ -123,6 +121,7 @@ if SERVER then
             ply:SetHName(name,localname)
             local color = HSVToColor(math.random(0,360),1,0.5)
             ply:SetPlayerColor(Color(color.r,color.g,color.b):ToVector())
+            ply:Give("weapon_fists")
         end
 
         // Selecting a random player as a traitor
@@ -139,16 +138,16 @@ else
     net.Receive("hc.wintext",function()
         local winner = net.ReadUInt(4)
         local traitor = net.ReadEntity()
-        local won, wons = homegrad.GetPhrase("hg_won"), homegrad.GetPhrase("hg_wons")
         local traitorhas = homegrad.GetPhrase("hc_traitorwas")
         if winner == 1 then
-            chat.AddText(color_white,won," ",homegrad.GetPhrase("hc_traitor"))
+            chat.AddText(color_white,homegrad.GetPhrase("hc_traitor_won"))
             chat.AddText(color_white,traitorhas," ",traitor:Name())
         elseif winner == 2 then
-            chat.AddText(color_white,wons," ",homegrad.GetPhrase("hc_innocents"))
+            chat.AddText(color_white,homegrad.GetPhrase("hc_innocent_won"))
             chat.AddText(color_white,traitorhas," ",traitor:Name())
         else
-            chat.AddText(color_white,won," ",homegrad.GetPhrase("hc_friendship"))
+            chat.AddText(color_white,homegrad.GetPhrase("hc_friendship_won"))
+            chat.AddText(color_white,traitorhas," ",traitor:Name())
         end
     end)
 end

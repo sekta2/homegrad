@@ -39,7 +39,7 @@ function homegrad.GetModeName()
 end
 
 function homegrad.GetNextModeName()
-    local curmode = homegrad.modes[homegrad.GetCurrentMode()]
+    local curmode = homegrad.modes[homegrad.GetNextMode()]
     return curmode:GetLocalizedName()
 end
 
@@ -90,18 +90,19 @@ if SERVER then
     end
 
     function homegrad.SetCurrentMode(curmode)
-        SetGlobalString("hg.currentmode",homegrad.modes[curmode] and curmode or "homicide")
+        SetGlobalString("hg.currentmode",curmode)
     end
 
     function homegrad.SetNextMode(nextmode)
-        SetGlobalString("hg.nextmode",homegrad.modes[nextmode] and nextmode or "homicide")
+        SetGlobalString("hg.nextmode",nextmode)
     end
 
     function homegrad.ProcessNextMode()
         local random = GetConVar("hg_random_modes"):GetBool()
         if random then
             homegrad.SetCurrentMode(homegrad.GetNextMode())
-            homegrad.SetNextMode(table.Random(homegrad.modes))
+            local _,nextround = table.Random(homegrad.modes)
+            homegrad.SetNextMode(nextround)
         else
             homegrad.SetCurrentMode(homegrad.GetNextMode())
         end

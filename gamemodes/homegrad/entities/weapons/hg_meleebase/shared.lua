@@ -9,6 +9,7 @@ SWEP.IsHomegrad = true
 SWEP.IsMelee = true
 
 SWEP.NextShoot = 0
+SWEP.HoldType = "knife"
 
 SWEP.Primary.ClipSize = 50
 SWEP.Primary.DefaultClip = 50
@@ -25,12 +26,11 @@ SWEP.Secondary.Automatic = false
 SWEP.Secondary.Ammo = "none"
 
 function SWEP:Initialize()
-    self:SetHoldType("knife")
+    self:SetHoldType(self.HoldType)
 end
 
 function SWEP:Deploy()
     self:EmitSound(self.Primary.SoundDraw)
-    self:SendWeaponAnim(ACT_VM_DRAW)
 end
 
 function SWEP:CanPrimaryAttack()
@@ -46,8 +46,8 @@ function SWEP:PrimaryAttack()
 
     self.NextShoot = CurTime() + self.ShootWait
 
-    self:SendWeaponAnim( ACT_VM_PRIMARYATTACK )
-    owner:SetAnimation( PLAYER_ATTACK1 )
+    self:SendWeaponAnim(ACT_VM_PRIMARYATTACK)
+    owner:SetAnimation(PLAYER_ATTACK1)
 
     local startPos = owner:GetAttachment(owner:LookupAttachment("eyes")).Pos
     local endPos = startPos + owner:GetAngles():Forward() * 80
@@ -56,8 +56,8 @@ function SWEP:PrimaryAttack()
         start = startPos,
         endpos = endPos,
         filter = owner,
-        mins = Vector( -16, -16, 0 ),
-        maxs = Vector( 16, 16, 0 ),
+        mins = Vector(-16, -16, 0),
+        maxs = Vector(16, 16, 0),
         mask = MASK_SHOT_HULL,
     })
 
@@ -72,11 +72,15 @@ function SWEP:PrimaryAttack()
             else
                 local snd = self.Primary.SoundHitWall[math.random(1,#self.Primary.SoundHitWall)]
                 owner:EmitSound(snd)
-                util.Decal("Impact.Concrete", startPos, endPos, owner)
+                util.Decal("ManhackCut", startPos, endPos, owner)
+                if IsValid(tr.Entity) then
+                    tr.Entity:TakeDamage(self.Primary.Damage,owner,self)
+                end
             end
         else
             if tr.Hit then
                 local snd = self.Primary.SoundHitWall[math.random(1,#self.Primary.SoundHitWall)]
+                util.Decal("ManhackCut", startPos, endPos, owner)
                 owner:EmitSound(snd)
             else
                 local snd = self.Primary.Sound[math.random(1,#self.Primary.Sound)]
@@ -84,4 +88,7 @@ function SWEP:PrimaryAttack()
             end
         end
     end
+end
+
+function SWEP:SecondaryAttack()
 end

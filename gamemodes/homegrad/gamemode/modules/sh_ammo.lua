@@ -1,7 +1,9 @@
 homegrad.ammos = {
     "5,45x39mm",
     "7,62x39mm",
-    "9mm Parabellum",
+    "5,56x45mm",
+    "9x19mm Parabellum",
+    "5,7x28mm"
 }
 
 for _,ammo in pairs(homegrad.ammos) do
@@ -15,7 +17,7 @@ for _,ammo in pairs(homegrad.ammos) do
         maxcarry = 120,
         minsplash = 10,
         maxsplash = 5
-    })
+   })
 end
 
 timer.Simple(1,function()

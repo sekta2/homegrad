@@ -1,0 +1,72 @@
+local MODE = {}
+
+MODE.name = "Based Mode" // Mode name
+MODE.startsounds = {"snd_jack_hmcd_disaster.mp3"} // Round-Start sounds
+
+// Teams
+MODE.teams = {
+    [1] = {
+        name = "Team 1",
+        color = Color(55,55,155)
+    },
+    [2] = {
+        name = "Team 2",
+        color = Color(155,55,55)
+    },
+}
+
+function MODE:GetLocalizedName()
+    return homegrad.GetPhrase("gmname_homicide")
+end
+
+function MODE:GetLocalizedDesc(teamid)
+    return teamid == 1 and homegrad.GetPhrase("hc_innocent_lore") or
+    teamid == 2 and homegrad.GetPhrase("hc_traitor_lore") or
+    teamid == 3 and homegrad.GetPhrase("hc_police_lore") or
+    "???"
+end
+
+function MODE:GetLocalizedRole(teamid)
+    local you = homegrad.GetPhrase("hg_you")
+    return teamid == 1 and you .. " " .. homegrad.GetPhrase("hc_innocent") or
+    teamid == 2 and you .. " " .. homegrad.GetPhrase("hc_traitor") or
+    teamid == 3 and you .. " " .. homegrad.GetPhrase("hc_police") or
+    "???"
+end
+
+if SERVER then
+    function MODE:OnEndRound()
+        // Leave empty if you don't use this
+    end
+
+    function MODE:OnPlayerDeath(victim,inflictor,attacker)
+        // Leave empty if you don't use this
+    end
+
+    function MODE:SetUp()
+        local plys = player.GetAll()
+
+        // Making everyone innocent
+        for _,ply in pairs(plys) do
+            // Team
+            ply:HSetTeam(math.random(1,2))
+
+            // Model and gender
+            local model,gender = randomModel()
+            local tblname = table.Random(homegrad.names[gender])
+            local name,localname = tblname[1],tblname[2]
+            ply:SetModel(model)
+            ply:SetGender(gender)
+            ply:SetHName(name,localname)
+
+            // Player color
+            local color = HSVToColor(math.random(0,360),1,0.5)
+            ply:SetPlayerColor(Color(color.r,color.g,color.b):ToVector())
+            ply:Give("weapon_fists")
+        end
+    end
+else
+    // Client functions
+end
+
+return MODE

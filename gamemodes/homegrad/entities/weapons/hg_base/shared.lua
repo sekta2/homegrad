@@ -74,10 +74,10 @@ function SWEP:DrawHUD()
 
     local text = self:GetAmmoText()
     local ammo = self:GetMaxClip1()
-    local ammomags = ply:GetAmmoCount( self:GetPrimaryAmmoType() )
+    local ammomags = ply:GetAmmoCount(self:GetPrimaryAmmoType())
 
-    draw.DrawText(homegrad.GetPhrase("hg_magazine") .. " | " .. text, "hg.big", pos.x, pos.y, color_gray1, TEXT_ALIGN_RIGHT )
-    draw.DrawText(homegrad.GetPhrase("hg_magazines") .. " | " .. math.Round(ammomags / ammo), "hg.big", pos.x + 5, pos.y + 25, color_gray, TEXT_ALIGN_RIGHT )
+    draw.DrawText(homegrad.GetPhrase("hg_magazine") .. " | " .. text, "hg.big", pos.x, pos.y, color_gray1, TEXT_ALIGN_RIGHT)
+    draw.DrawText(homegrad.GetPhrase("hg_magazines") .. " | " .. math.Round(ammomags / ammo), "hg.big", pos.x + 5, pos.y + 25, color_gray, TEXT_ALIGN_RIGHT)
 end
 
 function SWEP:IsScope()

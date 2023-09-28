@@ -13,7 +13,7 @@ sound.Add({
     volume = 1.0,
     level = 80,
     pitch = {95, 110},
-    sound = "pwb/weapons/aks74u/shoot.wav"
+    sound = "pwb/weapons/aks74u/draw.wav"
 })
 
 SWEP.Base = "hg_base"

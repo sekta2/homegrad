@@ -13,6 +13,8 @@ LANG.phrases = {
     ["hc_innocent"] = "Innocent",
     ["hc_innocents"] = "Innocents",
     ["hc_traitor"] = "Traitor",
+    ["hc_innocent_won"] = "Innocents won!",
+    ["hc_traitor_won"] = "Traitors won!",
     ["hg_won"] = "Won:",
     ["hg_wons"] = "Won:",
     ["hg_yourguilt"] = "Your guilt:",
@@ -22,6 +24,7 @@ LANG.phrases = {
     ["hc_traitor_lore"] = "Your task is to kill everyone before the police arrive",
     ["hc_police_lore"] = "You have a concealed firearm, try to neutralize the traitor",
     ["hc_friendship"] = "Friendship",
+    ["hc_friendship_won"] = "Friendship won!",
     ["hg_defaultname"] = "Human",
     ["hg_your_name"] = "Your name -",
     ["hg_name1"] = "Tommy",
@@ -51,6 +54,12 @@ LANG.phrases = {
     ["hg_half"] = "~Half",
     ["hg_almost_empty"] = "~Almost empty",
     ["hg_empty"] = "Empty",
+    ["dm_contr"] = "Counter-Terrorist",
+    ["dm_terror"] = "Terrorist",
+    ["dm_contr_lore"] = "Neutralize all terrorists",
+    ["dm_terror_lore"] = "Neutralize all counter-terrorists",
+    ["dm_contr_won"] = "Counter-Terrorists won!",
+    ["dm_terror_won"] = "Terrorists won!",
 }
 
 return LANG

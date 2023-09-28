@@ -1,5 +1,6 @@
-local lerped_ang
+local lerped_ang,lerped_fov
 local recoil = 0
+local startRecoil = 0
 
 hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
     if ply:IsSpectator() then return end
@@ -46,6 +47,7 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
             vpos = weppos
         end
 
+        lerped_fov = Lerp(ft,lerped_fov or fov,scope and 75 or fov)
         lerped_ang = LerpAngle(ft,lerped_ang or vang,wepang or vang)
 
         ply:ManipulateBoneScale(head,Vector(0,0,0))
@@ -55,7 +57,7 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
             if not oldShootTime then oldShootTime = lastShootTime else
                 if oldShootTime ~= lastShootTime then
                     oldShootTime = lastShootTime
-                    // startRecoil = CurTime() + 0.05
+                    startRecoil = CurTime() + 0.05
                     recoil = math.Rand(0.9,1.1) * (scope and 0.5 or 0.5)
                 end
             end
@@ -70,6 +72,10 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
         else
             recoil = 0
         end
+
+        local anim_pos = math.max(startRecoil - CurTime(),0) * 5
+
+        lerped_fov = lerped_fov - anim_pos * (scope and 2 or 1)
 
         local size = Vector(6,6,0)
         local tr = {}
@@ -95,7 +101,7 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
 
         view.origin = vpos
         view.angles = lerped_ang
-        view.fov = fov
+        view.fov = lerped_fov
         view.drawviewer = true
 
         return view

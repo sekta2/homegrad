@@ -4,6 +4,8 @@ local defaulthud = {
     ["CHudAmmo"] = true,
     ["CHudSecondaryAmmo"] = true,
     ["CHudCrosshair"] = true,
+    ["CHudDamageIndicator"] = true,
+    ["CHudGeiger"] = true
 }
 
 hook.Add("HUDShouldDraw","hg.hidedefaulthud",function(hud)
@@ -33,8 +35,8 @@ hook.Add("HUDPaint","hg.hudpaint",function()
     local scrw,scrh = ScrW(),ScrH()
 
     local startRound = homegrad.GetRoundStartTime() + 7 - CurTime()
-    local maincolor = Color(255,255,255,math.Clamp(startRound - 0.5,0,1) * 255 )
-    local teamcolor = Color(tc.r,tc.g,tc.b,math.Clamp(startRound - 0.5,0,1) * 255 )
+    local maincolor = Color(255,255,255,math.Clamp(startRound - 0.5,0,1) * 255)
+    local teamcolor = Color(tc.r,tc.g,tc.b,math.Clamp(startRound - 0.5,0,1) * 255)
 
     if startRound > 0 and ply:Alive() and roundstarted then
         ply:ScreenFade(SCREENFADE.IN,Color(0,0,0,255),3,0.5)
