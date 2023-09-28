@@ -72,13 +72,7 @@ function SWEP:PrimaryAttack()
             else
                 local snd = self.Primary.SoundHitWall[math.random(1,#self.Primary.SoundHitWall)]
                 owner:EmitSound(snd)
-                local negr = ents.Create("prop_ragdoll")
-                negr:SetModel("models/player/group01/male_03.mdl")
-                negr:SetPos(tr.Entity:GetPos())
-                negr:Spawn()
-                negr:SetColor(Color(1,0,0))
-                tr.Entity:Remove()
-                util.Decal("Scorch", startPos, endPos, owner)
+                util.Decal("Impact.Concrete", startPos, endPos, owner)
             end
         else
             if tr.Hit then
