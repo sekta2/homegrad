@@ -117,7 +117,7 @@ function SWEP:FireBullet(dmg,numbul,spread)
     local cone = 0
 
     local shootOrigin = Attachment.Pos
-    local vec = Vector(0,0,10)
+    local vec = Vector(0,0,0) -- Vector(0,0,10)
     vec:Rotate(Attachment.Ang)
     shootOrigin:Add(vec)
 
