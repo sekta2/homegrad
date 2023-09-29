@@ -83,7 +83,7 @@ if SERVER then
     function MODE:GetWinner()
         local allalive = self:GetAlivePlayers()
         local traitor = homegrad.HGetTeamPlayers(2)[1]
-        local traitoralive = traitor:Alive()
+        local traitoralive = IsValid(traitor) and traitor:Alive() or false
 
         return (traitoralive and allalive <= 0) and 1 or (not traitoralive and allalive > 0) and 2 or 3
     end
@@ -139,10 +139,10 @@ else
         local winner = net.ReadUInt(4)
         local traitor = net.ReadEntity()
         local traitorhas = homegrad.GetPhrase("hc_traitorwas")
-        if winner == 1 then
+        if winner == 1 and IsValid(traitor) then
             chat.AddText(color_white,homegrad.GetPhrase("hc_traitor_won"))
             chat.AddText(color_white,traitorhas," ",traitor:Name())
-        elseif winner == 2 then
+        elseif winner == 2 and IsValid(traitor) then
             chat.AddText(color_white,homegrad.GetPhrase("hc_innocent_won"))
             chat.AddText(color_white,traitorhas," ",traitor:Name())
         else

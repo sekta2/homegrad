@@ -5,11 +5,11 @@ MODE.startsounds = {"snd_jack_hmcd_disaster.mp3","snd_jack_hmcd_shining.mp3","sn
 MODE.teams = {
     [1] = {
         name = "Police",
-        color = Color(93,121,174)
+        color = Color(50,50,200)
     },
     [2] = {
         name = "Rebel",
-        color = Color(222,155,53)
+        color = Color(220,160,50)
     }
 }
 
@@ -54,7 +54,7 @@ if SERVER then
     end
 
     local function randomModelPolice()
-        return "models/kerry/nypd_v2/male_0" .. math.random(1,9) .. ".mdl", "male"
+        return "models/player/swat.mdl", "male"
     end
 
     function MODE:GetWinner()
@@ -84,10 +84,10 @@ if SERVER then
         local plys = homegrad.GetNonSpectators()
 
         // Making half the players police and the other half rebels
-        local del = math.floor(#plys / 2)
+        local del = math.Round(#plys / 2)
         local rand = math.random(0,100)
         for i,ply in pairs(plys) do
-            local teamid = rand >= 50 and (i < del and 1 or 2) or (i > del and 1 or 2)
+            local teamid = rand >= 50 and (i <= del and 1 or 2) or (i <= del and 2 or 1)
             ply:HSetTeam(teamid)
             local model,gender
             if teamid == 1 then model,gender = randomModelPolice()

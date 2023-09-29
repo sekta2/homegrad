@@ -8,7 +8,9 @@ SWEP.PrintName = "AKM"
 SWEP.ScopePos = Vector(5,5,0.76)
 SWEP.ScopeAng = Angle(-8,0,0)
 SWEP.HoldType = "ar2"
+SWEP.RunHoldType = "passive"
 SWEP.ReloadingTime = 2
+SWEP.Slot = 2
 
 SWEP.Primary.ClipSize = 30
 SWEP.Primary.DefaultClip = 30
@@ -26,5 +28,4 @@ SWEP.Secondary.DefaultClip = -1
 SWEP.Secondary.Automatic = false
 SWEP.Secondary.Ammo = "none"
 
-SWEP.ViewModel = "models/pwb/weapons/w_akm.mdl"
 SWEP.WorldModel = "models/pwb/weapons/w_akm.mdl"

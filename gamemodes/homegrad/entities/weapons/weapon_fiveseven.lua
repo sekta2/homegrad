@@ -11,6 +11,7 @@ SWEP.HoldType = "revolver"
 SWEP.RunHoldType = "normal"
 SWEP.ReloadingTime = 2.5
 SWEP.ShootWait = 0.15
+SWEP.Slot = 1
 
 SWEP.Primary.ClipSize = 20
 SWEP.Primary.DefaultClip = 20
@@ -28,5 +29,4 @@ SWEP.Secondary.DefaultClip = -1
 SWEP.Secondary.Automatic = false
 SWEP.Secondary.Ammo = "none"
 
-SWEP.ViewModel = "models/pwb2/weapons/w_fiveseven.mdl"
 SWEP.WorldModel = "models/pwb2/weapons/w_fiveseven.mdl"

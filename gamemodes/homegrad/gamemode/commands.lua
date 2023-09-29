@@ -12,15 +12,40 @@ homegrad.CreateCommand("test","This is test",function(ply,args)
     ply:ChatPrint("Hi! This is test.")
 end)
 
-homegrad.CreateCommand("endround","Ending the round",function(ply,args)
-    if ply:IsSuperAdmin() then
-        homegrad.EndRound()
+homegrad.CreateCommand("levelnext","Select next mode",function(ply,args)
+    if ply:IsAdmin() or ply:IsSuperAdmin() then
+        local mode = args[2]
+        homegrad.SetNextMode(homegrad.modes[mode] and mode or "homicide")
+        homegrad.print(ply:Nick() .. " Changed next mode to " .. tostring(args[1]))
+    else
+        ply:ChatPrint("You are not an admin.")
     end
 end)
 
-homegrad.CreateCommand("fendround","Ending the round",function(ply,args)
-    if ply:IsSuperAdmin() then
+homegrad.CreateCommand("levelstart","Start the round",function(ply,args)
+    if ply:IsAdmin() or ply:IsSuperAdmin() then
+        homegrad.StartRound()
+        homegrad.print(ply:Nick() .. " Started round")
+    else
+        ply:ChatPrint("You are not an admin.")
+    end
+end)
+
+homegrad.CreateCommand("levelend","Ending the round",function(ply,args)
+    if ply:IsAdmin() or ply:IsSuperAdmin() then
+        homegrad.EndRound()
+        homegrad.print(ply:Nick() .. " Ended round")
+    else
+        ply:ChatPrint("You are not an admin.")
+    end
+end)
+
+homegrad.CreateCommand("forcelevelend","Forcing round end",function(ply,args)
+    if ply:IsAdmin() or ply:IsSuperAdmin() then
         homegrad.ForceEndRound()
+        homegrad.print(ply:Nick() .. " Forced round end")
+    else
+        ply:ChatPrint("You are not an admin.")
     end
 end)
 

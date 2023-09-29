@@ -10,7 +10,8 @@ SWEP.ScopeAng = Angle(-4,3,0)
 SWEP.HoldType = "smg"
 SWEP.RunHoldType = "passive"
 SWEP.ReloadingTime = 2
-SWEP.ShootWait = 0.15
+SWEP.ShootWait = 0.085
+SWEP.Slot = 2
 
 SWEP.Primary.ClipSize = 30
 SWEP.Primary.DefaultClip = 30
@@ -28,5 +29,4 @@ SWEP.Secondary.DefaultClip = -1
 SWEP.Secondary.Automatic = false
 SWEP.Secondary.Ammo = "none"
 
-SWEP.ViewModel = "models/weapons/insurgency/w_m16.mdl"
 SWEP.WorldModel = "models/weapons/insurgency/w_m16.mdl"

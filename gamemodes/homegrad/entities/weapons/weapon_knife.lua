@@ -71,6 +71,7 @@ SWEP.PrintName = "Knife"
 
 SWEP.ShootWait = 0.6
 SWEP.HoldType = "knife"
+SWEP.Slot = 0
 
 SWEP.Primary.Automatic = true
 SWEP.Primary.Damage = 35
@@ -89,5 +90,4 @@ SWEP.Primary.SoundHitWall = {
 }
 SWEP.Primary.SoundDraw = "pwb/weapons/knife/deploy.wav"
 
-SWEP.ViewModel = "models/pwb/weapons/w_knife.mdl"
 SWEP.WorldModel = "models/pwb/weapons/w_knife.mdl"

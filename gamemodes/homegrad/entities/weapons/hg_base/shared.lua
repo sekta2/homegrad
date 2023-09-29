@@ -10,6 +10,7 @@ SWEP.Reloading = false
 SWEP.HudShow = 0
 
 SWEP.HoldType = "ar2"
+SWEP.RunHoldType = "passive"
 
 SWEP.ReloadingTime = 2.5
 SWEP.ReloadingTimer = 0
@@ -92,7 +93,7 @@ function SWEP:GetScopePos()
 end
 
 function SWEP:CanPrimaryAttack()
-    return self:Clip1() > 0 and self.NextShoot < CurTime() and not self:IsReloading()
+    return self:Clip1() > 0 and self.NextShoot < CurTime() and not self:IsReloading() and not self:GetOwner():IsSprinting()
 end
 
 function SWEP:Deploy()
@@ -116,7 +117,7 @@ function SWEP:FireBullet(dmg,numbul,spread)
     local cone = 0
 
     local shootOrigin = Attachment.Pos
-    local vec = Vector(0,0,0)
+    local vec = Vector(0,0,10)
     vec:Rotate(Attachment.Ang)
     shootOrigin:Add(vec)
 
@@ -182,6 +183,7 @@ function SWEP:PrimaryAttack()
 end
 
 function SWEP:SecondaryAttack()
+    return false
 end
 
 function SWEP:Reload()
@@ -200,6 +202,11 @@ end
 function SWEP:Think()
     local ply = self:GetOwner()
 
+    if ply:IsSprinting() then
+        self:SetHoldType(self.RunHoldType)
+    else
+        self:SetHoldType(self.HoldType)
+    end
     if self:IsReloading() and self.ReloadingTimer <= CurTime() then
         self:SetNWBool("hg.isreloading",false)
 

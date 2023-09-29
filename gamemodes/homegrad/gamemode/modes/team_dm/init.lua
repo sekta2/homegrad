@@ -5,11 +5,11 @@ MODE.startsounds = {"snd_jack_hmcd_deathmatch.mp3"}
 MODE.teams = {
     [1] = {
         name = "Counter-Terrorist",
-        color = Color(93,121,174)
+        color = Color(50,50,200)
     },
     [2] = {
         name = "Terrorist",
-        color = Color(222,155,53)
+        color = Color(200,50,50)
     }
 }
 
@@ -82,8 +82,8 @@ if SERVER then
         // Making half the players counter-terrorists and the other half terrorists
         local del = math.floor(#plys / 2)
         local rand = math.random(0,100)
-        for i,ply in pairs(plys) do
-            local teamid = rand >= 50 and (i < del and 1 or 2) or (i > del and 1 or 2)
+        for i,ply in ipairs(plys) do
+            local teamid = rand >= 50 and (i <= del and 1 or 2) or (i <= del and 2 or 1)
             ply:HSetTeam(teamid)
             local model,gender = randomModel()
             local tblname = table.Random(homegrad.names[gender])

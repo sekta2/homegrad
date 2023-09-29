@@ -20,10 +20,13 @@ if SERVER then
     end
 
     function homegrad.CleanAllPlayers()
-        for _,ply in pairs(player.GetAll()) do
+        for _,ply in pairs(homegrad.GetNonSpectators()) do
+            ply:UnSpectate()
             ply:StripAmmo()
             ply:StripWeapons()
             ply:Spawn()
+            ply:SetWalkSpeed(100)
+            ply:SetRunSpeed(250)
         end
     end
 
@@ -69,12 +72,23 @@ if SERVER then
 
     hook.Add("PlayerDeath","hg.rounddeath",function(victim,inflictor,attacker)
         if not homegrad.IsRoundStarted() then return end
-        victim:Spectate(OBS_MODE_ROAMING)
         homegrad.ModeOnDeath(victim,inflictor,attacker)
     end)
 
+    hook.Add("PlayerDeathThink","hg.rounddeaththink",function(ply)
+        ply:Spectate(OBS_MODE_ROAMING)
+        return false
+    end)
+
+    hook.Add("AllowPlayerPickup","hg.allowpickup", function(ply,ent)
+        if ent:GetPhysicsObject():GetMass() >= 15 then
+            return false
+        end
+        return
+    end)
+
     hook.Add("PlayerInitialSpawn","hg.roundinitialplayerspawn",function(ply,_)
-        ply:KillSilent()
+        ply:Kill()
         ply:Spectate(OBS_MODE_ROAMING)
         if not homegrad.IsRoundStarted() and homegrad.CheckRoundCanStart() and homegrad.GetNonSpecsPlayersNum() < 3 then
             homegrad.StartRound()

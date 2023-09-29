@@ -35,9 +35,10 @@ function homegrad.ExplodeCommand(str)
 end
 
 function plymeta:HGEyeTrace()
-    tr.start = ply:GetAttachment(ply:LookupAttachment("eyes")).Pos
-    tr.endpos = tr.start + ply:GetAngles():Forward() * 80
-    tr.filter = ply
+    local tr = {}
+    tr.start = self:GetAttachment(self:LookupAttachment("eyes")).Pos
+    tr.endpos = tr.start + self:GetAngles():Forward() * 80
+    tr.filter = self
     return util.TraceLine(tr)
 end
 
