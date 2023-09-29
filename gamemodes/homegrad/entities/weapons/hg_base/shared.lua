@@ -81,6 +81,40 @@ function SWEP:DrawHUD()
     draw.DrawText(homegrad.GetPhrase("hg_magazines") .. " | " .. math.Round(ammomags / ammo), "hg.big", pos.x + 5, pos.y + 25, color_gray, TEXT_ALIGN_RIGHT)
 end
 
+local muzzlePosAngPerHoldtype = {
+    _default = { Vector(10, 0.65, 3.5), Angle(-2, 5, 0) },
+    revolver = { Vector(8, -10.65, 20), Angle(-2, 5, 0) },
+    pistol = { Vector(10, 0.25, 3.5), Angle(-2, 5, 0) },
+    ar2 = { Vector(25, -1, 7.5), Angle(-9, 0, 0) },
+    smg = { Vector(12, -1, 7.5), Angle(-9, 0, 0) },
+    duel = { Vector(9, 1, 3.5), Angle(0, 11, 0) },
+}
+
+// https://github.com/chelog/dobrograd-13-06-2022/blob/master/garrysmod/addons/core-weapons/lua/weapons/weapon_octo_base/shared.lua  
+function SWEP:GetShootPosAndDir() // from dobrograd
+
+    local ply = self:GetOwner()
+    local attID = ply:LookupAttachment("anim_attachment_rh")
+
+    if attID then
+        local att = ply:GetAttachment(attID)
+        local offPos, offAng = self.MuzzlePos, self.MuzzleAng
+        if not offPos then
+            if muzzlePosAngPerHoldtype[self.HoldType] then
+                offPos, offAng = unpack(muzzlePosAngPerHoldtype[self.HoldType])
+            else
+                offPos, offAng = unpack(muzzlePosAngPerHoldtype._default)
+            end
+        end
+
+        local pos, ang = LocalToWorld(offPos, offAng, att.Pos, att.Ang)
+        return pos, ang:Forward(), ang
+    else
+        return ply:GetShootPos(), (ply.viewAngs or ply:EyeAngles()):Forward(), ply.viewAngs
+    end
+
+end
+
 function SWEP:IsScope()
     local ply = self:GetOwner()
     if ply:IsNPC() then return end
@@ -109,21 +143,9 @@ function SWEP:FireBullet(dmg,numbul,spread)
 
     local Attachment = self:GetAttachment(obj)
 
-    if not Attachment then
-        local Pos,Ang = self:GetPosAng()
-        Attachment = {Pos = Pos,Ang = Ang}
-    end
-
     local cone = 0
 
-    local shootOrigin = Attachment.Pos
-    local vec = Vector(0,0,0) -- Vector(0,0,10)
-    vec:Rotate(Attachment.Ang)
-    shootOrigin:Add(vec)
-
-    local shootAngles = Attachment.Ang
-
-    local shootDir = shootAngles:Forward()
+    local shootOrigin, shootDir, shootAngles = self:GetShootPosAndDir()
 
     local bullet = {}
     bullet.Num = self.NumBullet or 1
@@ -158,7 +180,7 @@ function SWEP:FireBullet(dmg,numbul,spread)
 
     if SERVER then
         self:TakePrimaryAmmo(1)
-        self:GetOwner():FireBullets(bullet)
+        ply:FireBullets(bullet)
     end
         self:SetLastShootTime()
 

@@ -65,6 +65,7 @@ LANG.phrases = {
     ["ri_police_lore"] = "Neutralize rioting people, try not to kill",
     ["ri_rebel_won"] = "Rebels won!",
     ["ri_police_won"] = "Police won!",
+    ["hg_need_more_players"] = "Need 2 or more players to start the game",
 }
 
 return LANG

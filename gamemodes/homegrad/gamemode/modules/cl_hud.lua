@@ -60,6 +60,43 @@ hook.Add("HUDPaint","hg.hudpaint",function()
         draw.SimpleText(yourole, "hg.big", scrw / 2, (scrh / 2) + 10, teamcolor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         draw.SimpleText(youroledesc, "hg.big", scrw / 2, scrh / 1.2, teamcolor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end
+
+    if not roundstarted and homegrad.GetNonSpecsPlayersNum() < 2 then
+        draw.SimpleText(homegrad.GetPhrase("hg_need_more_players"), "hg.big", scrw / 2, scrh / 1.2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    end
+
+    if not ply:Alive() or ply:GetMoveType() == MOVETYPE_NOCLIP and (ply:GetDeathSpectator() or ply:IsSpectator()) then
+        for _, v in ipairs(player.GetAll()) do --ESP
+            if !v:Alive() or v == ent then continue end
+
+            local ent = IsValid(v:GetNWEntity("Ragdoll")) and v:GetNWEntity("Ragdoll") or v
+            local screenPosition = ent:GetPos():ToScreen()
+            local x, y = screenPosition.x, screenPosition.y
+            local teamColor = v:GetPlayerColor():ToColor()
+            local distance = ply:GetPos():Distance(v:GetPos())
+            local factor = 1 - math.Clamp(distance / 1024, 0, 1)
+            local size = math.max(10, 32 * factor)
+            local alpha = math.max(255 * factor, 80)
+
+            local text = v:Name()
+            surface.SetFont("Trebuchet18")
+            local tw, th = surface.GetTextSize(text)
+
+            surface.SetDrawColor(teamColor.r, teamColor.g, teamColor.b, alpha * 0.5)
+            --surface.SetMaterial(gradient_d)
+            surface.DrawTexturedRect(x - size / 2 - tw / 2, y - th / 2, size + tw, th)
+
+            surface.SetTextColor(255, 255, 255, alpha)
+            surface.SetTextPos(x - tw / 2, y - th / 2)
+            surface.DrawText(text)
+
+            local barWidth = math.Clamp((v:Health() / 150) * (size + tw), 0, size + tw)
+            local healthcolor = v:Health() / 150 * 255
+
+            surface.SetDrawColor(255, healthcolor, healthcolor, alpha)
+            surface.DrawRect(x - barWidth / 2, y + th / 1.5, barWidth, ScreenScale(1))
+        end
+    end
 end)
 
 hook.Add("ScoreboardShow","hg.shownextround",function()

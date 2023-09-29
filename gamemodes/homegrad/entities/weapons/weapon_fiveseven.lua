@@ -4,7 +4,7 @@ SWEP.Author = "Homegrad"
 SWEP.Category = "Homegrad"
 SWEP.Spawnable = false
 
-SWEP.PrintName = "FiveSeven"
+SWEP.PrintName = "Five-Seven"
 SWEP.ScopePos = Vector(3.5,10,0.29)
 SWEP.ScopeAng = Angle(-10,0,0)
 SWEP.HoldType = "revolver"

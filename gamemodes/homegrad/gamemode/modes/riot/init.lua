@@ -54,7 +54,7 @@ if SERVER then
     end
 
     local function randomModelPolice()
-        return "models/player/swat.mdl", "male"
+        return "models/kerry/nypd_v2/male_0" .. math.random(3,9) .. ".mdl", "male"
     end
 
     function MODE:GetWinner()

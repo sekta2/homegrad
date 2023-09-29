@@ -13,10 +13,10 @@ for _,ammo in pairs(homegrad.ammos) do
         tracer = TRACER_LINE,
         plydmg = 0,
         npcdmg = 0,
-        force = 2000,
+        force = 0,
         maxcarry = 120,
-        minsplash = 10,
-        maxsplash = 5
+        minsplash = 0,
+        maxsplash = 0
    })
 end
 
