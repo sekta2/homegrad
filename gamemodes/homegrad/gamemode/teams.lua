@@ -8,6 +8,34 @@ function meta:IsSpectator()
     return self:GetNWBool("hg.spectator",false)
 end
 
+function homegrad.GetSpectators()
+    local plys = {}
+
+    for _, ply in pairs(player.GetAll()) do
+        if ply:IsSpectator() then plys[#plys + 1] = ply end
+    end
+
+    return plys
+end
+
+function homegrad.GetNonSpectators()
+    local plys = {}
+
+    for _, ply in pairs(player.GetAll()) do
+        if not ply:IsSpectator() then plys[#plys + 1] = ply end
+    end
+
+    return plys
+end
+
+function homegrad.GetSpectatorsNum()
+    return #homegrad.GetSpectators()
+end
+
+function homegrad.GetNonSpecsPlayersNum()
+    return player.GetCount() - #homegrad.GetSpectators()
+end
+
 function homegrad.HGetTeamPlayers(id)
     local plys = {}
 

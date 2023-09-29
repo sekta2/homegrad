@@ -31,6 +31,10 @@ if SERVER then
         SetGlobalFloat("hg.roundtime",time)
     end
 
+    function homegrad.CheckRoundCanStart()
+        return homegrad.GetNonSpecsPlayersNum() >= 2
+    end
+
     function homegrad.StartRound()
         game.CleanUpMap()
         homegrad.CleanAllPlayers()
@@ -50,7 +54,9 @@ if SERVER then
         homegrad.ModeOnEnd()
 
         timer.Simple(5,function()
-            homegrad.StartNextRound()
+            if homegrad.CheckRoundCanStart() then
+                homegrad.StartNextRound()
+            end
         end)
     end
 
@@ -63,7 +69,16 @@ if SERVER then
 
     hook.Add("PlayerDeath","hg.rounddeath",function(victim,inflictor,attacker)
         if not homegrad.IsRoundStarted() then return end
+        victim:Spectate(OBS_MODE_ROAMING)
         homegrad.ModeOnDeath(victim,inflictor,attacker)
+    end)
+
+    hook.Add("PlayerInitialSpawn","hg.roundinitialplayerspawn",function(ply,_)
+        ply:KillSilent()
+        ply:Spectate(OBS_MODE_ROAMING)
+        if not homegrad.IsRoundStarted() and homegrad.CheckRoundCanStart() and homegrad.GetNonSpecsPlayersNum() < 3 then
+            homegrad.StartRound()
+        end
     end)
 else
     net.Receive("hg.roundstarted",function()

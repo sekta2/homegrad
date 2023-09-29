@@ -5,35 +5,16 @@ local startRecoil = 0
 hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
     if ply:IsSpectator() then return end
 
-    local head = ply:LookupBone(homegrad.limbs["head"][1])
-    local eye = ply:GetAttachment(ply:LookupAttachment("eyes"))
-    local hand = ply:GetAttachment(ply:LookupAttachment("anim_attachment_rh"))
-    local ragdoll = ply:GetRagdollEntity()
-
     local ft = FrameTime() * 15
-    local weapon = ply:GetActiveWeapon()
-    local scope = IsValid(weapon) and (weapon.IsHomegrad and not weapon.IsMelee and weapon:IsScope() and not weapon:IsReloading())
 
-    if not ply:Alive() and IsValid(ragdoll) then
-        local raghead = ragdoll:LookupBone(homegrad.limbs["head"][1])
-        local rageye = ragdoll:GetAttachment(ragdoll:LookupAttachment("eyes"))
+    if ply:Alive() and ply:GetObserverMode() == OBS_MODE_NONE then
+        local head = ply:LookupBone(homegrad.limbs["head"][1])
+        local eye = ply:GetAttachment(ply:LookupAttachment("eyes"))
+        local hand = ply:GetAttachment(ply:LookupAttachment("anim_attachment_rh"))
 
-        local vpos = rageye.Pos + rageye.Ang:Up() * 2 + rageye.Ang:Forward() * 1
-        local vang = rageye.Ang
+        local weapon = ply:GetActiveWeapon()
+        local scope = IsValid(weapon) and (weapon.IsHomegrad and not weapon.IsMelee and weapon:IsScope() and not weapon:IsReloading())
 
-        lerped_ang = LerpAngle(ft,lerped_ang or vang,vang)
-
-        ragdoll:ManipulateBoneScale(raghead,Vector(0,0,0))
-
-        local view = {}
-
-        view.origin = vpos
-        view.angles = lerped_ang
-        view.fov = fov
-        view.drawviewer = false
-
-        return view
-    else
         local vpos = eye.Pos + eye.Ang:Up() * 2 + eye.Ang:Forward() * 1
         local vang = ply:GetAimVector():Angle()
 

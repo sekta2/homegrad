@@ -49,7 +49,7 @@ hook.Add("HUDPaint","hg.hudpaint",function()
 
     if not roundstarted then shownextround = 3 end
 
-    if startRound > 0 and ply:Alive() and roundstarted then
+    if startRound > 0 and ply:Alive() and roundstarted and not ply:IsSpectator() then
         ply:ScreenFade(SCREENFADE.IN,Color(0,0,0,255),3,0.5)
 
         shownextround = 15

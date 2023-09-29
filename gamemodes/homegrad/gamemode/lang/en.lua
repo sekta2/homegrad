@@ -60,6 +60,11 @@ LANG.phrases = {
     ["dm_terror_lore"] = "Neutralize all counter-terrorists",
     ["dm_contr_won"] = "Counter-Terrorists won!",
     ["dm_terror_won"] = "Terrorists won!",
+    ["ri_rebel"] = "Rebel",
+    ["ri_rebel_lore"] = "Save your rights! Neutralize all those who slow you down!",
+    ["ri_police_lore"] = "Neutralize rioting people, try not to kill",
+    ["ri_rebel_won"] = "Rebels won!",
+    ["ri_police_won"] = "Police won!",
 }
 
 return LANG

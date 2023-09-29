@@ -108,7 +108,7 @@ if SERVER then
     end
 
     function MODE:SetUp()
-        local plys = player.GetAll()
+        local plys = homegrad.GetNonSpectators()
 
         // Making everyone innocent
         for _,ply in pairs(plys) do

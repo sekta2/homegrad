@@ -1,32 +1,32 @@
 local MODE = {}
 
-MODE.name = "Team Deathmatch"
-MODE.startsounds = {"snd_jack_hmcd_deathmatch.mp3"}
+MODE.name = "Riot"
+MODE.startsounds = {"snd_jack_hmcd_disaster.mp3","snd_jack_hmcd_shining.mp3","snd_jack_hmcd_panic.mp3","snd_jack_hmcd_deathmatch.mp3"}
 MODE.teams = {
     [1] = {
-        name = "Counter-Terrorist",
+        name = "Police",
         color = Color(93,121,174)
     },
     [2] = {
-        name = "Terrorist",
+        name = "Rebel",
         color = Color(222,155,53)
     }
 }
 
 function MODE:GetLocalizedName()
-    return homegrad.GetPhrase("gmname_teamdm")
+    return homegrad.GetPhrase("gmname_riot")
 end
 
 function MODE:GetLocalizedDesc(teamid)
-    return teamid == 1 and homegrad.GetPhrase("dm_contr_lore") or
-    teamid == 2 and homegrad.GetPhrase("dm_terror_lore") or
+    return teamid == 1 and homegrad.GetPhrase("ri_police_lore") or
+    teamid == 2 and homegrad.GetPhrase("ri_rebel_lore") or
     "???"
 end
 
 function MODE:GetLocalizedRole(teamid)
     local you = homegrad.GetPhrase("hg_you")
-    return teamid == 1 and you .. " " .. homegrad.GetPhrase("dm_contr") or
-    teamid == 2 and you .. " " .. homegrad.GetPhrase("dm_terror") or
+    return teamid == 1 and you .. " " .. homegrad.GetPhrase("hc_police") or
+    teamid == 2 and you .. " " .. homegrad.GetPhrase("ri_rebel") or
     "???"
 end
 
@@ -41,7 +41,7 @@ function MODE:GetAliveTeam(teamid)
 end
 
 if SERVER then
-    util.AddNetworkString("tdm.wintext")
+    util.AddNetworkString("riot.wintext")
 
     local function randomModel()
         local rand = math.random(0,100)
@@ -53,25 +53,29 @@ if SERVER then
         end
     end
 
-    function MODE:GetWinner()
-        local contr = self:GetAliveTeam(1)
-        local terror = self:GetAliveTeam(2)
+    local function randomModelPolice()
+        return "models/kerry/nypd_v2/male_0" .. math.random(1,9) .. ".mdl", "male"
+    end
 
-        return (contr > 0 and terror <= 0) and 1 or (terror > 0 and contr <= 0) and 2 or 3
+    function MODE:GetWinner()
+        local police = self:GetAliveTeam(1)
+        local rebels = self:GetAliveTeam(2)
+
+        return (police > 0 and rebels <= 0) and 1 or (rebels > 0 and police <= 0) and 2 or 3
     end
 
     function MODE:OnEndRound()
         local winner = self:GetWinner()
-        net.Start("tdm.wintext")
+        net.Start("riot.wintext")
             net.WriteUInt(winner,4)
         net.Broadcast()
     end
 
     function MODE:OnPlayerDeath(victim,inflictor,attacker)
-        local contr = self:GetAliveTeam(1)
-        local terror = self:GetAliveTeam(2)
+        local police = self:GetAliveTeam(1)
+        local rebels = self:GetAliveTeam(2)
 
-        if (contr <= 0 and terror > 0) or (terror <= 0 and contr > 0) then
+        if (police <= 0 and rebels > 0) or (rebels <= 0 and police > 0) then
             homegrad.EndRound()
         end
     end
@@ -79,13 +83,15 @@ if SERVER then
     function MODE:SetUp()
         local plys = homegrad.GetNonSpectators()
 
-        // Making half the players counter-terrorists and the other half terrorists
+        // Making half the players police and the other half rebels
         local del = math.floor(#plys / 2)
         local rand = math.random(0,100)
         for i,ply in pairs(plys) do
             local teamid = rand >= 50 and (i < del and 1 or 2) or (i > del and 1 or 2)
             ply:HSetTeam(teamid)
-            local model,gender = randomModel()
+            local model,gender
+            if teamid == 1 then model,gender = randomModelPolice()
+            else model,gender = randomModel() end
             local tblname = table.Random(homegrad.names[gender])
             local name,localname = tblname[1],tblname[2]
             ply:SetModel(model)
@@ -95,21 +101,22 @@ if SERVER then
             ply:SetPlayerColor(color)
             ply:Give("weapon_fists")
             if teamid == 1 then
-                ply:Give("weapon_m16") ply:GiveAmmo(30 * 6, "5,56x45mm")
-                ply:Give("weapon_glock17") ply:GiveAmmo(17 * 6, "9x19mm Parabellum")
-            else
-                ply:Give("weapon_akm") ply:GiveAmmo(30 * 6, "7,62x39mm")
-                ply:Give("weapon_pl14") ply:GiveAmmo(14 * 6, "9x19mm Parabellum")
+                local randw = math.Rand(0,100)
+                if randw < 70 then
+                    ply:Give("weapon_glock17") ply:GiveAmmo(17 * 3, "9x19mm Parabellum")
+                elseif randw < 35 then
+                    ply:Give("weapon_m16") ply:GiveAmmo(30, "5,56x45mm")
+                end
             end
         end
     end
 else
-    net.Receive("tdm.wintext",function()
+    net.Receive("riot.wintext",function()
         local winner = net.ReadUInt(4)
         if winner == 1 then
-            chat.AddText(color_white,homegrad.GetPhrase("dm_contr_won"))
+            chat.AddText(color_white,homegrad.GetPhrase("ri_police_won"))
         elseif winner == 2 then
-            chat.AddText(color_white,homegrad.GetPhrase("dm_terror_won"))
+            chat.AddText(color_white,homegrad.GetPhrase("ri_rebel_won"))
         else
             chat.AddText(color_white,homegrad.GetPhrase("hc_friendship_won"))
         end
