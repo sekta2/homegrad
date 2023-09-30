@@ -100,12 +100,13 @@ if SERVER then
             local color = self.teams[teamid].color:ToVector()
             ply:SetPlayerColor(color)
             ply:Give("weapon_fists")
+            ply:AllowFlashlight(true)
             if teamid == 1 then
                 local randw = math.Rand(0,100)
                 if randw < 70 then
                     ply:Give("weapon_glock17") ply:GiveAmmo(17 * 3, "9x19mm Parabellum")
                 elseif randw < 35 then
-                    ply:Give("weapon_m16") ply:GiveAmmo(30, "5,56x45mm")
+                    ply:Give("weapon_m16") ply:GiveAmmo(30, "5,56x45mm") -- Че ебанутый
                 end
             end
         end
