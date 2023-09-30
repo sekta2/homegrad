@@ -43,6 +43,7 @@ if SERVER then
             ply:SetJumpPower(200)
 
             ply:SetCanZoom(false)
+            ply:AllowFlashlight(false) -- TODO: Add flashlight entity from original homigrad
         end
     end
 
