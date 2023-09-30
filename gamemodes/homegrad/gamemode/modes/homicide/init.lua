@@ -67,6 +67,7 @@ if SERVER then
         local traitor = table.Random(innocents)
         traitor:HSetTeam(2)
         traitor:Give("weapon_knife")
+        traitor:AllowFlashlight(true)
     end
 
     function MODE:SelectPolice()
@@ -77,6 +78,7 @@ if SERVER then
             policeman:HSetTeam(3)
             policeman:Give("weapon_glock17")
             policeman:GiveAmmo(17 * 6,"9x19mm Parabellum")
+            policeman:AllowFlashlight(true)
         end
     end
 
@@ -121,7 +123,7 @@ if SERVER then
             ply:SetHName(name,localname)
             local color = HSVToColor(math.random(0,360),1,0.5)
             ply:SetPlayerColor(Color(color.r,color.g,color.b):ToVector())
-            ply:Give("weapon_fists")
+            ply:Give("weapon_hands") -- TODO: Make hands SWEP
         end
 
         // Selecting a random player as a traitor
