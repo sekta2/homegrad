@@ -62,13 +62,13 @@ function SWEP:PrimaryAttack()
         if IsValid(tr.Entity) then
             if tr.Entity:IsPlayer() then
                 local snd = self.Primary.SoundHit[math.random(1,#self.Primary.SoundHit)]
-                owner:EmitSound(snd)
+                owner:EmitSound(snd, 60, math.random(95,105))
                 tr.Entity:TakeDamage(self.Primary.Damage,owner,self)
                 tr.Entity:SetLastHitGroup(tr.HitGroup)
                 util.Decal("Impact.Flesh", startPos, endPos, owner)
             else
                 local snd = self.Primary.SoundHitWall[math.random(1,#self.Primary.SoundHitWall)]
-                owner:EmitSound(snd)
+                owner:EmitSound(snd, 60, math.random(95,105))
                 util.Decal("ManhackCut", startPos, endPos, owner)
                 if IsValid(tr.Entity) then
                     tr.Entity:TakeDamage(self.Primary.Damage,owner,self)
@@ -78,10 +78,10 @@ function SWEP:PrimaryAttack()
             if tr.Hit then
                 local snd = self.Primary.SoundHitWall[math.random(1,#self.Primary.SoundHitWall)]
                 util.Decal("ManhackCut", startPos, endPos, owner)
-                owner:EmitSound(snd)
+                owner:EmitSound(snd, 60, math.random(95,105))
             else
                 local snd = self.Primary.Sound[math.random(1,#self.Primary.Sound)]
-                owner:EmitSound(snd)
+                owner:EmitSound(snd, 60, math.random(95,105))
             end
         end
     end
