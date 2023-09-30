@@ -11,14 +11,11 @@ SWEP.IsMelee = true
 SWEP.NextShoot = 0
 SWEP.HoldType = "knife"
 
-SWEP.Primary.ClipSize = 50
-SWEP.Primary.DefaultClip = 50
+SWEP.Primary.ClipSize = -1
+SWEP.Primary.DefaultClip = -1
 SWEP.Primary.Automatic = true
 SWEP.Primary.Ammo = "none"
-SWEP.Primary.Cone = 0
 SWEP.Primary.Damage = 100
-SWEP.Primary.Spread = 0
-SWEP.Primary.Force = 0
 
 SWEP.Secondary.ClipSize    = -1
 SWEP.Secondary.DefaultClip = -1
@@ -88,7 +85,10 @@ function SWEP:PrimaryAttack()
             end
         end
     end
+
+    owner:LagCompensation(false) -- Я НЕ ТЕСТИЛ ПОЭТОМУ ЕСЛИ ЧОТА СЛОМАЕТСЯ ТО УДАЛИТЬ!!!
 end
 
 function SWEP:SecondaryAttack()
+    return false
 end
