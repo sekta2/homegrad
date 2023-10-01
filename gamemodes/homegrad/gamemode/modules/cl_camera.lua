@@ -12,6 +12,7 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
 
         local raghead = ragdoll:LookupBone(homegrad.limbs["head"][1])
         local rageye = ragdoll:GetAttachment(ragdoll:LookupAttachment("eyes"))
+        if not ragdoll or not raghead or not rageye then return end
 
         local vpos = rageye.Pos + rageye.Ang:Up() * 2 + rageye.Ang:Forward() * 1
         local vang = rageye.Ang
@@ -32,6 +33,7 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
         local head = ply:LookupBone(homegrad.limbs["head"][1])
         local eye = ply:GetAttachment(ply:LookupAttachment("eyes"))
         local hand = ply:GetAttachment(ply:LookupAttachment("anim_attachment_rh"))
+        if not head or not eye or not hand then return end
 
         local weapon = ply:GetActiveWeapon()
         local scope = IsValid(weapon) and (weapon.IsHomegrad and not weapon.IsMelee and weapon:IsScope() and not weapon:IsReloading())
@@ -60,7 +62,7 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
                 if oldShootTime ~= lastShootTime then
                     oldShootTime = lastShootTime
                     startRecoil = CurTime() + 0.05
-                    recoil = math.Rand(0.9,1.1) * (scope and 0.5 or 0.5)
+                    recoil = math.Rand(0.9,1.1) * (scope and 0.5 or 0.8)
                 end
             end
         end
@@ -107,14 +109,14 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
         view.drawviewer = true
 
         return view
-    elseif not ply:Alive() and ply:GetDeathSpectator() then
-        local ragdoll = ply:GetRagdollEntity() or ply
-        --local raghead = ragdoll:LookupBone(homegrad.limbs["head"][1])
-        --ragdoll:ManipulateBoneScale(raghead,Vector(1,1,1))
+    //elseif not ply:Alive() and ply:GetDeathSpectator() then
+        // local ragdoll = ply:GetRagdollEntity() or ply
+        // local raghead = ragdoll:LookupBone(homegrad.limbs["head"][1])
+        // ragdoll:ManipulateBoneScale(raghead,Vector(1,1,1))
     end
 end)
 
 hook.Add("AdjustMouseSensitivity","hg.sensitivity",function(default)
     local ply = LocalPlayer()
-    return ply:IsSprinting() and 0.3
+    return (ply:IsSprinting() and ply:Alive()) and 0.3
 end)

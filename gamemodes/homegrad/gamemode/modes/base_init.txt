@@ -8,11 +8,11 @@ MODE.teams = {
     [1] = {
         name = "Team 1",
         color = Color(55,55,155)
-    },
+   },
     [2] = {
         name = "Team 2",
         color = Color(155,55,55)
-    },
+   },
 }
 
 function MODE:GetLocalizedName()
@@ -62,7 +62,7 @@ if SERVER then
             // Player color
             local color = HSVToColor(math.random(0,360),1,0.5)
             ply:SetPlayerColor(Color(color.r,color.g,color.b):ToVector())
-            ply:Give("weapon_fists")
+            ply:Give("weapon_hands") // Give hands
         end
     end
 else

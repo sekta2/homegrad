@@ -6,11 +6,11 @@ MODE.teams = {
     [1] = {
         name = "Police",
         color = Color(50,50,200)
-    },
+   },
     [2] = {
         name = "Rebel",
         color = Color(220,160,50)
-    }
+   }
 }
 
 function MODE:GetLocalizedName()
@@ -99,16 +99,21 @@ if SERVER then
             ply:SetHName(name,localname)
             local color = self.teams[teamid].color:ToVector()
             ply:SetPlayerColor(color)
-            ply:Give("weapon_fists")
+            ply:Give("weapon_hands")
             ply:AllowFlashlight(true)
+			ply:Flashlight(false)
+			local randw = math.random(1,60)
             if teamid == 1 then
-                local randw = math.Rand(0,100)
-                if randw < 70 then
-                    ply:Give("weapon_glock17") ply:GiveAmmo(17 * 3, "9x19mm Parabellum")
-                elseif randw < 35 then
-                    ply:Give("weapon_m16") ply:GiveAmmo(30, "5,56x45mm") -- Че ебанутый
-                end
-            end
+                if randw == 30 then
+                    ply:Give("weapon_glock17") ply:GiveAmmo(17, "9x19mm Parabellum")
+				end
+				ply:Give("weapon_stunbaton")
+            else
+                if randw == 30 then
+                    ply:Give("weapon_knife")
+				end
+                ply:Give("weapon_bar")
+			end
         end
     end
 else

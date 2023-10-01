@@ -2,7 +2,7 @@ SWEP.Base = "weapon_base"
 
 SWEP.Author = "Homegrad"
 SWEP.Category = "Homegrad"
-SWEP.Spawnable = false
+SWEP.Spawnable = GetConVar("developer"):GetBool()
 SWEP.AdminOnly = false
 SWEP.PrintName = "hg_weaponbase"
 SWEP.IsHomegrad = true
@@ -36,6 +36,8 @@ SWEP.Secondary.Ammo = "none"
 
 SWEP.ScopePos = Vector(0,0,0)
 SWEP.ScopeAng = Angle(0,0,0)
+SWEP.addPos = Vector(0,0,0)
+SWEP.addAng = Angle(0,0,0)
 
 function SWEP:Initialize()
     self:SetHoldType(self.HoldType)
@@ -77,42 +79,21 @@ function SWEP:DrawHUD()
     local ammo = self:GetMaxClip1()
     local ammomags = ply:GetAmmoCount(self:GetPrimaryAmmoType())
 
-    draw.DrawText(homegrad.GetPhrase("hg_magazine") .. " | " .. text, "hg.big", pos.x, pos.y, color_gray1, TEXT_ALIGN_RIGHT)
-    draw.DrawText(homegrad.GetPhrase("hg_magazines") .. " | " .. math.Round(ammomags / ammo), "hg.big", pos.x + 5, pos.y + 25, color_gray, TEXT_ALIGN_RIGHT)
-end
+    local pos1,pos2 = self:GetDebugPos()
 
-local muzzlePosAngPerHoldtype = {
-    _default = { Vector(10, 0.65, 3.5), Angle(-2, 5, 0) },
-    revolver = { Vector(8, -10.65, 20), Angle(-2, 5, 0) },
-    pistol = { Vector(10, 0.25, 3.5), Angle(-2, 5, 0) },
-    ar2 = { Vector(25, -1, 7.5), Angle(-9, 0, 0) },
-    smg = { Vector(12, -1, 7.5), Angle(-9, 0, 0) },
-    duel = { Vector(9, 1, 3.5), Angle(0, 11, 0) },
-}
-
-// https://github.com/chelog/dobrograd-13-06-2022/blob/master/garrysmod/addons/core-weapons/lua/weapons/weapon_octo_base/shared.lua  
-function SWEP:GetShootPosAndDir() // from dobrograd
-
-    local ply = self:GetOwner()
-    local attID = ply:LookupAttachment("anim_attachment_rh")
-
-    if attID then
-        local att = ply:GetAttachment(attID)
-        local offPos, offAng = self.MuzzlePos, self.MuzzleAng
-        if not offPos then
-            if muzzlePosAngPerHoldtype[self.HoldType] then
-                offPos, offAng = unpack(muzzlePosAngPerHoldtype[self.HoldType])
-            else
-                offPos, offAng = unpack(muzzlePosAngPerHoldtype._default)
-            end
-        end
-
-        local pos, ang = LocalToWorld(offPos, offAng, att.Pos, att.Ang)
-        return pos, ang:Forward(), ang
-    else
-        return ply:GetShootPos(), (ply.viewAngs or ply:EyeAngles()):Forward(), ply.viewAngs
+    if GetConVar("developer"):GetBool() then
+        local pos11 = pos1:ToScreen()
+        local pos22 = pos2:ToScreen()
+        --[[surface.DrawLine(pos11.x, pos11.y, pos22.x, pos22.y)
+        draw.DrawText("x", "hg.big", pos22.x, pos22.y, color_white, TEXT_ALIGN_RIGHT)
+        draw.DrawText("+", "hg.big", pos11.x, pos11.y, color_white, TEXT_ALIGN_RIGHT)]]
+        debugoverlay.Line(pos1, pos2, 5, color_whine, false)
+        debugoverlay.Box(pos1, Vector(.5,.5,.5), Vector(-.5,-.5,-.5), 5, color_white, false)
+        debugoverlay.Box(pos2, Vector(.5,.5,.5), Vector(-.5,-.5,-.5), 5, color_white, false)
     end
 
+    draw.DrawText(homegrad.GetPhrase("hg_magazine") .. " | " .. text, "hg.big", pos.x, pos.y, color_gray1, TEXT_ALIGN_RIGHT)
+    draw.DrawText(homegrad.GetPhrase("hg_magazines") .. " | " .. math.Round(ammomags / ammo), "hg.big", pos.x + 5, pos.y + 25, color_gray, TEXT_ALIGN_RIGHT)
 end
 
 function SWEP:IsScope()
@@ -134,18 +115,35 @@ function SWEP:Deploy()
     self:EmitSound(self.Primary.SoundDraw)
 end
 
+function SWEP:SetDebugPos(pos1,pos2)
+    self:SetNWVector("pos1",pos1)
+    self:SetNWVector("pos2",pos2)
+end
+
+function SWEP:GetDebugPos()
+    return self:GetNWVector("pos1",Vector(0,0,0)), self:GetNWVector("pos2",Vector(0,0,0))
+end
+
 function SWEP:FireBullet(dmg,numbul,spread)
     local ply = self:GetOwner()
 
     ply:LagCompensation(true)
 
     local obj = self:LookupAttachment("muzzle")
+    local Attachment = self:GetOwner():GetActiveWeapon():GetAttachment(obj)
 
-    local Attachment = self:GetAttachment(obj)
+    local cone = self.Primary.Cone
 
-    local cone = 0
+    local shootOrigin = Attachment.Pos
+    local vec = self.addPos or Vector(0,0,0)
+    vec:Rotate(Attachment.Ang)
+    shootOrigin:Add(vec)
 
-    local shootOrigin, shootDir, shootAngles = self:GetShootPosAndDir()
+    local shootAngles = Attachment.Ang
+    local ang = self.addAng or Angle(0,0,0)
+    shootAngles:Add(ang)
+
+    local shootDir = shootAngles:Forward()
 
     local bullet = {}
     bullet.Num = self.NumBullet or 1
@@ -155,12 +153,13 @@ function SWEP:FireBullet(dmg,numbul,spread)
     bullet.Force = self.Primary.Force / 40
     bullet.Damage = self.Primary.Damage * 4
     bullet.AmmoType = self.Primary.Ammo
-    bullet.Attacker = self:GetOwner()
+    bullet.Attacker = ply
     bullet.Tracer = 1
     bullet.TracerName = self.Tracer or "Tracer"
-    bullet.IgnoreEntity = not self:GetOwner():IsNPC() and self:GetOwner():GetVehicle() or self:GetOwner()
+    bullet.IgnoreEntity = not ply:IsNPC() and ply:GetVehicle() or ply
 
     bullet.Callback = function(owner,tr,dmgInfo)
+        self:SetDebugPos(tr.StartPos,tr.HitPos)
         if self.Primary.Ammo == "buckshot" then
             local k = math.max(1 - tr.StartPos:Distance(tr.HitPos) / 750,0)
             dmgInfo:ScaleDamage(k)
@@ -182,7 +181,7 @@ function SWEP:FireBullet(dmg,numbul,spread)
         self:TakePrimaryAmmo(1)
         ply:FireBullets(bullet)
     end
-        self:SetLastShootTime()
+    self:SetLastShootTime()
 
     ply:LagCompensation(false)
 
@@ -212,11 +211,9 @@ function SWEP:Reload()
     local ply = self:GetOwner()
 
     self.HudShow = 5
-
     if self:Clip1() >= self:GetMaxClip1() or self:IsReloading() or ply:GetAmmoCount(self:GetPrimaryAmmoType()) <= 0 then return end
 
-    self:SendWeaponAnim( ACT_VM_RELOAD )
-    ply:SetAnimation( PLAYER_RELOAD )
+    ply:SetAnimation(PLAYER_RELOAD)
     self:SetNWBool("hg.isreloading",true)
     self.ReloadingTimer = CurTime() + self.ReloadingTime
 end

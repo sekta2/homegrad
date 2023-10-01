@@ -1,3 +1,5 @@
+DeriveGamemode("sandbox")
+
 homegrad = homegrad or {}
 
 // Modules

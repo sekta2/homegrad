@@ -65,9 +65,35 @@ hook.Add("HUDPaint","hg.hudpaint",function()
         draw.SimpleText(homegrad.GetPhrase("hg_need_more_players"), "hg.big", scrw / 2, scrh / 1.2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end
 
-    if not ply:Alive() or ply:GetMoveType() == MOVETYPE_NOCLIP and (ply:GetDeathSpectator() or ply:IsSpectator()) then
+    if ply:Alive() then
+        local Tr = ply:HGEyeTrace(100)
+        if not Tr then return end
+
+        local Size = math.max(1 - Tr.Fraction, 0.1)
+        local col
+
+        local ent = Tr.Entity
+        if ent:IsPlayer() then
+            col = ent:GetPlayerColor():ToColor()
+        elseif ent.GetPlayerColor ~= nil then
+            col = ent.playerColor:ToColor()
+        end
+        if ent:IsPlayer() and ent:GetMoveType() ~= MOVETYPE_NOCLIP then
+            col.a = 255 * Size * 2
+            draw.DrawText(homegrad.GetPhrase(ent:GetHNameLocalized()) or ent:Name(), "hg.bigname", Tr.HitPos:ToScreen().x, Tr.HitPos:ToScreen().y + 30, col, TEXT_ALIGN_CENTER)
+        end
+
+        if ply:GetActiveWeapon().IsMelee == true and Tr.Hit then
+            local circlecol = Color(250,250,250,250 * Size)
+            surface.SetDrawColor(circlecol)
+            draw.NoTexture()
+            draw.Circle(Tr.HitPos:ToScreen().x, Tr.HitPos:ToScreen().y, 32 * Size, 32)
+        end
+    end
+
+    if ply:GetMoveType() == MOVETYPE_NOCLIP or (ply:GetDeathSpectator() or ply:IsSpectator()) then
         for _, v in ipairs(player.GetAll()) do --ESP
-            if !v:Alive() or v == ent then continue end
+            if not v:Alive() or v == ply then continue end
 
             local ent = IsValid(v:GetNWEntity("Ragdoll")) and v:GetNWEntity("Ragdoll") or v
             local screenPosition = ent:GetPos():ToScreen()

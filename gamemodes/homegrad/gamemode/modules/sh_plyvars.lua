@@ -21,7 +21,7 @@ homegrad.names = {
         {"Jimmy","hg_name8"},
         {"Charlie","hg_name9"},
         {"Eddie","hg_name10"},
-    },
+   },
     ["female"] = {
         {"Sophia","hg_name11"},
         {"Isabella","hg_name12"},
@@ -33,7 +33,7 @@ homegrad.names = {
         {"Harper","hg_name18"},
         {"Charlotte","hg_name19"},
         {"Lily","hg_name20"},
-    }
+   }
 }
 
 local meta = FindMetaTable("Player")

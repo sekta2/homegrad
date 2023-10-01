@@ -5,7 +5,7 @@ function homegrad.CreateCommand(name,helptext,callback)
         name = name,
         helptext = helptext,
         callback = callback
-    }
+   }
 end
 
 homegrad.CreateCommand("test","This is test",function(ply,args)
@@ -16,7 +16,7 @@ homegrad.CreateCommand("levelnext","Select next mode",function(ply,args)
     if ply:IsAdmin() or ply:IsSuperAdmin() then
         local mode = args[2]
         homegrad.SetNextMode(homegrad.modes[mode] and mode or "homicide")
-        homegrad.print(ply:Nick() .. " Changed next mode to " .. tostring(args[1]))
+        homegrad.print(ply:Nick() .. " Changed next mode to " .. tostring(mode))
     else
         ply:ChatPrint("You are not an admin.")
     end

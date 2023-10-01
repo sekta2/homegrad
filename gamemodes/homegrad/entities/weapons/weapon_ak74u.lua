@@ -20,7 +20,7 @@ SWEP.Base = "hg_base"
 
 SWEP.Author = "Homegrad"
 SWEP.Category = "Homegrad"
-SWEP.Spawnable = false
+SWEP.Spawnable = GetConVar("developer"):GetBool()
 SWEP.AdminOnly = false
 SWEP.PrintName = "AKS-74U"
 SWEP.ScopePos = Vector(5.2,4,0.78)
@@ -29,6 +29,8 @@ SWEP.HoldType = "ar2"
 SWEP.RunHoldType = "passive"
 SWEP.ReloadingTime = 2
 SWEP.Slot = 2
+SWEP.addPos = Vector(0,0,0)
+SWEP.addAng = Angle(-11,-1.5,0)
 
 SWEP.Primary.ClipSize = 30
 SWEP.Primary.DefaultClip = 30

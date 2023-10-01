@@ -2,7 +2,7 @@ SWEP.Base = "weapon_base"
 
 SWEP.Author = "Homegrad"
 SWEP.Category = "Homegrad"
-SWEP.Spawnable = false
+SWEP.Spawnable = GetConVar("developer"):GetBool()
 SWEP.AdminOnly = false
 SWEP.PrintName = "hg_meleebase"
 SWEP.IsHomegrad = true
@@ -42,8 +42,6 @@ function SWEP:PrimaryAttack()
     owner:LagCompensation(true)
 
     self.NextShoot = CurTime() + self.ShootWait
-
-    self:SendWeaponAnim(ACT_VM_PRIMARYATTACK)
     owner:SetAnimation(PLAYER_ATTACK1)
 
     local startPos = owner:GetAttachment(owner:LookupAttachment("eyes")).Pos
@@ -56,7 +54,7 @@ function SWEP:PrimaryAttack()
         mins = Vector(-16, -16, 0),
         maxs = Vector(16, 16, 0),
         mask = MASK_SHOT_HULL,
-    })
+   })
 
     if SERVER then
         if IsValid(tr.Entity) then
@@ -86,7 +84,7 @@ function SWEP:PrimaryAttack()
         end
     end
 
-    owner:LagCompensation(false) -- Я НЕ ТЕСТИЛ ПОЭТОМУ ЕСЛИ ЧОТА СЛОМАЕТСЯ ТО УДАЛИТЬ!!!
+    owner:LagCompensation(false)
 end
 
 function SWEP:SecondaryAttack()

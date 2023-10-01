@@ -1,20 +1,20 @@
 local MODE = {}
 
 MODE.name = "Homicide"
-MODE.startsounds = {"snd_jack_hmcd_disaster.mp3","snd_jack_hmcd_shining.mp3","snd_jack_hmcd_panic.mp3","snd_jack_hmcd_deathmatch.mp3"}
+MODE.startsounds = {"snd_jack_hmcd_disaster.mp3","snd_jack_hmcd_shining.mp3","snd_jack_hmcd_panic.mp3"}
 MODE.teams = {
     [1] = {
         name = "Innocent",
         color = Color(155,155,155)
-    },
+   },
     [2] = {
         name = "Traitor",
         color = Color(155,55,55)
-    },
+   },
     [3] = {
         name = "Police",
         color = Color(0,55,155)
-    }
+   }
 }
 
 function MODE:GetLocalizedName()
@@ -68,6 +68,7 @@ if SERVER then
         traitor:HSetTeam(2)
         traitor:Give("weapon_knife")
         traitor:AllowFlashlight(true)
+        traitor:Flashlight(false)
     end
 
     function MODE:SelectPolice()
@@ -79,6 +80,7 @@ if SERVER then
             policeman:Give("weapon_glock17")
             policeman:GiveAmmo(17 * 6,"9x19mm Parabellum")
             policeman:AllowFlashlight(true)
+            policeman:Flashlight(false)
         end
     end
 
@@ -123,7 +125,7 @@ if SERVER then
             ply:SetHName(name,localname)
             local color = HSVToColor(math.random(0,360),1,0.5)
             ply:SetPlayerColor(Color(color.r,color.g,color.b):ToVector())
-            ply:Give("weapon_hands") -- TODO: Make hands SWEP
+            ply:Give("weapon_hands")
         end
 
         // Selecting a random player as a traitor
@@ -131,7 +133,7 @@ if SERVER then
 
         // Selecting a random player as a police
         if math.random(0,100) >= 50 then
-            for i = 1, math.Rand(1,2) do // 1 or 2 policeman's
+            for i = 1, math.random(1,2) do // 1 or 2 policeman's
                 self:SelectPolice()
             end
         end

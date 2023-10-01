@@ -44,6 +44,7 @@ if SERVER then
 
             ply:SetCanZoom(false)
             ply:AllowFlashlight(false) -- TODO: Add flashlight entity from original homigrad
+            ply:Flashlight(false)
         end
     end
 
@@ -104,7 +105,9 @@ if SERVER then
     end)
 
     hook.Add("PlayerDisconnected", "hg.roundplayerdisconnect", function(ply)
-        ply:Kill()
+        if ply:Alive() then
+            ply:Kill()
+        end
     end)
 
     hook.Add("PlayerDeathThink","hg.rounddeaththink",function(ply)

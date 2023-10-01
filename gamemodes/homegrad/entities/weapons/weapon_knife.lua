@@ -2,7 +2,7 @@ sound.Add({
     name = "hg_knife_slash1",
     channel = CHAN_WEAPON,
     volume = 1.0,
-    level = 80,
+    level = 60,
     pitch = {95, 110},
     sound = "pwb/weapons/knife/slash1.wav"
 })
@@ -11,7 +11,7 @@ sound.Add({
     name = "hg_knife_slash2",
     channel = CHAN_WEAPON,
     volume = 1.0,
-    level = 80,
+    level = 60,
     pitch = {95, 110},
     sound = "pwb/weapons/knife/slash2.wav"
 })
@@ -20,7 +20,7 @@ sound.Add({
     name = "hg_knife_hit1",
     channel = CHAN_WEAPON,
     volume = 1.0,
-    level = 80,
+    level = 60,
     pitch = {95, 110},
     sound = "pwb/weapons/knife/hit1.wav"
 })
@@ -29,7 +29,7 @@ sound.Add({
     name = "hg_knife_hit2",
     channel = CHAN_WEAPON,
     volume = 1.0,
-    level = 80,
+    level = 60,
     pitch = {95, 110},
     sound = "pwb/weapons/knife/hit2.wav"
 })
@@ -38,7 +38,7 @@ sound.Add({
     name = "hg_knife_hit3",
     channel = CHAN_WEAPON,
     volume = 1.0,
-    level = 80,
+    level = 60,
     pitch = {95, 110},
     sound = "pwb/weapons/knife/hit3.wav"
 })
@@ -47,7 +47,7 @@ sound.Add({
     name = "hg_knife_hit4",
     channel = CHAN_WEAPON,
     volume = 1.0,
-    level = 80,
+    level = 60,
     pitch = {95, 110},
     sound = "pwb/weapons/knife/hit4.wav"
 })
@@ -56,7 +56,7 @@ sound.Add({
     name = "hg_knife_hitwall",
     channel = CHAN_WEAPON,
     volume = 1.0,
-    level = 80,
+    level = 65,
     pitch = {95, 110},
     sound = "pwb/weapons/knife/hitwall.wav"
 })
@@ -65,7 +65,7 @@ SWEP.Base = "hg_meleebase"
 
 SWEP.Author = "Homegrad"
 SWEP.Category = "Homegrad"
-SWEP.Spawnable = false
+SWEP.Spawnable = GetConVar("developer"):GetBool()
 SWEP.AdminOnly = false
 SWEP.PrintName = "Knife"
 
