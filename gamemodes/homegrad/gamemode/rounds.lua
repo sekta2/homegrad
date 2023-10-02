@@ -30,9 +30,9 @@ if SERVER then
         for _,ply in pairs(homegrad.GetNonSpectators()) do
             ply:SetDeathSpectator(false)
             ply:UnSpectate()
+            ply:Spawn()
             ply:StripAmmo()
             ply:StripWeapons()
-            ply:Spawn()
 
             ply:SetHealth(150)
             ply:SetMaxHealth(150)
@@ -95,12 +95,12 @@ if SERVER then
     end
 
     hook.Add("PlayerDeath","hg.rounddeath",function(victim,inflictor,attacker)
-        if not homegrad.IsRoundStarted() then return end
         timer.Simple(3,function()
             if IsValid(victim) and (not victim:Alive()) then
                 victim:SetDeathSpectator(true)
             end
         end)
+        if not homegrad.IsRoundStarted() then return end
         homegrad.ModeOnDeath(victim,inflictor,attacker)
     end)
 
@@ -124,10 +124,11 @@ if SERVER then
 
     hook.Add("PlayerInitialSpawn","hg.roundinitialplayerspawn",function(ply,_)
         timer.Simple(0, function()
-            ply:KillSilent()
+            if not homegrad.IsRoundStarted() then
+                ply:KillSilent()
+                ply:SetDeathSpectator(true)
+            end
         end)
-
-        ply:SetDeathSpectator(true)
 
         if not homegrad.IsRoundStarted() and homegrad.CheckRoundCanStart() and homegrad.GetNonSpecsPlayersNum() < 3 then
             homegrad.StartRound()

@@ -22,7 +22,7 @@ hook.Add("EntityRemoved","hg.boxlootspawn",function(ent,fullUpd)
     local model = ent:GetModel()
     local centerpos = ent:OBBCenter()
     local random = math.random(0,100)
-    print(homegrad.lootprops[model] and random >= 50)
+
     if homegrad.lootprops[model] and random >= 50 then
         local randent,_ = table.Random(homegrad.lootents)
         local entl = ents.Create(randent)
