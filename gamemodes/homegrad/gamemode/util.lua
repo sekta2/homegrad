@@ -61,4 +61,29 @@ if CLIENT then
 
         surface.DrawPoly(cir)
     end
+
+    local addmat_r = Material("CA/add_r")
+    local addmat_g = Material("CA/add_g")
+    local addmat_b = Material("CA/add_b")
+    local vgbm = Material("vgui/black")
+
+    function DrawCA(rx, gx, bx, ry, gy, by)
+    	render.UpdateScreenEffectTexture()
+
+    	addmat_r:SetTexture("$basetexture", render.GetScreenEffectTexture())
+    	addmat_g:SetTexture("$basetexture", render.GetScreenEffectTexture())
+    	addmat_b:SetTexture("$basetexture", render.GetScreenEffectTexture())
+
+    	render.SetMaterial(vgbm)
+    	render.DrawScreenQuad()
+
+    	render.SetMaterial(addmat_r)
+    	render.DrawScreenQuadEx(-rx / 2, -ry / 2, ScrW() + rx, ScrH() + ry)
+
+    	render.SetMaterial(addmat_g)
+    	render.DrawScreenQuadEx(-gx / 2, -gy / 2, ScrW() + gx, ScrH() + gy)
+
+    	render.SetMaterial(addmat_b)
+    	render.DrawScreenQuadEx(-bx / 2, -by / 2, ScrW() + bx, ScrH() + by)
+    end
 end

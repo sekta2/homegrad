@@ -97,6 +97,7 @@ if SERVER then
     end
 
     hook.Add("PlayerDeath","hg.rounddeath",function(victim,inflictor,attacker)
+        victim:MakeRagdoll()
         timer.Simple(3,function()
             if IsValid(victim) and (not victim:Alive()) then
                 victim:SetDeathSpectator(true)

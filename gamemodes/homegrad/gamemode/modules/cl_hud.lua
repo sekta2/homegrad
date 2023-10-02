@@ -20,6 +20,29 @@ hook.Add("HUDDrawPickupHistory","hg.hidehistory",function()
     return false
 end)
 
+hook.Add("RenderScreenspaceEffects", "hg.screffects", function()
+    local ply = LocalPlayer()
+    local frac = 1 - ply:Health() / ply:GetMaxHealth()
+    local clrmod = {
+        ["$pp_colour_brightness"] = 0 - 0.05 * frac,
+        ["$pp_colour_contrast"] = 1 - 0.08 * frac,
+        ["$pp_colour_colour"] = 1 - 0.8 * frac
+    }
+    if ply:Alive() then
+        DrawColorModify(clrmod)
+
+        DrawBloom(0.8, 1, 2, 2, 1, 1, 1, 1, 1)
+
+        DrawToyTown(2, ScrH() / 3 * frac)
+
+        DrawCA(0,0,0,0,0,0)
+
+        if ply:Health() <= 50 then
+            DrawMotionBlur(0.6 - 0.2 * frac, 0.8, 0.01)
+        end
+    end
+end)
+
 local shownextround = 0
 
 hook.Add("HUDPaint","hg.hudpaint",function()
@@ -76,12 +99,12 @@ hook.Add("HUDPaint","hg.hudpaint",function()
         local ent = Tr.Entity
         if ent:IsPlayer() then
             col = ent:GetPlayerColor():ToColor()
-        elseif ent.GetPlayerColor ~= nil then
-            col = ent.playerColor:ToColor()
         end
         if ent:IsPlayer() and ent:GetMoveType() ~= MOVETYPE_NOCLIP then
             col.a = 255 * Size * 2
-            draw.SimpleTextOutlined(homegrad.GetPhrase(ent:GetHNameLocalized()) or ent:Name(),"hg.bigname",Tr.HitPos:ToScreen().x, Tr.HitPos:ToScreen().y + 30,col,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER,2,color_black)
+            local black = color_black
+            black.a = 255 * Size * 2
+            draw.SimpleTextOutlined(homegrad.GetPhrase(ent:GetHNameLocalized()) or ent:Name(),"hg.bigname",Tr.HitPos:ToScreen().x, Tr.HitPos:ToScreen().y + 30,col,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER,2,black)
         end
 
         if ply:GetActiveWeapon().IsMelee == true and Tr.Hit then
