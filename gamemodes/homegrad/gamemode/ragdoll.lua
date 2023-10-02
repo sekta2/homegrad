@@ -1,4 +1,4 @@
-local meta, metaent = FindMetaTable("Player"), FindMetaTable("Entity")
+local meta = FindMetaTable("Player")
 
 function meta:IsRagdolled()
     return self:GetNWBool("hg.isragdoll",false)
