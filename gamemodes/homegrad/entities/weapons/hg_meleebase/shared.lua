@@ -2,7 +2,7 @@ SWEP.Base = "weapon_base"
 
 SWEP.Author = "Homegrad"
 SWEP.Category = "Homegrad"
-SWEP.Spawnable = GetConVar("developer"):GetBool()
+SWEP.Spawnable = false
 SWEP.AdminOnly = false
 SWEP.PrintName = "hg_meleebase"
 SWEP.IsHomegrad = true

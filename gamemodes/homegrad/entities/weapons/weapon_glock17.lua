@@ -2,7 +2,7 @@ SWEP.Base = "hg_base"
 
 SWEP.Author = "Homegrad"
 SWEP.Category = "Homegrad"
-SWEP.Spawnable = GetConVar("developer"):GetBool()
+SWEP.Spawnable = false
 SWEP.AdminOnly = false
 SWEP.PrintName = "Glock-17"
 SWEP.ScopePos = Vector(2.3,10,0)
@@ -13,7 +13,7 @@ SWEP.ReloadingTime = 2.5
 SWEP.NextShoot = 0.2
 SWEP.Slot = 1
 SWEP.addPos = Vector(0,0,0)
-SWEP.addAng = Angle(-11,-1.5,0)
+SWEP.addAng = Angle(-11,0,0)
 
 SWEP.Primary.ClipSize = 17
 SWEP.Primary.DefaultClip = 17

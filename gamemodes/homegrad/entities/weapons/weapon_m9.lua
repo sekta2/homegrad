@@ -2,7 +2,7 @@ SWEP.Base = "hg_base"
 
 SWEP.Author = "Homegrad"
 SWEP.Category = "Homegrad"
-SWEP.Spawnable = GetConVar("developer"):GetBool()
+SWEP.Spawnable = false
 
 SWEP.PrintName = "Beretta M9"
 SWEP.ScopePos = Vector(2.5,10,0.05)

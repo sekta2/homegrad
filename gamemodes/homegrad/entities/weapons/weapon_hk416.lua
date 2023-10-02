@@ -2,7 +2,7 @@ SWEP.Base = "hg_base"
 
 SWEP.Author = "Homegrad"
 SWEP.Category = "Homegrad"
-SWEP.Spawnable = GetConVar("developer"):GetBool()
+SWEP.Spawnable = false
 
 SWEP.PrintName = "HK416"
 SWEP.ScopePos = Vector(6.6,5,0.95)

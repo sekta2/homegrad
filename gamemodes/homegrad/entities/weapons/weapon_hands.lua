@@ -1,7 +1,10 @@
-
-SWEP.PrintName = "Hands"
+SWEP.Author = "Homegrad"
 SWEP.Category = "Homegrad"
-SWEP.Spawnable = GetConVar("developer"):GetBool()
+SWEP.Spawnable = false
+SWEP.AdminOnly = false
+SWEP.PrintName = "Hands"
+SWEP.IsHomegrad = true
+SWEP.IsMelee = true
 
 SWEP.Slot = 0
 SWEP.SlotPos = 1
@@ -12,7 +15,6 @@ SWEP.BounceWeaponIcon = false
 
 SWEP.AutoSwitchTo = false
 SWEP.AutoSwitchFrom = false
-SWEP.IsMelee = true
 
 local function WhomILookinAt(ply, cone, dist)
 	local CreatureTr, ObjTr, OtherTr = nil, nil, nil
@@ -204,7 +206,7 @@ function SWEP:SetCarrying(ent, bone, pos, dist)
 		self.CarryDist = dist
 		self:SetNWBool("Pickup", true)
 
-		if not (ent:GetClass() == "prop_ragdoll") then
+		if ent:GetClass() ~= "prop_ragdoll" then
 			self.CarryPos = ent:WorldToLocal(pos)
 		else
 			self.CarryPos = nil
@@ -311,8 +313,8 @@ function SWEP:AttackFront()
 	local AimVec = self:GetOwner():GetAimVector()
 
 	if IsValid(Ent) or (Ent and Ent.IsWorld and Ent:IsWorld()) then
-		local SelfForce, Mul = -150, 1
-		
+	local SelfForce, Mul = -150, 1
+
 		if self:IsEntSoft(Ent) then
 			SelfForce = 25
 			sound.Play("Flesh.ImpactHard", HitPos, 65, math.random(90, 110))
@@ -323,7 +325,7 @@ function SWEP:AttackFront()
 		local DamageAmt = math.random(3, 5)
 		local Dam = DamageInfo()
 		Dam:SetAttacker(self:GetOwner())
-		Dam:SetInflictor(self.Weapon)
+		Dam:SetInflictor(self)
 		Dam:SetDamage(DamageAmt * Mul)
 		Dam:SetDamageForce(AimVec * Mul ^ 2)
 		Dam:SetDamageType(DMG_CLUB)
@@ -340,16 +342,12 @@ function SWEP:AttackFront()
 			self:GetOwner():SetVelocity(-AimVec * SelfForce * .8)
 		end
 
-		if Ent:GetClass() == "func_breakable_surf" then
-			if math.random(1, 20) == 10 then
-				Ent:Fire("break", "", 0)
-			end
+		if Ent:GetClass() == "func_breakable_surf" and math.random(1, 20) == 10 then
+			Ent:Fire("break", "", 0)
 		end
 
-		if Ent:GetClass() == "func_breakable" then
-			if math.random(7, 11) == 10 then
-				Ent:Fire("break", "", 0)
-			end
+		if Ent:GetClass() == "func_breakable" and math.random(7, 11) == 10 then
+			Ent:Fire("break", "", 0)
 		end
 
 	end
@@ -394,12 +392,12 @@ if SERVER then
 			if pos then
 				TargetPos = ent:LocalToWorld(pos)
 			end
-			
+
 			local vec = target - TargetPos
 			local len, mul = vec:Length(), ent:GetPhysicsObject():GetMass()
 			vec:Normalize()
 			local avec, velo = vec * len, phys:GetVelocity() - ply:GetVelocity()
-			local Force = (avec) * (bone > 3 and mul / 10 or mul)
+			local Force = avec * (bone > 3 and mul / 10 or mul)
 			if math.abs((tbl[2]:GetPos() - tbl[1]:GetPos()):Length()) < 80 and tbl[2]:GetGroundEntity() != tbl[1] then
 				if tbl[6] then
 					phys:ApplyForceOffset(Force, ent:LocalToWorld(pos))
