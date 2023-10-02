@@ -53,11 +53,12 @@ hook.Add("HUDPaint","hg.hudpaint",function()
         ply:ScreenFade(SCREENFADE.IN,Color(0,0,0,255),3,0.5)
 
         shownextround = 15
+        local del = ScreenScale(8.5) / 2
 
         draw.SimpleText(currentmode, "hg.big", scrw / 2, scrh / 8, maincolor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 
-        draw.SimpleText(yourname .. " " .. namelocalized, "hg.big", scrw / 2, (scrh / 2) - 10, teamcolor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-        draw.SimpleText(yourole, "hg.big", scrw / 2, (scrh / 2) + 10, teamcolor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        draw.SimpleText(yourname .. " " .. namelocalized, "hg.big", scrw / 2, (scrh / 2) - del, teamcolor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        draw.SimpleText(yourole, "hg.big", scrw / 2, (scrh / 2) + del, teamcolor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
         draw.SimpleText(youroledesc, "hg.big", scrw / 2, scrh / 1.2, teamcolor, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
     end
 
@@ -80,7 +81,7 @@ hook.Add("HUDPaint","hg.hudpaint",function()
         end
         if ent:IsPlayer() and ent:GetMoveType() ~= MOVETYPE_NOCLIP then
             col.a = 255 * Size * 2
-            draw.DrawText(homegrad.GetPhrase(ent:GetHNameLocalized()) or ent:Name(), "hg.bigname", Tr.HitPos:ToScreen().x, Tr.HitPos:ToScreen().y + 30, col, TEXT_ALIGN_CENTER)
+            draw.SimpleTextOutlined(homegrad.GetPhrase(ent:GetHNameLocalized()) or ent:Name(),"hg.bigname",Tr.HitPos:ToScreen().x, Tr.HitPos:ToScreen().y + 30,col,TEXT_ALIGN_CENTER,TEXT_ALIGN_CENTER,2,color_black)
         end
 
         if ply:GetActiveWeapon().IsMelee == true and Tr.Hit then

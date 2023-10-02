@@ -10,9 +10,10 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
     if not ply:Alive() and not ply:GetDeathSpectator() then
         local ragdoll = ply:GetRagdollEntity()
 
+        if not ragdoll then return end
         local raghead = ragdoll:LookupBone(homegrad.limbs["head"][1])
         local rageye = ragdoll:GetAttachment(ragdoll:LookupAttachment("eyes"))
-        if not ragdoll or not raghead or not rageye then return end
+        if not raghead or not rageye then return end
 
         local vpos = rageye.Pos + rageye.Ang:Up() * 2 + rageye.Ang:Forward() * 1
         local vang = rageye.Ang

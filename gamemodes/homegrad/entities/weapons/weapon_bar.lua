@@ -76,7 +76,7 @@ SWEP.Primary.SoundHit = {
 }
 SWEP.Primary.SoundHitWall = {
     "hg_crowbar_hitwall1",
-	"hg_crowbar_hitwall2"
+    "hg_crowbar_hitwall2"
 }
 SWEP.Primary.SoundDraw = "pwb/weapons/knife/cloth.wav"
 

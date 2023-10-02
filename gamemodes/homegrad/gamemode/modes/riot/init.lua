@@ -101,19 +101,19 @@ if SERVER then
             ply:SetPlayerColor(color)
             ply:Give("weapon_hands")
             ply:AllowFlashlight(true)
-			ply:Flashlight(false)
-			local randw = math.random(1,60)
+            ply:Flashlight(false)
+            local randw = math.random(1,60)
             if teamid == 1 then
                 if randw == 30 then
                     ply:Give("weapon_glock17") ply:GiveAmmo(17, "9x19mm Parabellum")
-				end
-				ply:Give("weapon_stunbaton")
+                end
+                ply:Give("weapon_stunbaton")
             else
                 if randw == 30 then
                     ply:Give("weapon_knife")
-				end
+                end
                 ply:Give("weapon_bar")
-			end
+            end
         end
     end
 else

@@ -83,6 +83,8 @@ if SERVER then
         timer.Simple(5,function()
             if homegrad.CheckRoundCanStart() then
                 homegrad.StartNextRound()
+            else
+                homegrad.MakeSpectateAll()
             end
         end)
     end
@@ -124,15 +126,13 @@ if SERVER then
 
     hook.Add("PlayerInitialSpawn","hg.roundinitialplayerspawn",function(ply,_)
         timer.Simple(0, function()
-            if not homegrad.IsRoundStarted() then
-                ply:KillSilent()
-                ply:SetDeathSpectator(true)
+            ply:KillSilent()
+            ply:SetDeathSpectator(true)
+
+            if not homegrad.IsRoundStarted() and homegrad.CheckRoundCanStart() and homegrad.GetNonSpecsPlayersNum() < 3 then
+                homegrad.StartRound()
             end
         end)
-
-        if not homegrad.IsRoundStarted() and homegrad.CheckRoundCanStart() and homegrad.GetNonSpecsPlayersNum() < 3 then
-            homegrad.StartRound()
-        end
     end)
 
     hook.Add("UpdateAnimation","hg.updateanim",function(ply,event,data)
