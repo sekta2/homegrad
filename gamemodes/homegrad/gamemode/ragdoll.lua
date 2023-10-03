@@ -77,12 +77,14 @@ if SERVER then
         self:UnSpectate()
         self:Spawn()
 
-        if IsValid(ragdoll) then
-            self:SetPos(ragdoll:GetPhysicsObject():GetPos())
-            self:SetHealth(ragdoll:Health())
-
-            ragdoll:Remove()
-        end
+        timer.Simple(0,function()
+            if IsValid(ragdoll) then
+                self:SetPos(ragdoll:GetPhysicsObject():GetPos())
+                self:SetHealth(ragdoll:Health())
+    
+                ragdoll:Remove()
+            end
+        end)
     end
 
     function meta:SetRagdollCooldown(val)
@@ -116,6 +118,7 @@ if SERVER then
     hook.Add("PlayerTick","hg.ragdollspectate",function(ply,mv)
         if ply:IsRagdolled() and ply:Alive() then
             ply:Spectate(OBS_MODE_FIXED)
+            ply:SpectateEntity(ply:HGetRagdoll())
         end
     end)
 
@@ -126,6 +129,7 @@ if SERVER then
                 owner:TakeDamageInfo(dmg)
 
                 ent:SetHealth(ent:Health() - dmg:GetDamage())
+                owner:SetHealth(ent:Health())
 
                 if ent:Health() <= 0 then
                     owner:Kill()
