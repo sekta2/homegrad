@@ -28,6 +28,8 @@ if SERVER then
 
     function homegrad.CleanAllPlayers()
         for _,ply in pairs(homegrad.GetNonSpectators()) do
+            ply:SetPain(0)
+
             ply:SetDeathSpectator(false)
             ply:UnSpectate()
             ply:Spawn()

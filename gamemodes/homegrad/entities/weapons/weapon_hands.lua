@@ -46,8 +46,8 @@ end
 
 SWEP.Instructions = "Your hands, LMB/Reload: raise/lower fists;\nRaised: LMB - punch, RMB - block;\nDown: RMB - pick up item;\nWhile holding an item: Reload - keep item in the air, Use - rotate item in the air"
 SWEP.HoldType = "normal"
+SWEP.ViewModel = ""
 SWEP.WorldModel = ""
-SWEP.UseHands = true
 SWEP.AttackSlowDown = .5
 SWEP.Primary.ClipSize = -1
 SWEP.Primary.DefaultClip = -1
@@ -169,8 +169,6 @@ function SWEP:ApplyForce()
             return
         end
 
-        local CounterDir, CounterAmt = velo:GetNormalized(), velo:Length()
-
         if self.CarryPos then
             phys:ApplyForceOffset(Force, self.CarryEnt:LocalToWorld(self.CarryPos))
         else
@@ -182,7 +180,7 @@ function SWEP:ApplyForce()
             local commands = self:GetOwner():GetCurrentCommand()
             local x,y = commands:GetMouseX(),commands:GetMouseY()
             if self.CarryEnt:IsRagdoll() then
-                rotate = Vector(x,y,0)/6
+                rotate = Vector(x,y,0) / 6
             else
                 rotate = Vector(x,y,0)
             end
@@ -270,12 +268,6 @@ function SWEP:Think()
 end
 
 function SWEP:PrimaryAttack()
-    local side = "fists_left"
-
-    if math.random(1, 2) == 1 then
-        side = "fists_right"
-    end
-
     self:SetNextDown(CurTime() + 7)
 
     if not self:GetFists() then
@@ -338,7 +330,7 @@ function SWEP:AttackFront()
                 Ent:SetVelocity(AimVec * SelfForce * 1.5)
             end
 
-            Phys:ApplyForceOffset(AimVec * 5000 * Mul, HitPos)
+            Phys:ApplyForceOffset(AimVec * 1000 * Mul, HitPos)
             self:GetOwner():SetVelocity(-AimVec * SelfForce * .8)
         end
 
@@ -385,7 +377,7 @@ if SERVER then
         heldents = heldents or {}
         for i,tbl in pairs(heldents) do
             if not tbl or not IsValid(tbl[1]) then heldents[i] = nil continue end
-            local ent,ply,dist,target,bone,pos = tbl[1],tbl[2],tbl[3],tbl[4],tbl[5],tbl[6]
+            local ent,target,bone,pos = tbl[1],tbl[4],tbl[5],tbl[6]
             local phys = ent:GetPhysicsObjectNum(bone)
             local TargetPos = phys:GetPos()
 
@@ -396,9 +388,9 @@ if SERVER then
             local vec = target - TargetPos
             local len, mul = vec:Length(), ent:GetPhysicsObject():GetMass()
             vec:Normalize()
-            local avec, velo = vec * len, phys:GetVelocity() - ply:GetVelocity()
+            local avec = vec * len
             local Force = avec * (bone > 3 and mul / 10 or mul)
-            if math.abs((tbl[2]:GetPos() - tbl[1]:GetPos()):Length()) < 80 and tbl[2]:GetGroundEntity() != tbl[1] then
+            if math.abs((tbl[2]:GetPos() - tbl[1]:GetPos()):Length()) < 80 and tbl[2]:GetGroundEntity() ~= tbl[1] then
                 if tbl[6] then
                     phys:ApplyForceOffset(Force, ent:LocalToWorld(pos))
                 else

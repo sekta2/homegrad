@@ -20,13 +20,15 @@ hook.Add("HUDDrawPickupHistory","hg.hidehistory",function()
     return false
 end)
 
+local k3 = 0
 hook.Add("RenderScreenspaceEffects", "hg.screffects", function()
     local ply = LocalPlayer()
+    local pain = ply:GetPain()
     local frac = 1 - ply:Health() / ply:GetMaxHealth()
     local clrmod = {
-        ["$pp_colour_brightness"] = 0 - 0.05 * frac,
-        ["$pp_colour_contrast"] = 1 - 0.08 * frac,
-        ["$pp_colour_colour"] = 1 - 0.8 * frac
+        ["$pp_colour_brightness"] = 0 - 0.01 * frac,
+        ["$pp_colour_contrast"] = 1 - 0.01 * frac,
+        ["$pp_colour_colour"] = 1 - 0.2 * frac
     }
     if ply:Alive() then
         DrawColorModify(clrmod)
@@ -35,7 +37,11 @@ hook.Add("RenderScreenspaceEffects", "hg.screffects", function()
 
         DrawToyTown(2, ScrH() / 3 * frac)
 
-        DrawCA(0,0,0,0,0,0)
+        k3 = math.Clamp(Lerp(0.01,k3,pain),0,50)
+
+        if pain > 0 then
+            DrawCA(4 * k3, 2 * k3, 0, 2 * k3, 1 * k3, 0)
+        end
 
         if ply:Health() <= 50 then
             DrawMotionBlur(0.6 - 0.2 * frac, 0.8, 0.01)

@@ -2,6 +2,8 @@ local MODE = {}
 
 MODE.name = "Based Mode" // Mode name
 MODE.startsounds = {"snd_jack_hmcd_disaster.mp3"} // Round-Start sounds
+MODE.lootenabled = true
+MODE.loottable = {}
 
 // Teams
 MODE.teams = {

@@ -73,6 +73,16 @@ function homegrad.GetModeTeamColor(id)
     return teams[id] and teams[id].color or "???"
 end
 
+function homegrad.GetModeCanLoot()
+    local curmode = homegrad.modes[homegrad.GetCurrentMode()]
+    return curmode.lootenabled
+end
+
+function homegrad.GetModeLootTable()
+    local curmode = homegrad.modes[homegrad.GetCurrentMode()]
+    return curmode.loottable
+end
+
 function homegrad.SetUpMode()
     local curmode = homegrad.modes[homegrad.GetCurrentMode()]
     curmode:SetUp()

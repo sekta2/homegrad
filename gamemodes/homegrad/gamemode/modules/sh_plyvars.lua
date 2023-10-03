@@ -46,21 +46,12 @@ function meta:GetLimbCondition(name)
     end
 end
 
-function meta:SetHName(name,localized)
-    self:SetNWString("hg.name",name or "Human")
-    self:SetNWString("hg.namelocalized",localized or "hg_defaultname")
-end
-
 function meta:GetHName()
     return self:GetNWString("hg.name","Human")
 end
 
 function meta:GetHNameLocalized()
     return self:GetNWString("hg.namelocalized","hg_defaultname")
-end
-
-function meta:SetGender(gender)
-    self:SetNWString("hg.gender",gender == "male" and "male" or "female")
 end
 
 function meta:GetGender()
@@ -71,3 +62,41 @@ hook.Add( "PlayerFootstep", "CustomFootstep", function( ply, pos, foot, sound, v
     --sound.Play(Sound("npc/combine_soldier/gear" .. math.random(1,6) .. ".wav"),pos,75,100,1)
     --return true -- Don't allow default footsteps, or other addon footsteps
 end)
+
+function meta:GetPain()
+    return self:GetNWInt("hg.pain",0)
+end
+
+if SERVER then
+    function meta:SetHName(name,localized)
+        self:SetNWString("hg.name",name or "Human")
+        self:SetNWString("hg.namelocalized",localized or "hg_defaultname")
+    end
+
+    function meta:SetGender(gender)
+        self:SetNWString("hg.gender",gender == "male" and "male" or "female")
+    end
+
+    function meta:SetPain(val)
+        self:SetNWInt("hg.pain",val)
+    end
+
+    function meta:AddPain(val)
+        self:SetPain(math.Clamp(self:GetPain() + val,0,100))
+    end
+
+    timer.Create("hg.painless",1,0,function()
+        local plys = player.GetAll()
+
+        for _,ply in pairs(plys) do
+            ply:AddPain(-3.5)
+        end
+    end)
+
+    hook.Add("EntityTakeDamage","hg.plytakedamage",function(ply,dmg)
+        if IsValid(ply) and (ply:IsPlayer()) then
+            ply:AddPain(dmg:GetDamage() / 20)
+            -- hook.Run("hg.damage", ply, dmginfo)
+        end
+    end)
+end

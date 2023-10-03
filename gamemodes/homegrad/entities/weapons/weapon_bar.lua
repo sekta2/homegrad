@@ -60,12 +60,13 @@ SWEP.Spawnable = false
 SWEP.AdminOnly = false
 SWEP.PrintName = "Crowbar"
 
-SWEP.ShootWait = 1
+SWEP.ShootWait = 1.15
 SWEP.HoldType = "melee2"
 SWEP.Slot = 0
 
 SWEP.Primary.Automatic = true
-SWEP.Primary.Damage = 40
+SWEP.Primary.Damage = 42
+SWEP.Primary.Force = 2000
 SWEP.Primary.Sound = {
     "hg_crowbar_slash"
 }

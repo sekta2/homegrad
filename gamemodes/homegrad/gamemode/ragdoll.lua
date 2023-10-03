@@ -4,6 +4,10 @@ function meta:IsRagdolled()
     return self:GetNWBool("hg.isragdoll",false)
 end
 
+function meta:HGetRagdoll()
+    return self:GetNWEntity("hg.ragdoll",self)
+end
+
 if SERVER then
     util.AddNetworkString("hg.sendragdollcolor")
 
@@ -26,7 +30,7 @@ if SERVER then
         local vel = self:GetVelocity() / 1 + (force or Vector(0,0,0))
         local bonecount = ragdoll:GetPhysicsObjectCount()
         for i = 0, bonecount - 1 do
-            local physobj = ragdoll:GetPhysicsObjectNum( i )
+            local physobj = ragdoll:GetPhysicsObjectNum(i)
             local ragbonename = ragdoll:GetBoneName(ragdoll:TranslatePhysBoneToBone(i))
             local bone = self:LookupBone(ragbonename)
             if bone then
@@ -42,12 +46,15 @@ if SERVER then
                 end
             end
         end
+
+        return ragdoll
     end
 
     function meta:MakeRagdoll()
         self:SetNWBool("hg.isragdoll",true)
 
-        self:HCreateRagdoll()
+        local ragdoll = self:HCreateRagdoll()
+        self:SetNWEntity("hg.ragdoll",ragdoll)
         self:GetRagdollEntity():Remove()
     end
 else
@@ -62,3 +69,9 @@ else
         end)
     end)
 end
+
+concommand.Add("fake", function(ply)
+    if ply:Alive() then
+        ply:MakeRagdoll()
+    end
+end)

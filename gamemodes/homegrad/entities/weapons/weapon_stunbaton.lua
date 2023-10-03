@@ -57,6 +57,7 @@ SWEP.Slot = 0
 
 SWEP.Primary.Automatic = true
 SWEP.Primary.Damage = 30
+SWEP.Primary.Force = 1500
 SWEP.Primary.Sound = {
     "hg_stunbaton_slash"
 }

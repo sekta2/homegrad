@@ -16,6 +16,8 @@ MODE.teams = {
         color = Color(0,55,155)
    }
 }
+MODE.lootenabled = true
+MODE.loottable = false
 
 function MODE:GetLocalizedName()
     return homegrad.GetPhrase("gmname_homicide")

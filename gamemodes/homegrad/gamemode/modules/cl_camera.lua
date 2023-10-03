@@ -6,11 +6,9 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
     if ply:IsSpectator() then return end
 
     local ft = FrameTime() * 15
+    local ragdoll = ply:HGetRagdoll()
 
-    if not ply:Alive() and not ply:GetDeathSpectator() then
-        local ragdoll = ply:GetRagdollEntity()
-
-        if not ragdoll then return end
+    if not ply:GetDeathSpectator() and ply:IsRagdolled() and IsValid(ragdoll) then
         local raghead = ragdoll:LookupBone(homegrad.limbs["head"][1])
         local rageye = ragdoll:GetAttachment(ragdoll:LookupAttachment("eyes"))
         if not raghead or not rageye then return end
@@ -110,10 +108,9 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
         view.drawviewer = true
 
         return view
-    //elseif not ply:Alive() and ply:GetDeathSpectator() then
-        // local ragdoll = ply:GetRagdollEntity() or ply
-        // local raghead = ragdoll:LookupBone(homegrad.limbs["head"][1])
-        // ragdoll:ManipulateBoneScale(raghead,Vector(1,1,1))
+    elseif not ply:Alive() and ply:GetDeathSpectator() and IsValid(ragdoll) then
+        local raghead = ragdoll:LookupBone(homegrad.limbs["head"][1])
+        ragdoll:ManipulateBoneScale(raghead,Vector(1,1,1))
     end
 end)
 

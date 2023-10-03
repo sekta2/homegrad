@@ -83,7 +83,8 @@ SWEP.HoldType = "knife"
 SWEP.Slot = 0
 
 SWEP.Primary.Automatic = true
-SWEP.Primary.Damage = 35
+SWEP.Primary.Damage = 30
+SWEP.Primary.Force = 900
 SWEP.Primary.Sound = {
     "hg_knife_slash1",
     "hg_knife_slash2"

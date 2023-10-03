@@ -17,6 +17,7 @@ SWEP.ReloadingTimer = 0
 
 SWEP.NextShoot = 0
 SWEP.ShootWait = 0.1
+SWEP.ViewModel = ""
 
 SWEP.Primary.ClipSize = 50
 SWEP.Primary.DefaultClip = 50
@@ -87,9 +88,9 @@ function SWEP:DrawHUD()
     local pos1,pos2 = self:GetDebugPos()
 
     if GetConVar("developer"):GetBool() then
-        local pos11 = pos1:ToScreen()
+        --[[local pos11 = pos1:ToScreen()
         local pos22 = pos2:ToScreen()
-        --[[surface.DrawLine(pos11.x, pos11.y, pos22.x, pos22.y)
+        surface.DrawLine(pos11.x, pos11.y, pos22.x, pos22.y)
         draw.DrawText("x", "hg.big", pos22.x, pos22.y, color_white, TEXT_ALIGN_RIGHT)
         draw.DrawText("+", "hg.big", pos11.x, pos11.y, color_white, TEXT_ALIGN_RIGHT)]]
         debugoverlay.Line(pos1, pos2, 5, color_whine, false)

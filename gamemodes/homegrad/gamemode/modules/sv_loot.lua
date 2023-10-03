@@ -25,9 +25,10 @@ hook.Add("PropBreak","hg.boxlootspawn",function(ply,ent)
     local model = ent:GetModel()
     local centerpos = ent:OBBCenter()
     local random = math.random(0,100)
-    local randent,_ = table.Random(homegrad.lootents)
+    local lootents = homegrad.GetModeLootTable() and homegrad.GetModeLootTable() or homegrad.lootents
+    local randent,_ = table.Random(lootents)
 
-    if homegrad.lootprops[model] and random <= (50 * randent[2]) then
+    if homegrad.lootprops[model] and random <= (50 * randent[2]) and homegrad.GetModeCanLoot() then
         local entl = ents.Create(randent[1])
         entl:SetPos(ent:GetPos() + centerpos)
         entl:Spawn()

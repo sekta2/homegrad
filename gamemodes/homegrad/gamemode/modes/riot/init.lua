@@ -12,6 +12,12 @@ MODE.teams = {
         color = Color(220,160,50)
    }
 }
+MODE.lootenabled = true
+MODE.loottable = {
+    // Loot class and mul of rarity
+    {"weapon_knife",0.05},
+    {"weapon_bar",0.1}
+}
 
 function MODE:GetLocalizedName()
     return homegrad.GetPhrase("gmname_riot")

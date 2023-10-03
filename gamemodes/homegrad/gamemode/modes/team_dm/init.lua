@@ -12,6 +12,8 @@ MODE.teams = {
         color = Color(200,50,50)
    }
 }
+MODE.lootenabled = false
+MODE.loottable = false
 
 function MODE:GetLocalizedName()
     return homegrad.GetPhrase("gmname_teamdm")
@@ -94,6 +96,8 @@ if SERVER then
             local color = self.teams[teamid].color:ToVector()
             ply:SetPlayerColor(color)
             ply:Give("weapon_hands")
+            ply:AllowFlashlight(true)
+            ply:Flashlight(false)
             if teamid == 1 then
                 ply:Give("weapon_hk416") ply:GiveAmmo(30 * 6, "5,56x45mm")
                 ply:Give("weapon_glock17") ply:GiveAmmo(17 * 6, "9x19mm Parabellum")

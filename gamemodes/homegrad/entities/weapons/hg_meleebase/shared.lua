@@ -10,12 +10,14 @@ SWEP.IsMelee = true
 
 SWEP.NextShoot = 0
 SWEP.HoldType = "knife"
+SWEP.ViewModel = ""
 
 SWEP.Primary.ClipSize = -1
 SWEP.Primary.DefaultClip = -1
 SWEP.Primary.Automatic = true
 SWEP.Primary.Ammo = "none"
 SWEP.Primary.Damage = 100
+SWEP.Primary.Force = 1000
 
 SWEP.Secondary.ClipSize    = -1
 SWEP.Secondary.DefaultClip = -1
@@ -75,6 +77,14 @@ function SWEP:PrimaryAttack()
                 if IsValid(tr.Entity) then
                     tr.Entity:TakeDamage(self.Primary.Damage,owner,self)
                 end
+            end
+            local phys = tr.Entity:GetPhysicsObjectNum(tr.PhysicsBone)
+
+            if IsValid(phys) then
+                local pushvec = tr.Normal * self.Primary.Force
+                local pushpos = tr.HitPos
+
+                phys:ApplyForceOffset(pushvec, pushpos)
             end
         else
             if tr.Hit then
