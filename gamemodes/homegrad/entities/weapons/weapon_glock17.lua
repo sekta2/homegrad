@@ -12,8 +12,6 @@ SWEP.RunHoldType = "normal"
 SWEP.ReloadingTime = 2.5
 SWEP.NextShoot = 0.2
 SWEP.Slot = 1
-SWEP.addPos = Vector(0,0,0)
-SWEP.addAng = Angle(-11,0,0)
 
 SWEP.Primary.ClipSize = 17
 SWEP.Primary.DefaultClip = 17
@@ -32,4 +30,5 @@ SWEP.Secondary.DefaultClip = -1
 SWEP.Secondary.Automatic = false
 SWEP.Secondary.Ammo = "none"
 
+SWEP.ViewModel = "models/pwb/weapons/w_glock17.mdl"
 SWEP.WorldModel = "models/pwb/weapons/w_glock17.mdl"

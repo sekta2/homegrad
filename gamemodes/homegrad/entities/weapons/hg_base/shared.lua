@@ -17,7 +17,6 @@ SWEP.ReloadingTimer = 0
 
 SWEP.NextShoot = 0
 SWEP.ShootWait = 0.1
-SWEP.ViewModel = ""
 
 SWEP.Primary.ClipSize = 50
 SWEP.Primary.DefaultClip = 50
@@ -141,12 +140,12 @@ function SWEP:FireBullet(dmg,numbul,spread)
     local cone = self.Primary.Cone
 
     local shootOrigin = Attachment.Pos
-    local vec = self.addPos or Vector(0,0,0)
+    local vec = Vector(0,0,0)
     vec:Rotate(Attachment.Ang)
     shootOrigin:Add(vec)
 
     local shootAngles = Attachment.Ang
-    local ang = self.addAng or Angle(0,0,0)
+    local ang = Angle(0,0,0)
     shootAngles:Add(ang)
 
     local shootDir = shootAngles:Forward()

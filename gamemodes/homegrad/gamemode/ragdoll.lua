@@ -25,6 +25,8 @@ if SERVER then
     function meta:HCreateRagdoll()
         local ragdoll = ents.Create("prop_ragdoll")
         ragdoll.IsHomegrad = true
+        ragdoll:SetMaxHealth(self:GetMaxHealth())
+        ragdoll:SetHealth(self:Health())
         ragdoll:SetNWEntity("hg.ragowner",self)
 
         ragdoll:SetModel(self:GetModel())
@@ -77,6 +79,7 @@ if SERVER then
 
         if IsValid(ragdoll) then
             self:SetPos(ragdoll:GetPhysicsObject():GetPos())
+            self:SetHealth(ragdoll:Health())
 
             ragdoll:Remove()
         end
@@ -88,7 +91,7 @@ if SERVER then
 
     function meta:Ragdollize()
         local cooldown = self:GetRagdollCooldown()
-        if cooldown <= CurTime() then
+        if cooldown <= CurTime() and self:GetPain() <= 50 then
             self:SetRagdollCooldown(2)
             if not self:IsRagdolled() and self:Alive() then
                 self:MakeRagdoll()
@@ -98,20 +101,40 @@ if SERVER then
         end
     end
 
+    function meta:IRagdollize()
+        if not self:IsRagdolled() and self:Alive() then
+            self:MakeRagdoll()
+        end
+    end
+
+    function meta:IUnRagdollize()
+        if self:IsRagdolled() and self:Alive() then
+            self:DeMakeRagdoll()
+        end
+    end
+
     hook.Add("PlayerTick","hg.ragdollspectate",function(ply,mv)
-        if ply:IsRagdolled() then
+        if ply:IsRagdolled() and ply:Alive() then
             ply:Spectate(OBS_MODE_FIXED)
         end
     end)
 
-    hook.Add("EntityTakeDamage","hg.ragdolldamage",function(ragdoll,dmg)
-        if ragdoll.IsHomegrad then
-            local owner = ragdoll:GetNWEntity("hg.ragowner",Entity(1))
-            owner:TakeDamageInfo(dmg)
+    hook.Add("EntityTakeDamage","hg.ragdolldamage",function(ent,dmg)
+        if ent.IsHomegrad then
+            local owner = ent:GetNWEntity("hg.ragowner",Entity(1))
+            if owner:Alive() then
+                owner:TakeDamageInfo(dmg)
+
+                ent:SetHealth(ent:Health() - dmg:GetDamage())
+
+                if ent:Health() <= 0 then
+                    owner:Kill()
+                end
+            end
         end
     end)
 
-    concommand.Add("fake2", function(ply)
+    concommand.Add("fake", function(ply)
         if ply:Alive() then
             ply:Ragdollize()
         end

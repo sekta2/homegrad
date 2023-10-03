@@ -70,6 +70,11 @@ function SWEP:PrimaryAttack()
                 tr.Entity:TakeDamage(self.Primary.Damage,owner,self)
                 tr.Entity:SetLastHitGroup(tr.HitGroup)
                 util.Decal("Impact.Flesh", startPos, endPos, owner)
+            elseif tr.Entity:IsRagdoll() then
+                local snd = self.Primary.SoundHit[math.random(1,#self.Primary.SoundHit)]
+                owner:EmitSound(snd, 60, math.random(95,105))
+                tr.Entity:TakeDamage(self.Primary.Damage,owner,self)
+                util.Decal("Impact.Flesh", startPos, endPos, owner)
             else
                 local snd = self.Primary.SoundHitWall[math.random(1,#self.Primary.SoundHitWall)]
                 owner:EmitSound(snd, 60, math.random(95,105))

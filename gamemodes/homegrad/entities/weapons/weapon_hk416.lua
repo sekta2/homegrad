@@ -12,8 +12,6 @@ SWEP.RunHoldType = "passive"
 SWEP.ReloadingTime = 2
 SWEP.ShootWait = 0.085
 SWEP.Slot = 2
-SWEP.addPos = Vector(0,0,0)
-SWEP.addAng = Angle(-10,-1.5,0)
 
 SWEP.Primary.ClipSize = 30
 SWEP.Primary.DefaultClip = 30
@@ -32,4 +30,5 @@ SWEP.Secondary.DefaultClip = -1
 SWEP.Secondary.Automatic = false
 SWEP.Secondary.Ammo = "none"
 
+SWEP.ViewModel = "models/pwb/weapons/w_hk416.mdl"
 SWEP.WorldModel = "models/pwb/weapons/w_hk416.mdl"

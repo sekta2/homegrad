@@ -11,8 +11,6 @@ SWEP.RunHoldType = "normal"
 SWEP.ReloadingTime = 2.5
 SWEP.ShootWait = 0.15
 SWEP.Slot = 1
-SWEP.addPos = Vector(0,0,0)
-SWEP.addAng = Angle(-11,0,0)
 
 SWEP.Primary.ClipSize = 15
 SWEP.Primary.DefaultClip = 15
@@ -31,4 +29,5 @@ SWEP.Secondary.DefaultClip = -1
 SWEP.Secondary.Automatic = false
 SWEP.Secondary.Ammo = "none"
 
+SWEP.ViewModel = "models/pwb/weapons/w_fnp45.mdl"
 SWEP.WorldModel = "models/pwb/weapons/w_fnp45.mdl"

@@ -150,7 +150,7 @@ function SWEP:ApplyForce()
         end
 
         local vec = target - TargetPos
-        local len, mul = vec:Length(), self.CarryEnt:GetPhysicsObject():GetMass()
+        local len, mul = vec:Length(), self.CarryEnt:GetPhysicsObject():GetMass() * 2.5
 
         if len > self.ReachDistance then
             self:SetCarrying()
@@ -163,7 +163,7 @@ function SWEP:ApplyForce()
         local Force = (avec - velo / 2) * (self.CarryBone > 3 and mul / 10 or mul)
         local ForceMagnitude = Force:Length()
 
-        if ForceMagnitude > 4000 * 1 then
+        if ForceMagnitude > 4000 * 2 then
             self:SetCarrying()
 
             return

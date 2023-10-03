@@ -37,8 +37,8 @@ if SERVER then
             ply:StripAmmo()
             ply:StripWeapons()
 
-            ply:SetHealth(150)
             ply:SetMaxHealth(150)
+            ply:SetHealth(150)
             ply:SetWalkSpeed(100)
             ply:SetRunSpeed(250)
             ply:SetSlowWalkSpeed(75)
@@ -100,12 +100,18 @@ if SERVER then
     end
 
     hook.Add("PlayerDeath","hg.rounddeath",function(victim,inflictor,attacker)
-        victim:MakeRagdoll()
+        if not victim:IsRagdolled() then
+            victim:MakeRagdoll()
+        end
+        if IsValid(victim:GetRagdollEntity()) then
+            victim:GetRagdollEntity():Remove()
+        end
         timer.Simple(3,function()
             if IsValid(victim) and (not victim:Alive()) then
                 victim:SetDeathSpectator(true)
             end
         end)
+        victim:UnSpectate()
         if not homegrad.IsRoundStarted() then return end
         homegrad.ModeOnDeath(victim,inflictor,attacker)
     end)

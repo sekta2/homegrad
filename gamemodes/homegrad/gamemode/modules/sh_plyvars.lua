@@ -90,12 +90,16 @@ if SERVER then
 
         for _,ply in pairs(plys) do
             ply:AddPain(-3.5)
+
+            if ply:GetPain() >= 50 and not ply:IsRagdolled() and ply:Alive() then
+                ply:IRagdollize()
+            end
         end
     end)
 
     hook.Add("EntityTakeDamage","hg.plytakedamage",function(ply,dmg)
         if IsValid(ply) and (ply:IsPlayer()) then
-            ply:AddPain(dmg:GetDamage() * 1.5)
+            ply:AddPain(dmg:GetDamage() / 1.5)
             -- hook.Run("hg.damage", ply, dmginfo)
         end
     end)
