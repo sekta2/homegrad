@@ -79,5 +79,6 @@ SWEP.Primary.SoundHitWall = {
     "hg_crowbar_hitwall2"
 }
 SWEP.Primary.SoundDraw = "pwb/weapons/knife/cloth.wav"
+SWEP.Primary.EquipSound = "pwb/weapons/knife/cloth.wav"
 
 SWEP.WorldModel = "models/weapons/w_crowbar.mdl"

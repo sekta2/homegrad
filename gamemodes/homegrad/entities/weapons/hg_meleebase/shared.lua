@@ -34,6 +34,10 @@ function SWEP:CanPrimaryAttack()
     return self.NextShoot < CurTime()
 end
 
+function SWEP:Equip(owner)
+    owner:EmitSound(self.Primary.EquipSound)
+end
+
 function SWEP:PrimaryAttack()
     if not self:CanPrimaryAttack() then return end
 

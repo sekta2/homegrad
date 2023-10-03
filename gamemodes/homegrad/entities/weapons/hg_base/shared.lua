@@ -27,6 +27,7 @@ SWEP.Primary.Damage = 100
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = Sound("ak74/ak74_fp.wav")
 SWEP.Primary.SoundDraw = Sound("ak74/ak74_draw.wav")
+SWEP.Primary.EquipSound = Sound("ak74/ak74_cloth.wav")
 SWEP.Primary.Force = 0
 
 SWEP.Secondary.ClipSize    = -1
@@ -57,6 +58,10 @@ function SWEP:GetAmmoText()
     elseif ammobag < 1 then
         return homegrad.GetPhrase("hg_empty")
     end
+end
+
+function SWEP:Equip(owner)
+    owner:EmitSound(self.Primary.EquipSound)
 end
 
 function SWEP:IsReloading()

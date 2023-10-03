@@ -66,3 +66,8 @@ end
 function meta:GetGender()
     return self:GetNWString("hg.gender","male")
 end
+
+hook.Add( "PlayerFootstep", "CustomFootstep", function( ply, pos, foot, sound, volume, rf )
+    --sound.Play(Sound("npc/combine_soldier/gear" .. math.random(1,6) .. ".wav"),pos,75,100,1)
+    --return true -- Don't allow default footsteps, or other addon footsteps
+end)

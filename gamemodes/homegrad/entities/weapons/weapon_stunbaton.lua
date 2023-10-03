@@ -69,5 +69,6 @@ SWEP.Primary.SoundHitWall = {
     "hg_stunbaton_hitwall2"
 }
 SWEP.Primary.SoundDraw = "weapons/stunstick/spark2.wav"
+SWEP.Primary.EquipSound = ""
 
 SWEP.WorldModel = "models/weapons/w_stunbaton.mdl"

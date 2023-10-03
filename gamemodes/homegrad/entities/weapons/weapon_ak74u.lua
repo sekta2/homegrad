@@ -16,6 +16,15 @@ sound.Add({
     sound = "pwb/weapons/aks74u/draw.wav"
 })
 
+sound.Add({
+    name = "hg_ak74u_cloth",
+    channel = CHAN_WEAPON,
+    volume = 1.0,
+    level = 80,
+    pitch = {95, 110},
+    sound = "pwb/weapons/aks74u/cloth.wav"
+})
+
 SWEP.Base = "hg_base"
 
 SWEP.Author = "Homegrad"
@@ -41,6 +50,7 @@ SWEP.Primary.Damage = 20
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "hg_ak74u_shoot"
 SWEP.Primary.SoundDraw = "hg_ak74u_draw"
+SWEP.Primary.EquipSound = "hg_ak74u_cloth"
 SWEP.Primary.Force = 0
 
 SWEP.Secondary.ClipSize    = -1

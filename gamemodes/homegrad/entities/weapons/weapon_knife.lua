@@ -61,6 +61,15 @@ sound.Add({
     sound = "pwb/weapons/knife/hitwall.wav"
 })
 
+sound.Add({
+    name = "hg_knife_cloth",
+    channel = CHAN_WEAPON,
+    volume = 1.0,
+    level = 65,
+    pitch = {95, 110},
+    sound = "pwb/weapons/knife/cloth.wav"
+})
+
 SWEP.Base = "hg_meleebase"
 
 SWEP.Author = "Homegrad"
@@ -89,5 +98,6 @@ SWEP.Primary.SoundHitWall = {
     "hg_knife_hitwall"
 }
 SWEP.Primary.SoundDraw = "pwb/weapons/knife/deploy.wav"
+SWEP.Primary.EquipSound = "hg_knife_cloth"
 
 SWEP.WorldModel = "models/pwb/weapons/w_knife.mdl"

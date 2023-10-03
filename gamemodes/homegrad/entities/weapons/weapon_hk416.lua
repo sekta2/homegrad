@@ -24,6 +24,7 @@ SWEP.Primary.Damage = 22
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = "pwb/weapons/hk416/shoot.wav"
 SWEP.Primary.SoundDraw = "pwb/weapons/hk416/deploy.wav"
+SWEP.Primary.EquipSound = ""
 SWEP.Primary.Force = 0
 
 SWEP.Secondary.ClipSize    = -1

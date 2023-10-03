@@ -24,6 +24,7 @@ SWEP.Primary.Damage = 15
 SWEP.Primary.Spread = 0
 SWEP.Primary.Sound = Sound("pwb/weapons/glock17/shoot.wav")
 SWEP.Primary.SoundDraw = Sound("pwb/weapons/glock17/draw.wav")
+SWEP.Primary.EquipSound = ""
 SWEP.Primary.Force = 0
 
 SWEP.Secondary.ClipSize    = -1
