@@ -108,7 +108,7 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
         view.drawviewer = true
 
         return view
-    elseif not ply:Alive() and ply:GetDeathSpectator() and IsValid(ragdoll) then
+    elseif not ply:Alive() and ply:GetDeathSpectator() and IsValid(ragdoll) and ply:IsRagdolled() then
         local raghead = ragdoll:LookupBone(homegrad.limbs["head"][1])
         ragdoll:ManipulateBoneScale(raghead,Vector(1,1,1))
     end

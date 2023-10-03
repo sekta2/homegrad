@@ -8,6 +8,10 @@ function meta:HGetRagdoll()
     return self:GetNWEntity("hg.ragdoll",self)
 end
 
+function meta:GetRagdollCooldown()
+    return self:GetNWInt("hg.ragdollcooldown",0)
+end
+
 if SERVER then
     util.AddNetworkString("hg.sendragdollcolor")
 
@@ -20,6 +24,9 @@ if SERVER then
 
     function meta:HCreateRagdoll()
         local ragdoll = ents.Create("prop_ragdoll")
+        ragdoll.IsHomegrad = true
+        ragdoll:SetNWEntity("hg.ragowner",self)
+
         ragdoll:SetModel(self:GetModel())
         ragdoll:Spawn()
         ragdoll.GetPlayerColor = function() return self:GetPlayerColor() end
@@ -54,9 +61,61 @@ if SERVER then
         self:SetNWBool("hg.isragdoll",true)
 
         local ragdoll = self:HCreateRagdoll()
+        local oldrag = self:GetRagdollEntity()
         self:SetNWEntity("hg.ragdoll",ragdoll)
-        self:GetRagdollEntity():Remove()
+        if IsValid(oldrag) then
+            oldrag:Remove()
+        end
     end
+
+    function meta:DeMakeRagdoll()
+        local ragdoll = self:HGetRagdoll()
+
+        self:SetNWBool("hg.isragdoll",false)
+        self:UnSpectate()
+        self:Spawn()
+
+        if IsValid(ragdoll) then
+            self:SetPos(ragdoll:GetPhysicsObject():GetPos())
+
+            ragdoll:Remove()
+        end
+    end
+
+    function meta:SetRagdollCooldown(val)
+        self:SetNWInt("hg.ragdollcooldown",CurTime() + val)
+    end
+
+    function meta:Ragdollize()
+        local cooldown = self:GetRagdollCooldown()
+        if cooldown <= CurTime() then
+            self:SetRagdollCooldown(2)
+            if not self:IsRagdolled() and self:Alive() then
+                self:MakeRagdoll()
+            elseif self:IsRagdolled() and self:Alive() then
+                self:DeMakeRagdoll()
+            end
+        end
+    end
+
+    hook.Add("PlayerTick","hg.ragdollspectate",function(ply,mv)
+        if ply:IsRagdolled() then
+            ply:Spectate(OBS_MODE_FIXED)
+        end
+    end)
+
+    hook.Add("EntityTakeDamage","hg.ragdolldamage",function(ragdoll,dmg)
+        if ragdoll.IsHomegrad then
+            local owner = ragdoll:GetNWEntity("hg.ragowner",Entity(1))
+            owner:TakeDamageInfo(dmg)
+        end
+    end)
+
+    concommand.Add("fake2", function(ply)
+        if ply:Alive() then
+            ply:Ragdollize()
+        end
+    end)
 else
     net.Receive("hg.sendragdollcolor",function()
         local ragdollindex = net.ReadFloat()
@@ -69,9 +128,3 @@ else
         end)
     end)
 end
-
-concommand.Add("fake", function(ply)
-    if ply:Alive() then
-        ply:MakeRagdoll()
-    end
-end)

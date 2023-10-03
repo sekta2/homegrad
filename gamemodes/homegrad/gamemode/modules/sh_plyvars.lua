@@ -95,7 +95,7 @@ if SERVER then
 
     hook.Add("EntityTakeDamage","hg.plytakedamage",function(ply,dmg)
         if IsValid(ply) and (ply:IsPlayer()) then
-            ply:AddPain(dmg:GetDamage() / 20)
+            ply:AddPain(dmg:GetDamage() * 1.5)
             -- hook.Run("hg.damage", ply, dmginfo)
         end
     end)
