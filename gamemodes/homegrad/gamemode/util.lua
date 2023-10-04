@@ -67,7 +67,7 @@ if CLIENT then
     local addmat_b = Material("CA/add_b")
     local vgbm = Material("vgui/black")
 
-    function DrawCA(rx, gx, bx, ry, gy, by)
+    function DrawCA(rx, gx, bx, ry, gy, by) -- credits to Mr.Point
     	render.UpdateScreenEffectTexture()
 
     	addmat_r:SetTexture("$basetexture", render.GetScreenEffectTexture())
