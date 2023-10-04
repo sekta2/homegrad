@@ -5,6 +5,7 @@
 	"category"		"pvp"
 	"maps"			"^hs_|^hg_|^ttt_|^mu_|^hmcd_"
 	"menusystem"	"1"
+	"workshopid"	"3045741731"
 
 	"settings"
 	{
