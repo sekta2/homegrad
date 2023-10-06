@@ -37,8 +37,6 @@ SWEP.Secondary.Ammo = "none"
 
 SWEP.ScopePos = Vector(0,0,0)
 SWEP.ScopeAng = Angle(0,0,0)
-SWEP.addPos = Vector(0,0,0)
-SWEP.addAng = Angle(0,0,0)
 
 function SWEP:Initialize()
     self:SetHoldType(self.HoldType)

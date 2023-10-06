@@ -28,6 +28,11 @@ if SERVER then
         ragdoll:SetMaxHealth(self:GetMaxHealth())
         ragdoll:SetHealth(self:Health())
         ragdoll:SetNWEntity("hg.ragowner",self)
+        ragdoll.weapons = {}
+        for k,v in pairs(self:GetWeapons()) do
+            ragdoll.weapons[k] = {v:GetClass(),v:Clip1()}
+            self:StripWeapon(v:GetClass())
+        end
 
         ragdoll:SetModel(self:GetModel())
         ragdoll:Spawn()
@@ -36,7 +41,8 @@ if SERVER then
 
         ragdoll:AddEFlags(EFL_NO_DAMAGE_FORCES)
         ragdoll:SetCollisionGroup(COLLISION_GROUP_WEAPON)
-        local vel = self:GetVelocity() / 1 + (force or Vector(0,0,0))
+        ragdoll:GetPhysicsObject():SetMass(1000)
+        local vel = self:GetVelocity()
         local bonecount = ragdoll:GetPhysicsObjectCount()
         for i = 0, bonecount - 1 do
             local physobj = ragdoll:GetPhysicsObjectNum(i)
@@ -77,11 +83,19 @@ if SERVER then
         self:UnSpectate()
         self:Spawn()
 
+        local sweps = ragdoll.weapons
+        if sweps then
+            for k,v in pairs(sweps) do
+                local wep = self:Give(v[1])
+                wep:SetClip1(v[2])
+            end
+        end
+
         timer.Simple(0,function()
             if IsValid(ragdoll) then
                 self:SetPos(ragdoll:GetPhysicsObject():GetPos())
                 self:SetHealth(ragdoll:Health())
-    
+
                 ragdoll:Remove()
             end
         end)
@@ -122,10 +136,18 @@ if SERVER then
         end
     end)
 
+    hook.Add("PlayerUse","hg.ragdollcannotuse",function(ply,ent)
+        if ply:IsRagdolled() and ply:Alive() then
+            return false
+        end
+    end)
+
     hook.Add("EntityTakeDamage","hg.ragdolldamage",function(ent,dmg)
         if ent.IsHomegrad then
             local owner = ent:GetNWEntity("hg.ragowner",Entity(1))
             if owner:Alive() then
+                dmg:SetDamage(dmg:GetDamage() / 2)
+
                 owner:TakeDamageInfo(dmg)
 
                 ent:SetHealth(ent:Health() - dmg:GetDamage())

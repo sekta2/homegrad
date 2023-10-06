@@ -51,7 +51,7 @@ SWEP.Spawnable = false
 SWEP.AdminOnly = false
 SWEP.PrintName = "Stun Baton"
 
-SWEP.ShootWait = 0.9
+SWEP.ShootWait = 1
 SWEP.HoldType = "melee"
 SWEP.Slot = 0
 
@@ -70,6 +70,6 @@ SWEP.Primary.SoundHitWall = {
     "hg_stunbaton_hitwall2"
 }
 SWEP.Primary.SoundDraw = "weapons/stunstick/spark2.wav"
-SWEP.Primary.EquipSound = ""
+SWEP.Primary.EquipSound = "pwb/weapons/knife/cloth.wav"
 
 SWEP.WorldModel = "models/weapons/w_stunbaton.mdl"

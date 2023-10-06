@@ -13,7 +13,7 @@ homegrad.CreateCommand("test","This is test",function(ply,args)
 end)
 
 homegrad.CreateCommand("levelnext","Select next mode",function(ply,args)
-    if ply:IsAdmin() or ply:IsSuperAdmin() then
+    if ply:IsAdmin() then -- It will also return true if the player is Player:IsSuperAdmin by default. https://wiki.facepunch.com/gmod/Player:IsAdmin
         local mode = args[2]
         homegrad.SetNextMode(homegrad.modes[mode] and mode or "homicide")
         homegrad.print(ply:Nick() .. " Changed next mode to " .. tostring(mode))
@@ -23,7 +23,7 @@ homegrad.CreateCommand("levelnext","Select next mode",function(ply,args)
 end)
 
 homegrad.CreateCommand("levelstart","Start the round",function(ply,args)
-    if ply:IsAdmin() or ply:IsSuperAdmin() then
+    if ply:IsAdmin() then
         homegrad.StartRound()
         homegrad.print(ply:Nick() .. " Started round")
     else
@@ -32,7 +32,7 @@ homegrad.CreateCommand("levelstart","Start the round",function(ply,args)
 end)
 
 homegrad.CreateCommand("levelend","Ending the round",function(ply,args)
-    if ply:IsAdmin() or ply:IsSuperAdmin() then
+    if ply:IsAdmin() then
         homegrad.EndRound()
         homegrad.print(ply:Nick() .. " Ended round")
     else
@@ -41,7 +41,7 @@ homegrad.CreateCommand("levelend","Ending the round",function(ply,args)
 end)
 
 homegrad.CreateCommand("forcelevelend","Forcing round end",function(ply,args)
-    if ply:IsAdmin() or ply:IsSuperAdmin() then
+    if ply:IsAdmin() then
         homegrad.ForceEndRound()
         homegrad.print(ply:Nick() .. " Forced round end")
     else

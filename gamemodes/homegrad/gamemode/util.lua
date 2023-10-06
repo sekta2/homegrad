@@ -68,22 +68,22 @@ if CLIENT then
     local vgbm = Material("vgui/black")
 
     function DrawCA(rx, gx, bx, ry, gy, by) -- credits to Mr.Point
-    	render.UpdateScreenEffectTexture()
+        render.UpdateScreenEffectTexture()
 
-    	addmat_r:SetTexture("$basetexture", render.GetScreenEffectTexture())
-    	addmat_g:SetTexture("$basetexture", render.GetScreenEffectTexture())
-    	addmat_b:SetTexture("$basetexture", render.GetScreenEffectTexture())
+        addmat_r:SetTexture("$basetexture", render.GetScreenEffectTexture())
+        addmat_g:SetTexture("$basetexture", render.GetScreenEffectTexture())
+        addmat_b:SetTexture("$basetexture", render.GetScreenEffectTexture())
 
-    	render.SetMaterial(vgbm)
-    	render.DrawScreenQuad()
+        render.SetMaterial(vgbm)
+        render.DrawScreenQuad()
 
-    	render.SetMaterial(addmat_r)
-    	render.DrawScreenQuadEx(-rx / 2, -ry / 2, ScrW() + rx, ScrH() + ry)
+        render.SetMaterial(addmat_r)
+        render.DrawScreenQuadEx(-rx / 2, -ry / 2, ScrW() + rx, ScrH() + ry)
 
-    	render.SetMaterial(addmat_g)
-    	render.DrawScreenQuadEx(-gx / 2, -gy / 2, ScrW() + gx, ScrH() + gy)
+        render.SetMaterial(addmat_g)
+        render.DrawScreenQuadEx(-gx / 2, -gy / 2, ScrW() + gx, ScrH() + gy)
 
-    	render.SetMaterial(addmat_b)
-    	render.DrawScreenQuadEx(-bx / 2, -by / 2, ScrW() + bx, ScrH() + by)
+        render.SetMaterial(addmat_b)
+        render.DrawScreenQuadEx(-bx / 2, -by / 2, ScrW() + bx, ScrH() + by)
     end
 end
