@@ -115,20 +115,20 @@ hook.Add("CalcView","hg.calcview",function(ply,origin,angles,fov,znear,zfar)
 end)
 
 hook.Add("Think","hg.mouthanim",function()
-    for i,ply in pairs(player.GetAll()) do
+    for i, ply in ipairs(player.GetAll()) do
         local ent = ply:IsRagdolled() and ply:HGetRagdoll() or ply
-        if IsValid(ent) then
+        if IsValid(ent) and ply:IsSpeaking() then
             local flexes = {
-                ent:GetFlexIDByName( "jaw_drop" ),
-                ent:GetFlexIDByName( "left_part" ),
-                ent:GetFlexIDByName( "right_part" ),
-                ent:GetFlexIDByName( "left_mouth_drop" ),
-                ent:GetFlexIDByName( "right_mouth_drop" )
+                ent:GetFlexIDByName("jaw_drop"),
+                ent:GetFlexIDByName("left_part"),
+                ent:GetFlexIDByName("right_part"),
+                ent:GetFlexIDByName("left_mouth_drop"),
+                ent:GetFlexIDByName("right_mouth_drop")
             }
 
-            local weight = ply:IsSpeaking() and math.Clamp( ply:VoiceVolume() * 4, 0, 4 ) or 0
+            local weight = ply:IsSpeaking() and math.Clamp(ply:VoiceVolume() * 4,0,4) or 0
 
-            for k,v in pairs(flexes) do
+            for k, v in pairs(flexes) do
                 ent:SetFlexWeight(v, weight)
             end
         end
